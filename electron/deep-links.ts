@@ -1,6 +1,6 @@
 import type { OpenThemeAction } from "./shared/types";
 
-export const CODEX_THEMES_PROTOCOL = "codexthemes:";
+export const CODEX_UI_PROTOCOL = "codexui:";
 
 const THEME_ID_RE = /^[a-z0-9]+(?:-[a-z0-9]+)*$/;
 
@@ -22,9 +22,9 @@ export type DeepLinkAction = OpenThemeAction | AuthCallbackAction | PaymentResul
  * Parse the small, allow-listed set of actions exposed to the public website.
  *
  * Accepted forms:
- * - codexthemes://theme/<built-in-theme-id>
- * - codexthemes://create/custom
- * - codexthemes://create/ai
+ * - codexui://theme/<built-in-theme-id>
+ * - codexui://create/custom
+ * - codexui://create/ai
  *
  * Theme existence is checked separately by the main process.
  */
@@ -49,7 +49,7 @@ function parseDeepLink(raw: string): DeepLinkAction | null {
 
   try {
     const url = new URL(raw);
-    if (url.protocol !== CODEX_THEMES_PROTOCOL) return null;
+    if (url.protocol !== CODEX_UI_PROTOCOL) return null;
     if (url.username || url.password || url.port) return null;
 
     if (url.hostname === "auth") {

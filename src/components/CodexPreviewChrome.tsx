@@ -71,7 +71,7 @@ export function CodexPreviewSidebar({ colors, page }: CodexPreviewSidebarProps) 
         <button type="button" className="mock-codex-sidebar__project">
           <FolderGit2 size={15} />
           <span>
-            <b>codex-themes</b>
+            <b>codex-ui</b>
             <small>本地工作区</small>
           </span>
         </button>
@@ -120,7 +120,7 @@ export function CodexPreviewHeader({ colors, page }: CodexPreviewHeaderProps) {
     >
       <div className="mock-app-header__context">
         <FolderGit2 size={14} style={{ color: colors.accent }} />
-        <span>codex-themes</span>
+        <span>codex-ui</span>
         <i>/</i>
         <b>{page === "home" ? "新任务" : "优化主题生成配色"}</b>
       </div>

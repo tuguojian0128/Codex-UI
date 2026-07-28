@@ -18,7 +18,7 @@ function renderMessage(title: string, message: string): string {
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>${title} · Codex Themes</title>
+    <title>${title} · Codex-UI</title>
     <style>
       :root { color-scheme: dark; }
       body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; background: #0d1017; color: #f7f3ea; display: grid; place-items: center; min-height: 100vh; margin: 0; }
@@ -43,7 +43,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
   const rawId = Array.isArray(req.query.id) ? req.query.id[0] : req.query.id;
   const token = Array.isArray(req.query.token) ? req.query.token[0] : req.query.token;
   if (!rawId || !token) {
-    return res.status(400).send(renderMessage("支付链接无效", "请返回 Codex Themes 重新发起支付。"));
+    return res.status(400).send(renderMessage("支付链接无效", "请返回 Codex-UI 重新发起支付。"));
   }
 
   const { data: order, error } = await supabase
@@ -53,7 +53,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
     .single();
 
   if (error || !order || !order.checkout_token_hash || !order.checkout_expires_at) {
-    return res.status(404).send(renderMessage("订单不存在", "请返回 Codex Themes 重新选择主题。"));
+    return res.status(404).send(renderMessage("订单不存在", "请返回 Codex-UI 重新选择主题。"));
   }
   if (!safeTokenEquals(token, order.checkout_token_hash)) {
     return res.status(403).send(renderMessage("支付链接无效", "这个链接无法验证，请返回应用重新发起支付。"));
@@ -62,14 +62,14 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
     return res.status(410).send(renderMessage("支付链接已过期", "支付链接 30 分钟内有效，请返回应用重新发起支付。"));
   }
   if (order.status === "paid") {
-    return res.status(200).send(renderMessage("订单已经支付", "请返回 Codex Themes 查看并使用已购主题。"));
+    return res.status(200).send(renderMessage("订单已经支付", "请返回 Codex-UI 查看并使用已购主题。"));
   }
   if (order.status !== "pending") {
     return res.status(409).send(renderMessage("订单无法支付", "当前订单已关闭，请返回应用重新发起支付。"));
   }
 
   try {
-    const themeName = (order.theme_products as unknown as { name: string } | null)?.name ?? "Codex Themes 主题";
+    const themeName = (order.theme_products as unknown as { name: string } | null)?.name ?? "Codex-UI 主题";
     const { form } = createAlipayOrder({
       outTradeNo: order.out_trade_no,
       totalAmount: formatYuan(order.price_cents),
@@ -81,7 +81,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="referrer" content="no-referrer" />
-    <title>正在前往支付宝 · Codex Themes</title>
+    <title>正在前往支付宝 · Codex-UI</title>
   </head>
   <body>
     <noscript>请启用 JavaScript 后重新打开支付链接。</noscript>

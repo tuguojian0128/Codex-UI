@@ -36,6 +36,6 @@ test("keeps invalid numeric entities instead of crashing", () => {
 test("builds the official release URL for a version", () => {
   assert.equal(
     releaseUrlForVersion("0.2.3-beta.1"),
-    "https://github.com/freestylefly/codex-themes/releases/tag/v0.2.3-beta.1",
+    "https://github.com/tuguojian0128/-/releases/tag/v0.2.3-beta.1",
   );
 });

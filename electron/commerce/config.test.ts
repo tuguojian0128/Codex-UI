@@ -6,11 +6,11 @@ import {
   DEFAULT_SUPABASE_URL,
 } from "./config";
 
-test("uses the production commerce API by default", () => {
-  assert.equal(DEFAULT_COMMERCE_API_URL, "https://theme.codexguide.ai");
+test("does not bind a fork to another deployment's commerce API", () => {
+  assert.equal(DEFAULT_COMMERCE_API_URL, "");
 });
 
-test("uses public Supabase configuration suitable for a desktop client", () => {
-  assert.equal(DEFAULT_SUPABASE_URL, "https://zuduorhjcwlsjxakewym.supabase.co");
-  assert.match(DEFAULT_SUPABASE_PUBLISHABLE_KEY, /^sb_publishable_/);
+test("does not ship another project's Supabase configuration", () => {
+  assert.equal(DEFAULT_SUPABASE_URL, "");
+  assert.equal(DEFAULT_SUPABASE_PUBLISHABLE_KEY, "");
 });

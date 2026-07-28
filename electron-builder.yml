@@ -1,5 +1,5 @@
-appId: com.codexthemes.app
-productName: Codex Themes
+appId: com.tuguojian0128.codexui
+productName: Codex-UI
 directories:
   output: release
   buildResources: assets/build
@@ -22,14 +22,14 @@ extraResources:
 asarUnpack: []
 fileAssociations:
   - ext: codextheme
-    name: Codex Theme Package
-    description: Codex Themes package
+    name: Codex-UI Theme Package
+    description: Codex-UI theme package
     role: Editor
     isPackage: true
 protocols:
-  - name: Codex Themes
+  - name: Codex-UI
     schemes:
-      - codexthemes
+      - codexui
 mac:
   category: public.app-category.utilities
   icon: assets/presets/blue-window-messenger/mascot.png
@@ -41,19 +41,18 @@ mac:
   entitlementsInherit: assets/build/entitlements.mac.plist
   notarize: true
 dmg:
-  artifactName: Codex-Themes-${version}-mac-${arch}.${ext}
+  artifactName: Codex-UI-${version}-mac-${arch}.${ext}
 win:
   icon: assets/build/icon.png
   target:
     - nsis
 nsis:
-  artifactName: Codex-Themes-${version}-win-${arch}.${ext}
+  artifactName: Codex-UI-${version}-win-${arch}.${ext}
   oneClick: false
   allowToChangeInstallationDirectory: true
-artifactName: Codex-Themes-${version}-${os}-${arch}.${ext}
+artifactName: Codex-UI-${version}-${os}-${arch}.${ext}
 npmRebuild: false
-# Auto-update feed. Packaged builds announce GitHub releases in the app.
 publish:
   provider: github
-  owner: freestylefly
-  repo: codex-themes
+  owner: tuguojian0128
+  repo: "-"

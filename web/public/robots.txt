@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://theme.codexguide.ai/sitemap-index.xml
+Sitemap: https://tuguojian0128.github.io/-/sitemap-index.xml

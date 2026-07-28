@@ -374,7 +374,7 @@ function RetroHomePortal({
               onClick={() => setActiveRecent(index)}
             >
               <Icon size={15} />
-              <b>codex-themes</b>
+              <b>codex-ui</b>
               <i>/</i>
               <span>{label}</span>
               <GitBranch size={12} />
@@ -387,7 +387,7 @@ function RetroHomePortal({
 
       <section className="retro-home-bottom">
         <div className="retro-home-context">
-          <button type="button"><Folder size={14} />codex-themes</button>
+          <button type="button"><Folder size={14} />codex-ui</button>
           <span><Laptop size={14} />本地</span>
           <span><GitBranch size={14} />main</span>
           {sent && <small>任务已发送</small>}

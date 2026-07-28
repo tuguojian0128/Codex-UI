@@ -47,7 +47,7 @@ export function Settings() {
       </div>
 
       <div className="settings-group">
-        <div className="settings-group-title">Codex Themes</div>
+        <div className="settings-group-title">Codex-UI</div>
         <div className="kv-row">
           <span className="kv-key">客户端版本</span>
           <span className="kv-value mono">

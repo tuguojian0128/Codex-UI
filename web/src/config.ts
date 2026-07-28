@@ -1,8 +1,8 @@
-export const SITE_NAME = "Codex Themes";
-export const SITE_URL = "https://theme.codexguide.ai";
-export const APP_PROTOCOL = "codexthemes";
-export const GITHUB_REPO_URL = "https://github.com/freestylefly/codex-themes";
-export const COMMUNITY_JOIN_URL = "https://codexguide.ai/community/join.html";
+export const SITE_NAME = "Codex-UI";
+export const SITE_URL = "https://tuguojian0128.github.io/-";
+export const APP_PROTOCOL = "codexui";
+export const GITHUB_REPO_URL = "https://github.com/tuguojian0128/-";
+export const COMMUNITY_JOIN_URL = "https://github.com/tuguojian0128/-/issues";
 export const DOWNLOAD_URL = "/download";
 export const MAC_ARM64_DMG_URL =
   "/api/v1/downloads/latest?platform=mac&arch=arm64&format=dmg";

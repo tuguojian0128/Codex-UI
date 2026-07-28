@@ -484,14 +484,14 @@
         <section class="blue-window-home__section blue-window-home__continue-section">
           <h2>继续工作</h2>
           <div class="blue-window-home__recent-list">
-            <button type="button" data-task-target="检查主图主题定制"><span class="blue-window-home__recent-icon"></span><b>codex-themes</b><i>/</i><span>主题配置优化</span><small>刚刚</small></button>
-            <button type="button" data-task-target="codex-themes"><span class="blue-window-home__recent-icon"></span><b>codex-themes</b><i>/</i><span>sidebar-enhancement.ts</span><small>2 小时前</small></button>
-            <button type="button" data-task-target="README.md"><span class="blue-window-home__recent-icon"></span><b>codex-themes</b><i>/</i><span>README.md</span><small>昨天</small></button>
+            <button type="button" data-task-target="检查主图主题定制"><span class="blue-window-home__recent-icon"></span><b>codex-ui</b><i>/</i><span>主题配置优化</span><small>刚刚</small></button>
+            <button type="button" data-task-target="codex-ui"><span class="blue-window-home__recent-icon"></span><b>codex-ui</b><i>/</i><span>sidebar-enhancement.ts</span><small>2 小时前</small></button>
+            <button type="button" data-task-target="README.md"><span class="blue-window-home__recent-icon"></span><b>codex-ui</b><i>/</i><span>README.md</span><small>昨天</small></button>
           </div>
         </section>
         <section class="blue-window-home__composer-zone">
           <div class="blue-window-home__project-context">
-            <button type="button" data-project-target="codex-themes"><span class="blue-window-home__context-icon"></span><b>codex-themes</b></button>
+            <button type="button" data-project-target="codex-ui"><span class="blue-window-home__context-icon"></span><b>codex-ui</b></button>
             <button type="button" data-native-action="clear-project" title="不在项目中工作">×</button>
             <button type="button" data-native-action="local-mode" title="本地模式">本地</button>
             <button type="button" data-native-action="branch" title="分支">main</button>
@@ -598,7 +598,7 @@
         const original = findNativeProjectControl("project") ||
           [...document.querySelectorAll("button")].find((candidate) =>
             !candidate.closest(`#${BLUE_WINDOW_HOME_ID}`) &&
-            (candidate.textContent || "").includes("codex-themes"));
+            (candidate.textContent || "").includes("codex-ui"));
         if (original instanceof HTMLElement) original.click();
       });
 
@@ -629,7 +629,7 @@
     });
 
     const projectText = [...(sidebar?.querySelectorAll("*") || [])].find((candidate) =>
-      candidate.children.length === 0 && (candidate.textContent || "").trim() === "codex-themes");
+      candidate.children.length === 0 && (candidate.textContent || "").trim() === "codex-ui");
     const projectTextRect = projectText?.getBoundingClientRect();
     const projectRow = projectText?.closest('button, a, [role="button"]');
     const projectRowIcons = projectTextRect
@@ -653,7 +653,7 @@
       projectText?.parentElement?.querySelector("svg") ??
       [...document.querySelectorAll("button, a")].find((candidate) =>
         !candidate.closest(`#${BLUE_WINDOW_HOME_ID}`) &&
-        (candidate.textContent || "").includes("codex-themes"))?.querySelector("svg") ??
+        (candidate.textContent || "").includes("codex-ui"))?.querySelector("svg") ??
       fallbackIcons[0];
     const contextSlot = panel.querySelector(".blue-window-home__context-icon");
     if (contextSlot && contextSourceIcon && !contextSlot.querySelector("svg")) {

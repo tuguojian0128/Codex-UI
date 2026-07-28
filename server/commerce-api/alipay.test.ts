@@ -51,7 +51,7 @@ test("hosted Vercel deployments ignore a local sandbox file", (t) => {
     ALIPAY_SELLER_EMAIL: process.env.ALIPAY_SELLER_EMAIL,
     ALIPAY_GATEWAY: process.env.ALIPAY_GATEWAY,
   };
-  const sandboxDirectory = fs.mkdtempSync(path.join(os.tmpdir(), "codex-themes-alipay-"));
+  const sandboxDirectory = fs.mkdtempSync(path.join(os.tmpdir(), "codex-ui-alipay-"));
   const sandboxPath = path.join(sandboxDirectory, ".alipay-sandbox.json");
   fs.writeFileSync(
     sandboxPath,

@@ -13,12 +13,12 @@ function queryParams(req: VercelRequest): Record<string, unknown> {
 function renderResult(orderId: string | null, kind: "theme" | "points" = "theme"): string {
   const queryKey = kind === "points" ? "pointOrderId" : "orderId";
   const deepLink = orderId
-    ? `codexthemes://payment/result?${queryKey}=${encodeURIComponent(orderId)}`
-    : "codexthemes://payment/result";
-  const heading = orderId ? "支付结果确认中" : "返回 Codex Themes";
+    ? `codexui://payment/result?${queryKey}=${encodeURIComponent(orderId)}`
+    : "codexui://payment/result";
+  const heading = orderId ? "支付结果确认中" : "返回 Codex-UI";
   const message = orderId
     ? "页面返回不代表支付成功。客户端将通过支付宝查单确认结果，请稍候查看已购主题。"
-    : "未能验证本次同步返回。请回到 Codex Themes，应用会通过安全查单确认最终支付状态。";
+    : "未能验证本次同步返回。请回到 Codex-UI，应用会通过安全查单确认最终支付状态。";
 
   return `<!doctype html>
 <html lang="zh-CN">
@@ -26,7 +26,7 @@ function renderResult(orderId: string | null, kind: "theme" | "points" = "theme"
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="referrer" content="no-referrer" />
-    <title>支付结果 · Codex Themes</title>
+    <title>支付结果 · Codex-UI</title>
     <style>
       :root { color-scheme: dark; }
       body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; background: #0d1017; color: #f7f3ea; display: grid; place-items: center; min-height: 100vh; margin: 0; }
@@ -40,7 +40,7 @@ function renderResult(orderId: string | null, kind: "theme" | "points" = "theme"
     <main>
       <h1>${heading}</h1>
       <p>${message}</p>
-      <a href="${deepLink}">打开 Codex Themes</a>
+      <a href="${deepLink}">打开 Codex-UI</a>
     </main>
   </body>
 </html>`;

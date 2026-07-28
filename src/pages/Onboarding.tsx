@@ -97,7 +97,7 @@ export function Onboarding() {
     <div className="onboarding">
       <header className="ob-deck-brand">
         <span className="brand-mark"><Palette size={15} /></span>
-        <strong>Codex Themes</strong>
+        <strong>Codex-UI</strong>
       </header>
 
       <main className="ob-deck-main">

@@ -100,7 +100,7 @@ export interface ThemeConfigV2 {
   id: string;
   /** Semantic version. */
   version: string;
-  /** Minimum Codex Themes engine version required. */
+  /** Minimum Codex-UI engine version required. */
   minEngineVersion: string;
   /** Whether a bundled preset appears in the app and website galleries. */
   galleryVisible?: boolean;

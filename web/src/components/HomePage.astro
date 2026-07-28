@@ -143,7 +143,7 @@ const description =
   </section>
 
   <section class="manifesto section-shell">
-    <div class="section-kicker">01 / {locale === "zh" ? "为什么是 Codex Themes" : "Why Codex Themes"}</div>
+    <div class="section-kicker">01 / {locale === "zh" ? "为什么是 Codex-UI" : "Why Codex-UI"}</div>
     <div class="manifesto-grid">
       <h2>
         {locale === "zh"
@@ -152,8 +152,8 @@ const description =
       </h2>
       <p>
         {locale === "zh"
-          ? "Codex Themes 不修改应用安装包。它在本机运行，把主题布局、颜色和装饰安全地应用到 Codex，并保留一键恢复官方外观的能力。"
-          : "Codex Themes runs locally and never patches the installed app. It applies layout, color, and decoration safely, with a one-click return to the official look."}
+          ? "Codex-UI 不修改应用安装包。它在本机运行，把主题布局、颜色和装饰安全地应用到 Codex，并保留一键恢复官方外观的能力。"
+          : "Codex-UI runs locally and never patches the installed app. It applies layout, color, and decoration safely, with a one-click return to the official look."}
       </p>
     </div>
     <div class="feature-grid">
@@ -193,7 +193,7 @@ const description =
         <div class="creation-path-visual">
           <Image
             src={themeGalleryClient}
-            alt={locale === "zh" ? "Codex Themes 客户端主题画廊" : "Codex Themes desktop theme gallery"}
+            alt={locale === "zh" ? "Codex-UI 客户端主题画廊" : "Codex-UI desktop theme gallery"}
             widths={[480, 720, 960]}
             sizes="(max-width: 820px) 100vw, 33vw"
             format="webp"
@@ -216,7 +216,7 @@ const description =
         <div class="creation-path-visual">
           <Image
             src={customThemeClient}
-            alt={locale === "zh" ? "Codex Themes 客户端自定义主题编辑器" : "Codex Themes desktop custom theme editor"}
+            alt={locale === "zh" ? "Codex-UI 客户端自定义主题编辑器" : "Codex-UI desktop custom theme editor"}
             widths={[480, 720, 960]}
             sizes="(max-width: 820px) 100vw, 33vw"
             format="webp"
@@ -231,7 +231,7 @@ const description =
           <div class="creation-path-meta"><span>02</span><Wand2 size={18} stroke-width={1.6} aria-hidden="true" /></div>
           <h3>{locale === "zh" ? "自定义你的主题" : "Build your own theme"}</h3>
           <p>{locale === "zh" ? "上传主图，选择布局，调节配色、透明度和焦点，在首页与对话页实时预览。" : "Upload artwork, choose a layout, and tune colors, transparency, and focus with live home and conversation previews."}</p>
-          <button class="creation-path-action" type="button" data-deep-link="codexthemes://create/custom">
+          <button class="creation-path-action" type="button" data-deep-link="codexui://create/custom">
             {locale === "zh" ? "打开自定义主题" : "Open theme builder"}<ArrowRight size={16} aria-hidden="true" />
           </button>
         </div>
@@ -241,7 +241,7 @@ const description =
         <div class="creation-path-visual">
           <Image
             src={aiStudioClient}
-            alt={locale === "zh" ? "Codex Themes 客户端 AI 主题工作台" : "Codex Themes desktop AI theme studio"}
+            alt={locale === "zh" ? "Codex-UI 客户端 AI 主题工作台" : "Codex-UI desktop AI theme studio"}
             widths={[480, 720, 960]}
             sizes="(max-width: 820px) 100vw, 33vw"
             format="webp"
@@ -257,7 +257,7 @@ const description =
           <div class="creation-path-meta"><span>03</span><Sparkles size={18} stroke-width={1.6} aria-hidden="true" /></div>
           <h3>{locale === "zh" ? "用本地 Codex 生成" : "Generate with local Codex"}</h3>
           <p>{locale === "zh" ? "输入一句描述或添加参考图，由本机 Codex CLI 生成主题图片、布局和配色方案。" : "Describe an idea or attach a reference image, then let your local Codex CLI generate artwork, layout, and palette."}</p>
-          <button class="creation-path-action" type="button" data-deep-link="codexthemes://create/ai">
+          <button class="creation-path-action" type="button" data-deep-link="codexui://create/ai">
             {locale === "zh" ? "连接本地 Codex 生成" : "Create with local Codex"}<ArrowRight size={16} aria-hidden="true" />
           </button>
         </div>
@@ -285,7 +285,7 @@ const description =
       <article>
         <div class="step-number">1</div>
         <h3>{locale === "zh" ? "更新并安装应用" : "Update and install"}</h3>
-        <p>{locale === "zh" ? "先把官方 Codex 升级到最新版，再安装最新版 Codex Themes。" : "Update the official Codex app first, then install the latest Codex Themes."}</p>
+        <p>{locale === "zh" ? "先把官方 Codex 升级到最新版，再安装最新版 Codex-UI。" : "Update the official Codex app first, then install the latest Codex-UI."}</p>
       </article>
       <article>
         <div class="step-number">2</div>
@@ -322,8 +322,8 @@ const description =
           <summary>{locale === "zh" ? "为什么第一次打开需要手动允许？" : "Why do I need to allow the first launch manually?"}</summary>
           <p>
             {locale === "zh"
-              ? "当前 Beta 尚未完成 Apple 签名与公证。可先在“系统设置 → 隐私与安全性”中选择“仍要打开”；若提示应用已损坏，请前往下载页按说明移除 Codex Themes 的 quarantine 隔离属性后重新打开。"
-              : "The current Beta is not yet Apple-signed or notarized. Choose Open Anyway in System Settings → Privacy & Security. If macOS reports the app as damaged, follow the download-page steps to remove the quarantine attribute from Codex Themes and reopen it."}
+              ? "当前 Beta 尚未完成 Apple 签名与公证。可先在“系统设置 → 隐私与安全性”中选择“仍要打开”；若提示应用已损坏，请前往下载页按说明移除 Codex-UI 的 quarantine 隔离属性后重新打开。"
+              : "The current Beta is not yet Apple-signed or notarized. Choose Open Anyway in System Settings → Privacy & Security. If macOS reports the app as damaged, follow the download-page steps to remove the quarantine attribute from Codex-UI and reopen it."}
           </p>
         </details>
         <details>

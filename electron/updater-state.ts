@@ -63,5 +63,5 @@ export function normalizeReleaseNotes(value: unknown): string | null {
 }
 
 export function releaseUrlForVersion(version: string): string {
-  return `https://github.com/freestylefly/codex-themes/releases/tag/v${encodeURIComponent(version)}`;
+  return `https://github.com/tuguojian0128/-/releases/tag/v${encodeURIComponent(version)}`;
 }

@@ -1,4 +1,4 @@
-# Codex Themes：本地 Codex CLI 驱动的 AI 主题系统开发计划
+# Codex-UI：本地 Codex CLI 驱动的 AI 主题系统开发计划
 
 > 计划版本：3.1  
 > 更新日期：2026-07-19  
@@ -7,7 +7,7 @@
 
 ## 一、产品目标
 
-将 Codex Themes 建设成一个本地优先的 AI 主题工作室：
+将 Codex-UI 建设成一个本地优先的 AI 主题工作室：
 
 - 用户直接在应用内描述想要的主题。
 - 应用使用用户本机已经安装、已经登录的 Codex CLI 作为 AI 执行引擎。
@@ -336,7 +336,7 @@ Recipe 不接受：
 ### 5.5 私有 AI 任务数据
 
 ```text
-Application Support/Codex Themes/
+Application Support/Codex-UI/
 ├── themes/
 ├── ai-jobs/
 │   └── <job-id>/

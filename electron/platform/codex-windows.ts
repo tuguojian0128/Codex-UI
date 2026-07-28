@@ -14,7 +14,13 @@ interface WindowsInstallCandidate {
   version: string;
   signatureStatus: string;
   signerSubject: string;
+  trustType?: "authenticode" | "appx";
+  packageName?: string;
+  packagePublisher?: string;
 }
+
+const OFFICIAL_CODEX_PACKAGE_NAME = "OpenAI.Codex";
+const OFFICIAL_CODEX_PACKAGE_PUBLISHER = "CN=50BDFD77-8903-4850-9FFE-6E8522F64D5B";
 
 export interface WindowsProcessRow {
   pid: number;
@@ -60,6 +66,22 @@ export function isTrustedWindowsPublisher(
   return /(?:^|,\s*)CN=OpenAI(?:,\s*L\.?L\.?C\.?)?(?:,|$)/i.test(signerSubject);
 }
 
+export function isTrustedWindowsAppxPackage(
+  signatureStatus: string,
+  signerSubject: string,
+  packageName: string,
+  packagePublisher: string,
+  executable: string,
+): boolean {
+  const normalizedExecutable = normalizeWindowsPath(executable);
+  return signatureStatus.toLowerCase() === "valid" &&
+    packageName === OFFICIAL_CODEX_PACKAGE_NAME &&
+    packagePublisher === OFFICIAL_CODEX_PACKAGE_PUBLISHER &&
+    signerSubject === packagePublisher &&
+    normalizedExecutable.includes("\\windowsapps\\openai.codex_") &&
+    normalizedExecutable.endsWith("\\app\\chatgpt.exe");
+}
+
 export function parseWindowsInstallCandidate(raw: string): CodexInstall | null {
   if (!raw.trim()) return null;
   let parsed: Partial<WindowsInstallCandidate>;
@@ -68,14 +90,26 @@ export function parseWindowsInstallCandidate(raw: string): CodexInstall | null {
   } catch {
     return null;
   }
+  const trusted = typeof parsed.signatureStatus === "string" &&
+    typeof parsed.signerSubject === "string" &&
+    typeof parsed.executable === "string" &&
+    (parsed.trustType === "appx"
+      ? typeof parsed.packageName === "string" &&
+        typeof parsed.packagePublisher === "string" &&
+        isTrustedWindowsAppxPackage(
+          parsed.signatureStatus,
+          parsed.signerSubject,
+          parsed.packageName,
+          parsed.packagePublisher,
+          parsed.executable,
+        )
+      : isTrustedWindowsPublisher(parsed.signatureStatus, parsed.signerSubject));
   if (
     typeof parsed.executable !== "string" ||
     !path.win32.isAbsolute(parsed.executable) ||
     typeof parsed.installPath !== "string" ||
     !path.win32.isAbsolute(parsed.installPath) ||
-    typeof parsed.signatureStatus !== "string" ||
-    typeof parsed.signerSubject !== "string" ||
-    !isTrustedWindowsPublisher(parsed.signatureStatus, parsed.signerSubject)
+    !trusted
   ) {
     return null;
   }
@@ -91,48 +125,104 @@ export function parseWindowsInstallCandidate(raw: string): CodexInstall | null {
 
 const DISCOVER_SCRIPT = String.raw`
 $ErrorActionPreference = "SilentlyContinue"
-$candidatePaths = [System.Collections.Generic.List[string]]::new()
-if ($env:CODEX_THEMES_DESKTOP_PATH) {
-  $candidatePaths.Add($env:CODEX_THEMES_DESKTOP_PATH)
-}
+$result = $null
+$packageRoots = [System.Collections.Generic.List[string]]::new()
+
+# Preferred path: ask the package manager. Some Windows installations return
+# HRESULT 0x80070002 here, so a protected WindowsApps scan is also used below.
 Get-AppxPackage | Where-Object {
-  $_.Name -match "OpenAI|ChatGPT" -or $_.PackageFamilyName -match "OpenAI|ChatGPT"
+  $_.Name -eq "OpenAI.Codex" -or $_.PackageFamilyName -like "OpenAI.Codex_*"
 } | ForEach-Object {
-  $package = $_
-  $manifest = Get-AppxPackageManifest -Package $package.PackageFullName
+  if ($_.InstallLocation) { $packageRoots.Add([string]$_.InstallLocation) }
+}
+
+$windowsAppsRoot = Join-Path $env:ProgramFiles "WindowsApps"
+if (Test-Path -LiteralPath $windowsAppsRoot -PathType Container) {
+  Get-ChildItem -LiteralPath $windowsAppsRoot -Directory -Filter "OpenAI.Codex_*__2p2nqsd0c76g0" |
+    Sort-Object Name -Descending |
+    ForEach-Object { $packageRoots.Add($_.FullName) }
+}
+
+$seenRoots = @{}
+foreach ($packageRoot in $packageRoots) {
+  if (-not $packageRoot) { continue }
+  $fullRoot = [System.IO.Path]::GetFullPath($packageRoot)
+  if ($seenRoots[$fullRoot]) { continue }
+  $seenRoots[$fullRoot] = $true
+
+  $manifestPath = Join-Path $fullRoot "AppxManifest.xml"
+  $signaturePath = Join-Path $fullRoot "AppxSignature.p7x"
+  if (-not (Test-Path -LiteralPath $manifestPath -PathType Leaf) -or
+      -not (Test-Path -LiteralPath $signaturePath -PathType Leaf)) { continue }
+
+  [xml]$manifest = Get-Content -LiteralPath $manifestPath -Raw
+  $identity = $manifest.Package.Identity
+  $packageName = [string]$identity.Name
+  $packagePublisher = [string]$identity.Publisher
+  if ($packageName -ne "OpenAI.Codex" -or
+      $packagePublisher -ne "CN=50BDFD77-8903-4850-9FFE-6E8522F64D5B") { continue }
+
+  $packageSignature = Get-AuthenticodeSignature -LiteralPath $signaturePath
+  $packageSigner = [string]$packageSignature.SignerCertificate.Subject
+  if ([string]$packageSignature.Status -ne "Valid" -or
+      $packageSigner -ne $packagePublisher) { continue }
+
   foreach ($application in @($manifest.Package.Applications.Application)) {
     $relative = [string]$application.Executable
-    if ($relative -and $relative -match "ChatGPT|Codex|OpenAI") {
-      $candidatePaths.Add((Join-Path $package.InstallLocation $relative))
+    if (-not $relative -or $relative -notmatch "ChatGPT|Codex|OpenAI") { continue }
+    $executable = [System.IO.Path]::GetFullPath((Join-Path $fullRoot $relative))
+    if (-not (Test-Path -LiteralPath $executable -PathType Leaf)) { continue }
+    $result = [pscustomobject]@{
+      executable = $executable
+      installPath = (Get-Item -LiteralPath $executable).Directory.FullName
+      version = [string]$identity.Version
+      signatureStatus = [string]$packageSignature.Status
+      signerSubject = $packageSigner
+      trustType = "appx"
+      packageName = $packageName
+      packagePublisher = $packagePublisher
     }
+    break
+  }
+  if ($result) { break }
+}
+
+# Legacy/standalone fallback: require the executable itself to be signed by OpenAI.
+if (-not $result) {
+  $candidatePaths = [System.Collections.Generic.List[string]]::new()
+  if ($env:CODEX_UI_DESKTOP_PATH) {
+    $candidatePaths.Add($env:CODEX_UI_DESKTOP_PATH)
+  }
+  $candidatePaths.Add((Join-Path $env:LOCALAPPDATA "Microsoft\WindowsApps\ChatGPT.exe"))
+  $seen = @{}
+  foreach ($candidatePath in $candidatePaths) {
+    if (-not $candidatePath) { continue }
+    $fullPath = [System.IO.Path]::GetFullPath($candidatePath)
+    if ($seen[$fullPath] -or -not (Test-Path -LiteralPath $fullPath -PathType Leaf)) { continue }
+    $seen[$fullPath] = $true
+    $signature = Get-AuthenticodeSignature -LiteralPath $fullPath
+    $item = Get-Item -LiteralPath $fullPath
+    $result = [pscustomobject]@{
+      executable = $fullPath
+      installPath = $item.Directory.FullName
+      version = [string]$item.VersionInfo.ProductVersion
+      signatureStatus = [string]$signature.Status
+      signerSubject = [string]$signature.SignerCertificate.Subject
+      trustType = "authenticode"
+    }
+    break
   }
 }
-$candidatePaths.Add((Join-Path $env:LOCALAPPDATA "Microsoft\WindowsApps\ChatGPT.exe"))
-$seen = @{}
-foreach ($candidatePath in $candidatePaths) {
-  if (-not $candidatePath) { continue }
-  $fullPath = [System.IO.Path]::GetFullPath($candidatePath)
-  if ($seen[$fullPath] -or -not (Test-Path -LiteralPath $fullPath -PathType Leaf)) { continue }
-  $seen[$fullPath] = $true
-  $signature = Get-AuthenticodeSignature -LiteralPath $fullPath
-  $item = Get-Item -LiteralPath $fullPath
-  [pscustomobject]@{
-    executable = $fullPath
-    installPath = $item.Directory.FullName
-    version = [string]$item.VersionInfo.ProductVersion
-    signatureStatus = [string]$signature.Status
-    signerSubject = [string]$signature.SignerCertificate.Subject
-  } | ConvertTo-Json -Compress
-  break
-}
-`;
+
+if ($result) { $result | ConvertTo-Json -Compress }
+`
 
 export async function discoverWindowsCodexApp(
   configured?: string | null,
 ): Promise<CodexInstall | null> {
   const env = {
     ...process.env,
-    CODEX_THEMES_DESKTOP_PATH:
+    CODEX_UI_DESKTOP_PATH:
       configured && path.win32.isAbsolute(configured) ? configured : "",
   };
   try {
@@ -211,11 +301,17 @@ export function portBelongsToWindowsInstall(
 }
 
 async function listenerPids(port: number): Promise<number[]> {
+  // Get-NetTCPConnection exits with code 1 when no matching listener exists,
+  // even with -ErrorAction SilentlyContinue. An unused port is expected during
+  // port selection, so always emit valid JSON and explicitly exit 0.
   const raw = await powershell(`
-Get-NetTCPConnection -State Listen -LocalPort ${port} -ErrorAction SilentlyContinue |
+$connections = @(Get-NetTCPConnection -State Listen -LocalPort ${port} -ErrorAction SilentlyContinue)
+if ($connections.Count -eq 0) { Write-Output "[]"; exit 0 }
+$connections |
   Select-Object -ExpandProperty OwningProcess |
   Sort-Object -Unique |
   ConvertTo-Json -Compress
+exit 0
 `);
   if (!raw) return [];
   return asArray(JSON.parse(raw) as number | number[])

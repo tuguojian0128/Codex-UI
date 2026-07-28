@@ -37,8 +37,8 @@ const NAV: { page: Page; label: string; icon: React.ReactNode }[] = [
   { page: "settings", label: "设置", icon: <Settings2 size={15} /> },
 ];
 
-const SIDEBAR_STORAGE_KEY = "codex-themes:sidebar-collapsed";
-const SIDEBAR_WIDTH_STORAGE_KEY = "codex-themes:sidebar-width";
+const SIDEBAR_STORAGE_KEY = "codex-ui:sidebar-collapsed";
+const SIDEBAR_WIDTH_STORAGE_KEY = "codex-ui:sidebar-width";
 const SIDEBAR_DEFAULT_WIDTH = 204;
 const SIDEBAR_MIN_WIDTH = 176;
 const SIDEBAR_MAX_WIDTH = 320;
@@ -167,7 +167,7 @@ export function App() {
       style={shellStyle}
     >
       <div className="titlebar">
-        <span className="titlebar-title">Codex Themes</span>
+        <span className="titlebar-title">Codex-UI</span>
         <StatusCard />
       </div>
       <aside className="sidebar" aria-label="应用导航">
@@ -200,7 +200,7 @@ export function App() {
             <Palette size={14} />
           </span>
           <div className="brand-copy">
-            <div className="brand-name">Codex Themes</div>
+            <div className="brand-name">Codex-UI</div>
             <div className="brand-sub">Codex 桌面端换肤</div>
           </div>
         </div>

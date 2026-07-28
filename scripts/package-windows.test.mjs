@@ -27,7 +27,7 @@ test("Windows target parsing and runner validation accept x64 only", () => {
 });
 
 test("Windows artifact validation and metadata cover the NSIS installer", (t) => {
-  const root = fs.mkdtempSync(path.join(os.tmpdir(), "codex-themes-win-test-"));
+  const root = fs.mkdtempSync(path.join(os.tmpdir(), "codex-ui-win-test-"));
   t.after(() => fs.rmSync(root, { recursive: true, force: true }));
   const artifacts = getWindowsArtifactPaths(root, "0.2.14");
   fs.mkdirSync(artifacts.releaseDir);
@@ -35,10 +35,10 @@ test("Windows artifact validation and metadata cover the NSIS installer", (t) =>
   fs.writeFileSync(artifacts.installerBlockmap, "blockmap");
   const metadata = `version: 0.2.14
 files:
-  - url: Codex-Themes-0.2.14-win-x64.exe
+  - url: Codex-UI-0.2.14-win-x64.exe
     sha512: ${sha512File(artifacts.installer)}
     size: ${fs.statSync(artifacts.installer).size}
-path: Codex-Themes-0.2.14-win-x64.exe
+path: Codex-UI-0.2.14-win-x64.exe
 sha512: ${sha512File(artifacts.installer)}
 `;
   fs.writeFileSync(artifacts.updateMetadata, metadata);

@@ -73,10 +73,10 @@ export function mergeMacMetadata({
   assertVersion(x64, version, "x64 metadata");
 
   const names = {
-    arm64Zip: `Codex-Themes-${version}-mac-arm64.zip`,
-    arm64Dmg: `Codex-Themes-${version}-mac-arm64.dmg`,
-    x64Zip: `Codex-Themes-${version}-mac-x64.zip`,
-    x64Dmg: `Codex-Themes-${version}-mac-x64.dmg`,
+    arm64Zip: `Codex-UI-${version}-mac-arm64.zip`,
+    arm64Dmg: `Codex-UI-${version}-mac-arm64.dmg`,
+    x64Zip: `Codex-UI-${version}-mac-x64.zip`,
+    x64Dmg: `Codex-UI-${version}-mac-x64.dmg`,
   };
   const files = [
     requiredEntry(arm64, names.arm64Zip, "ARM64 metadata"),
@@ -104,10 +104,10 @@ export function assertMergedMacMetadata(metadataText, version, releaseDir) {
   const document = parseMetadata(metadataText, "Merged macOS metadata");
   assertVersion(document, version, "Merged macOS metadata");
   const expectedNames = [
-    `Codex-Themes-${version}-mac-arm64.zip`,
-    `Codex-Themes-${version}-mac-arm64.dmg`,
-    `Codex-Themes-${version}-mac-x64.zip`,
-    `Codex-Themes-${version}-mac-x64.dmg`,
+    `Codex-UI-${version}-mac-arm64.zip`,
+    `Codex-UI-${version}-mac-arm64.dmg`,
+    `Codex-UI-${version}-mac-x64.zip`,
+    `Codex-UI-${version}-mac-x64.dmg`,
   ];
   if (
     document.path !== expectedNames[0] ||

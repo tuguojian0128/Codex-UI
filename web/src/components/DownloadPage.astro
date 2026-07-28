@@ -26,8 +26,8 @@ import type { Locale } from "../lib/i18n";
 const { locale } = Astro.props as { locale: Locale };
 const description =
   locale === "zh"
-    ? "下载适用于 Apple 芯片 Mac、Intel Mac 和 Windows x64 的最新版 Codex Themes。"
-    : "Download the latest Codex Themes for Apple silicon Macs, Intel Macs, and Windows x64.";
+    ? "下载适用于 Apple 芯片 Mac、Intel Mac 和 Windows x64 的最新版 Codex-UI。"
+    : "Download the latest Codex-UI for Apple silicon Macs, Intel Macs, and Windows x64.";
 const isZh = locale === "zh";
 ---
 
@@ -77,7 +77,7 @@ const isZh = locale === "zh";
           <div class="download-product-window">
             <Image
               src={themeGalleryClient}
-              alt={isZh ? "Codex Themes 桌面客户端主题画廊" : "Codex Themes desktop theme gallery"}
+              alt={isZh ? "Codex-UI 桌面客户端主题画廊" : "Codex-UI desktop theme gallery"}
               widths={[720, 1080, 1440]}
               sizes="(max-width: 900px) 92vw, 48vw"
               format="webp"
@@ -178,8 +178,8 @@ const isZh = locale === "zh";
         <h2>{isZh ? "下载后，三步开始使用" : "Get started in three steps"}</h2>
         <p>
           {isZh
-            ? "保持 Codex 与 Codex Themes 都是最新版，可以获得更稳定的主题体验。"
-            : "Keep Codex and Codex Themes up to date for the most reliable theme experience."}
+            ? "保持 Codex 与 Codex-UI 都是最新版，可以获得更稳定的主题体验。"
+            : "Keep Codex and Codex-UI up to date for the most reliable theme experience."}
         </p>
       </div>
 
@@ -225,8 +225,8 @@ const isZh = locale === "zh";
       <div class="install-guide-note">
         <p>
           {isZh
-            ? "Codex Themes 在本机运行，不读取 API Key，也不会修改 Codex 安装包。"
-            : "Codex Themes runs locally, never reads your API key, and leaves the Codex installation untouched."}
+            ? "Codex-UI 在本机运行，不读取 API Key，也不会修改 Codex 安装包。"
+            : "Codex-UI runs locally, never reads your API key, and leaves the Codex installation untouched."}
         </p>
         <a href={GITHUB_REPO_URL}>
           {isZh ? "在 GitHub 查看源码" : "View the source on GitHub"}

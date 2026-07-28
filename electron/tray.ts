@@ -20,7 +20,7 @@ export class AppTray {
     const image = nativeImage.createFromPath(iconPath);
     if (process.platform === "darwin") image.setTemplateImage(true);
     this.tray = new Tray(image);
-    this.tray.setToolTip("Codex Themes");
+    this.tray.setToolTip("Codex-UI");
     this.state = controller.getState();
     this.controller.on("stateChanged", (state: AppState) => {
       this.state = state;
@@ -57,7 +57,7 @@ export class AppTray {
         click: () => void this.controller.restoreOfficial(),
       },
       { type: "separator" },
-      { label: "退出 Codex Themes", click: () => this.quit() },
+      { label: "退出 Codex-UI", click: () => this.quit() },
     ]);
     this.tray.setContextMenu(menu);
   }

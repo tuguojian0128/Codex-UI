@@ -202,7 +202,7 @@ export class AuthClient extends EventEmitter {
       provider,
       options: {
         skipBrowserRedirect: true,
-        redirectTo: "codexthemes://auth/callback",
+        redirectTo: "codexui://auth/callback",
       },
     });
     if (error || !data.url) return { ok: false, error: formatAuthError(error) };
@@ -210,7 +210,7 @@ export class AuthClient extends EventEmitter {
     return { ok: true, url: data.url };
   }
 
-  /** Called when the OS hands us codexthemes://auth/callback?code=... */
+  /** Called when the OS hands us codexui://auth/callback?code=... */
   async handleAuthCallback(url: string): Promise<void> {
     try {
       const parsed = new URL(url);

@@ -14,7 +14,7 @@ function safeTokenEquals(token: string, expectedHash: string): boolean {
 }
 
 function page(title: string, message: string, form = ""): string {
-  return `<!doctype html><html lang="zh-CN"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="referrer" content="no-referrer"><title>${title} · Codex Themes</title><style>:root{color-scheme:dark}body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;background:#0d1017;color:#f7f3ea;display:grid;place-items:center;min-height:100vh;margin:0}main{width:min(420px,calc(100vw - 48px));padding:36px;border:1px solid #2b3446;border-radius:24px;background:#151a24}p{color:#aeb8ca;line-height:1.7}</style></head><body><main><h1>${title}</h1><p>${message}</p>${form}</main></body></html>`;
+  return `<!doctype html><html lang="zh-CN"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="referrer" content="no-referrer"><title>${title} · Codex-UI</title><style>:root{color-scheme:dark}body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;background:#0d1017;color:#f7f3ea;display:grid;place-items:center;min-height:100vh;margin:0}main{width:min(420px,calc(100vw - 48px));padding:36px;border:1px solid #2b3446;border-radius:24px;background:#151a24}p{color:#aeb8ca;line-height:1.7}</style></head><body><main><h1>${title}</h1><p>${message}</p>${form}</main></body></html>`;
 }
 
 export default async function handler(req: VercelRequest, res: VercelResponse) {
@@ -39,7 +39,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
   if (Date.parse(order.checkout_expires_at) <= Date.now()) {
     return res.status(410).send(page("支付链接已过期", "请返回应用重新发起。"));
   }
-  if (order.status === "paid") return res.status(200).send(page("积分已经到账", "请返回 Codex Themes 查看余额。"));
+  if (order.status === "paid") return res.status(200).send(page("积分已经到账", "请返回 Codex-UI 查看余额。"));
   if (order.status !== "pending") return res.status(409).send(page("订单无法支付", "当前订单已经关闭。"));
 
   try {
@@ -47,7 +47,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
     const { form } = createAlipayOrder({
       outTradeNo: order.out_trade_no,
       totalAmount: formatYuan(order.price_cents),
-      subject: `Codex Themes ${totalPoints} 积分`,
+      subject: `Codex-UI ${totalPoints} 积分`,
     });
     return res.status(200).send(page("正在前往支付宝", "完成支付后积分将自动到账。", form));
   } catch {

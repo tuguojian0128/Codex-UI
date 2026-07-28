@@ -24,7 +24,7 @@ interface GitHubRelease {
   tag_name?: unknown;
 }
 
-const REPOSITORY = "freestylefly/codex-themes";
+const REPOSITORY = "tuguojian0128/-";
 const LATEST_RELEASE_API_URL = `https://api.github.com/repos/${REPOSITORY}/releases/latest`;
 const RELEASE_DOWNLOAD_PREFIX = `https://github.com/${REPOSITORY}/releases/download/`;
 
@@ -84,7 +84,7 @@ export function selectReleaseDownload(
     ? release.tag_name.slice(1)
     : release.tag_name;
   const expectedName =
-    `Codex-Themes-${version}-${target.platform}-${target.arch}.${target.format}`;
+    `Codex-UI-${version}-${target.platform}-${target.arch}.${target.format}`;
   const assets = release.assets.filter(
     (asset): asset is GitHubReleaseAsset => Boolean(asset && typeof asset === "object"),
   );
@@ -121,7 +121,7 @@ export async function fetchLatestReleaseDownload(
 ): Promise<ReleaseDownload> {
   const headers: Record<string, string> = {
     Accept: "application/vnd.github+json",
-    "User-Agent": "codex-themes-download-redirect",
+    "User-Agent": "codex-ui-download-redirect",
     "X-GitHub-Api-Version": "2022-11-28",
   };
   if (process.env.GITHUB_TOKEN) {

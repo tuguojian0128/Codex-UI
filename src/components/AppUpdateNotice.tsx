@@ -121,7 +121,7 @@ export function AppUpdateNotice() {
                     v{update.currentVersion} → v{update.availableVersion}
                   </span>
                   <h3 id="app-update-title">
-                    {update.releaseName ?? `Codex Themes v${update.availableVersion}`}
+                    {update.releaseName ?? `Codex-UI v${update.availableVersion}`}
                   </h3>
                 </div>
                 <button

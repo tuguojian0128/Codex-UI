@@ -103,7 +103,7 @@ const allThemes: WebTheme[] = Object.entries(manifestModules)
         y: manifest.wallpaperFocusY ?? 0.5,
       },
       hasBackdropArtwork: Boolean(backdropArtwork),
-      deepLink: `codexthemes://theme/${encodeURIComponent(manifest.id)}`,
+      deepLink: `codexui://theme/${encodeURIComponent(manifest.id)}`,
       priceCents: manifest.priceCents,
       isPaid: typeof manifest.priceCents === "number" && manifest.priceCents > 0,
     };

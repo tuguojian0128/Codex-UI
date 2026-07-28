@@ -34,7 +34,7 @@ export function assertWindowsPackagingEnvironment(
 
 export function getWindowsArtifactPaths(rootDir, version) {
   const releaseDir = path.join(rootDir, "release");
-  const baseName = `Codex-Themes-${version}-win-x64`;
+  const baseName = `Codex-UI-${version}-win-x64`;
   return {
     releaseDir,
     installer: path.join(releaseDir, `${baseName}.exe`),

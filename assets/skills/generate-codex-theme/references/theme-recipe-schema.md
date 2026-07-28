@@ -1,6 +1,6 @@
 # Theme Recipe Schema
 
-The Theme Recipe is the only structured output the `generate-codex-theme` skill produces. It describes a Codex Themes v2 theme without containing any CSS, JavaScript, shell commands, or arbitrary file paths.
+The Theme Recipe is the only structured output the `generate-codex-theme` skill produces. It describes a Codex-UI v2 theme without containing any CSS, JavaScript, shell commands, or arbitrary file paths.
 
 ```json
 {

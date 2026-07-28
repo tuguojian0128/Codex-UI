@@ -30,8 +30,8 @@
   - 未登录时展示邮箱验证码和 GitHub 登录。
   - 已登录时展示头像、邮箱、登录方式、已购主题数量和退出登录。
 - 扩展深链：
-  - `codexthemes://auth/callback?code=...`
-  - `codexthemes://payment/result?orderId=...`
+  - `codexui://auth/callback?code=...`
+  - `codexui://payment/result?orderId=...`
 - 邮箱登录采用客户端输入验证码的方式，避免邮件安全扫描提前消费登录链接。
 
 ### 2. 主题商品与授权

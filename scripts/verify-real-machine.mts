@@ -23,7 +23,7 @@ import { captureScreenshot, verifyRemovedSession } from "../electron/engine/veri
 import type { AppPaths } from "../electron/paths";
 
 const repoRoot = process.cwd();
-const workRoot = fs.mkdtempSync(path.join(os.tmpdir(), "codex-themes-verify-"));
+const workRoot = fs.mkdtempSync(path.join(os.tmpdir(), "codex-ui-verify-"));
 const screenshotPath = path.join(repoRoot, "tmp", "codex-verify", "applied.png");
 
 function step(message: string) {

@@ -27,7 +27,7 @@ const UPDATE_CHECK_INTERVAL_MS = 4 * 60 * 60 * 1000;
 const FIRST_UPDATE_CHECK_DELAY_MS = 5_000;
 const UPDATE_PREPARATION_TIMEOUT_MS = 5_000;
 const LATEST_RELEASE_URL =
-  "https://github.com/freestylefly/codex-themes/releases/latest";
+  "https://github.com/tuguojian0128/-/releases/latest";
 const PLATFORM_INFO = getUpdatePlatformInfo();
 
 type Logger = (level: LogLine["level"], message: string) => void;
@@ -59,7 +59,7 @@ function availableState(
     ...current,
     status: "available",
     availableVersion: info.version,
-    releaseName: info.releaseName ?? `Codex Themes v${info.version}`,
+    releaseName: info.releaseName ?? `Codex-UI v${info.version}`,
     releaseNotes: normalizeReleaseNotes(info.releaseNotes),
     releaseDate: info.releaseDate || null,
     releaseUrl: releaseUrlForVersion(info.version),
@@ -243,7 +243,7 @@ export class AppUpdaterService extends EventEmitter {
     }
 
     try {
-      this.log("info", `正在安装 Codex Themes v${this.state.availableVersion}。`);
+      this.log("info", `正在安装 Codex-UI v${this.state.availableVersion}。`);
       autoUpdater.quitAndInstall();
       return { ok: true };
     } catch (error) {
@@ -280,11 +280,11 @@ export class AppUpdaterService extends EventEmitter {
   private async hydrateGitHubRelease(version: string): Promise<void> {
     try {
       const response = await fetch(
-        `https://api.github.com/repos/freestylefly/codex-themes/releases/tags/v${encodeURIComponent(version)}`,
+        `https://api.github.com/repos/tuguojian0128/-/releases/tags/v${encodeURIComponent(version)}`,
         {
           headers: {
             Accept: "application/vnd.github+json",
-            "User-Agent": "codex-themes-app-updater",
+            "User-Agent": "codex-ui-app-updater",
             "X-GitHub-Api-Version": "2022-11-28",
           },
         },

@@ -57,7 +57,7 @@ export function getMacArtifactPaths(rootDir, version, arch) {
     throw new Error(`Unsupported macOS architecture: ${arch}.`);
   }
   const releaseDir = path.join(rootDir, "release");
-  const baseName = `Codex-Themes-${version}-mac-${arch}`;
+  const baseName = `Codex-UI-${version}-mac-${arch}`;
   return {
     releaseDir,
     dmg: path.join(releaseDir, `${baseName}.dmg`),

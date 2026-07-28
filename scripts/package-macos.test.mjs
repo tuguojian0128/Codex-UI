@@ -63,11 +63,11 @@ test("macOS artifact paths include the selected architecture", () => {
   const artifacts = getMacArtifactPaths("/repo", "0.2.14", "x64");
   assert.equal(
     artifacts.dmg,
-    path.join("/repo", "release", "Codex-Themes-0.2.14-mac-x64.dmg"),
+    path.join("/repo", "release", "Codex-UI-0.2.14-mac-x64.dmg"),
   );
   assert.equal(
     artifacts.zipBlockmap,
-    path.join("/repo", "release", "Codex-Themes-0.2.14-mac-x64.zip.blockmap"),
+    path.join("/repo", "release", "Codex-UI-0.2.14-mac-x64.zip.blockmap"),
   );
   assert.equal(
     artifacts.updateMetadata,
@@ -78,33 +78,33 @@ test("macOS artifact paths include the selected architecture", () => {
 test("DMG metadata refresh preserves the ZIP entry", () => {
   const input = `version: 0.2.14
 files:
-  - url: Codex-Themes-0.2.14-mac-arm64.zip
+  - url: Codex-UI-0.2.14-mac-arm64.zip
     sha512: zip-hash
     size: 100
-  - url: Codex-Themes-0.2.14-mac-arm64.dmg
+  - url: Codex-UI-0.2.14-mac-arm64.dmg
     sha512: old-dmg-hash
     size: 200
-path: Codex-Themes-0.2.14-mac-arm64.zip
+path: Codex-UI-0.2.14-mac-arm64.zip
 sha512: zip-hash
 `;
   const output = updateArtifactMetadata(
     input,
-    "Codex-Themes-0.2.14-mac-arm64.dmg",
+    "Codex-UI-0.2.14-mac-arm64.dmg",
     "new-dmg-hash",
     300,
   );
   assert.deepEqual(
-    readUpdateEntry(output, "Codex-Themes-0.2.14-mac-arm64.zip"),
+    readUpdateEntry(output, "Codex-UI-0.2.14-mac-arm64.zip"),
     { sha512: "zip-hash", size: 100 },
   );
   assert.deepEqual(
-    readUpdateEntry(output, "Codex-Themes-0.2.14-mac-arm64.dmg"),
+    readUpdateEntry(output, "Codex-UI-0.2.14-mac-arm64.dmg"),
     { sha512: "new-dmg-hash", size: 300 },
   );
 });
 
 test("artifact validation rejects a missing release file", (t) => {
-  const root = fs.mkdtempSync(path.join(os.tmpdir(), "codex-themes-mac-test-"));
+  const root = fs.mkdtempSync(path.join(os.tmpdir(), "codex-ui-mac-test-"));
   t.after(() => fs.rmSync(root, { recursive: true, force: true }));
   const artifacts = getMacArtifactPaths(root, "0.2.14", "arm64");
   fs.mkdirSync(artifacts.releaseDir);

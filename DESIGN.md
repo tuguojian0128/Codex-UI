@@ -1,4 +1,4 @@
-# Codex Themes — 桌面主题管理应用设计方案
+# Codex-UI — 桌面主题管理应用设计方案
 
 > 状态:M1–M4 已实现并持续打磨;设计系统已参考 Fei-Away/Codex-Dream-Skin 优化排版、半径、阴影与氛围感。
 > 日期:2026-07-17
@@ -8,7 +8,7 @@
 
 现有的 Codex-Dream-Skin 证明了「不修改官方安装包、通过本机 CDP(Chrome DevTools Protocol)注入给 OpenAI Codex 桌面端换肤」的可行性,但它以 shell 脚本 + `.command` 双击入口交付,用户要理解端口、重启、verify 等概念,体验不够丝滑。
 
-**目标**:构建一个独立的桌面应用(工作名 **Codex Themes**),用户下载安装后,点击选择主题或自定义主题,应用自动完成全部配置;并支持一键还原官方外观。
+**目标**:构建一个独立的桌面应用(工作名 **Codex-UI**),用户下载安装后,点击选择主题或自定义主题,应用自动完成全部配置;并支持一键还原官方外观。
 
 已确认的产品决策:
 
@@ -94,7 +94,7 @@ theme.json 校验规则(移植原引擎):文本字段截断(名称 80 / 标语 1
 ## 5. 目录结构
 
 ```
-codex-themes/
+codex-ui/
 ├── package.json / electron-builder.yml / tsconfig.node.json / tsconfig.web.json
 ├── electron.vite.config.ts
 ├── electron/            # 主进程

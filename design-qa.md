@@ -100,9 +100,9 @@ final result: passed
 ## Comparison target
 
 - Source visual truth: `/Users/canghe/.codex/generated_images/019f8e03-7663-7d43-941f-9b4008b07bf4/call_8Bu69fg4zjHYjaF7exWmrMZw.png`
-- Rendered implementation: `/Users/canghe/responsibility/canghe/codex-themes/tmp/design-qa/creator-center-implementation-01.png`
-- Full-view comparison: `/Users/canghe/responsibility/canghe/codex-themes/tmp/design-qa/creator-center-comparison-01.png`
-- Focused inspector comparison: `/Users/canghe/responsibility/canghe/codex-themes/tmp/design-qa/creator-center-inspector-comparison-01.png`
+- Rendered implementation: `/Users/canghe/responsibility/canghe/codex-ui/tmp/design-qa/creator-center-implementation-01.png`
+- Full-view comparison: `/Users/canghe/responsibility/canghe/codex-ui/tmp/design-qa/creator-center-comparison-01.png`
+- Focused inspector comparison: `/Users/canghe/responsibility/canghe/codex-ui/tmp/design-qa/creator-center-inspector-comparison-01.png`
 - CSS viewport/state: full-screen Electron window at `1147 × 716`, authenticated creator with six real local works, first work selected, all-work filter, dark theme.
 - Source pixels: `1487 × 1058`.
 - Implementation pixels: `1147 × 716`.
@@ -160,16 +160,16 @@ final result: passed
 
 ## Source visual truth
 
-- 用户选定方案 1：`/Users/canghe/responsibility/canghe/codex-themes/.cowork-temp/home-hero-direction-1.png`。
+- 用户选定方案 1：`/Users/canghe/responsibility/canghe/codex-ui/.cowork-temp/home-hero-direction-1.png`。
 - 目标结构：黑金官网首屏、左侧三行高对比标题、主题主图铺满首屏、右侧三层主题卡组、缩略图轨道与主题进度。
 - 目标行为：背景与当前轮播主题同步；主题有独立 `hero.png`／`wallpaper.png` 时使用无 UI 高清主图，否则使用经过弱化处理的真实预览图。
 
 ## Implementation evidence
 
-- 桌面最终截图：`/Users/canghe/responsibility/canghe/codex-themes/.cowork-temp/home-hero-implementation-final.png`。
-- 移动端最终截图：`/Users/canghe/responsibility/canghe/codex-themes/.cowork-temp/home-hero-mobile-final.png`。
-- 最终全图并排对照：`/Users/canghe/responsibility/canghe/codex-themes/.cowork-temp/home-hero-qa-final.png`。
-- 标题、操作与轮播焦点对照：`/Users/canghe/responsibility/canghe/codex-themes/.cowork-temp/home-hero-qa-focus.png`。
+- 桌面最终截图：`/Users/canghe/responsibility/canghe/codex-ui/.cowork-temp/home-hero-implementation-final.png`。
+- 移动端最终截图：`/Users/canghe/responsibility/canghe/codex-ui/.cowork-temp/home-hero-mobile-final.png`。
+- 最终全图并排对照：`/Users/canghe/responsibility/canghe/codex-ui/.cowork-temp/home-hero-qa-final.png`。
+- 标题、操作与轮播焦点对照：`/Users/canghe/responsibility/canghe/codex-ui/.cowork-temp/home-hero-qa-focus.png`。
 - 桌面测试视口：1440 × 1000 CSS px，截图栅格 1440 × 964 px；移动端测试视口：390 × 844 CSS px，截图栅格 390 × 823 px。
 - 状态：首屏、自动播放、手动下一张、主题主图联动、移动端单列。
 
@@ -214,15 +214,15 @@ final result: passed
 
 ## Source visual truth
 
-- 用户选定参考图：`/Users/canghe/responsibility/canghe/codex-themes/.cowork-temp/web-banner-redesign/reference-option-1.png`。
+- 用户选定参考图：`/Users/canghe/responsibility/canghe/codex-ui/.cowork-temp/web-banner-redesign/reference-option-1.png`。
 - 目标结构：暖黑金首页首屏、左侧三行主标题与金色主题入口、标题下方融入三张真实主题图，右侧以一张主卡和两张后置卡组成主题轮播。
 - 目标交互：轮播支持前后切换、缩略图直达、键盘方向键、拖动和自动播放；减少动态效果偏好下停止自动播放。
 
 ## Implementation evidence
 
-- 最终桌面首屏：`/Users/canghe/responsibility/canghe/codex-themes/.cowork-temp/web-banner-redesign/implementation-final-desktop.png`。
-- 最终手机首屏：`/Users/canghe/responsibility/canghe/codex-themes/.cowork-temp/web-banner-redesign/implementation-final-mobile.png`。
-- 最终并排对照：`/Users/canghe/responsibility/canghe/codex-themes/.cowork-temp/web-banner-redesign/comparison-final.png`。
+- 最终桌面首屏：`/Users/canghe/responsibility/canghe/codex-ui/.cowork-temp/web-banner-redesign/implementation-final-desktop.png`。
+- 最终手机首屏：`/Users/canghe/responsibility/canghe/codex-ui/.cowork-temp/web-banner-redesign/implementation-final-mobile.png`。
+- 最终并排对照：`/Users/canghe/responsibility/canghe/codex-ui/.cowork-temp/web-banner-redesign/comparison-final.png`。
 - 桌面验收视口：945 × 900 CSS px；手机验收视口：390 × 1000 CSS px。
 
 ## Findings
@@ -263,15 +263,15 @@ final result: passed
 
 ## Source visual truth
 
-- 用户选定参考图：`/Users/canghe/responsibility/canghe/codex-themes/.cowork-temp/web-home-redesign/reference-option-1.png`。
+- 用户选定参考图：`/Users/canghe/responsibility/canghe/codex-ui/.cowork-temp/web-home-redesign/reference-option-1.png`。
 - 目标结构：暖黑全屏首屏、左侧高对比品牌文案、右侧三张透视主题卡、底部主题缩略图轨道与切换控制。
 
 ## Implementation evidence
 
 - 首页已完成真实主题资源接入、三卡轮播、缩略图选择、前后切换、键盘方向键与拖动交互。
-- 桌面首屏：`/Users/canghe/responsibility/canghe/codex-themes/.cowork-temp/web-home-redesign/implementation-final.png`。
-- 820 px 窗口首屏：`/Users/canghe/responsibility/canghe/codex-themes/.cowork-temp/web-home-redesign/implementation-mobile-top.png`。
-- 最终并排对照：`/Users/canghe/responsibility/canghe/codex-themes/.cowork-temp/web-home-redesign/comparison-final.png`。
+- 桌面首屏：`/Users/canghe/responsibility/canghe/codex-ui/.cowork-temp/web-home-redesign/implementation-final.png`。
+- 820 px 窗口首屏：`/Users/canghe/responsibility/canghe/codex-ui/.cowork-temp/web-home-redesign/implementation-mobile-top.png`。
+- 最终并排对照：`/Users/canghe/responsibility/canghe/codex-ui/.cowork-temp/web-home-redesign/comparison-final.png`。
 - Astro 生产构建通过，`git diff --check` 通过；47 个静态页面均成功生成。
 
 ## Findings
@@ -297,15 +297,15 @@ final result: passed
 
 ## Source visual truth
 
-- 用户选定参考图（方案 3）：`/Users/canghe/responsibility/canghe/codex-themes/.cowork-temp/onboarding-design/reference-option-3.png`。
+- 用户选定参考图（方案 3）：`/Users/canghe/responsibility/canghe/codex-ui/.cowork-temp/onboarding-design/reference-option-3.png`。
 - 目标结构：暖黑全屏画布、左侧编辑式标题和三款主题选择、右侧由真实主题图组成的透视卡组、底部本地状态与安全说明。
 - 目标交互：用户在进入应用前可以切换并预览主题，再以当前主题继续；首屏不是一次性说明书式表单。
 
 ## Implementation evidence
 
-- 真实 Electron 最终截图：`/Users/canghe/responsibility/canghe/codex-themes/.cowork-temp/onboarding-design/implementation-final.png`。
-- 参考图／实装并排对照：`/Users/canghe/responsibility/canghe/codex-themes/.cowork-temp/onboarding-design/comparison-final.png`。
-- 响应式对照（1024 × 820、760 × 820、520 × 800）：`/Users/canghe/responsibility/canghe/codex-themes/.cowork-temp/onboarding-design/responsive-comparison.png`。
+- 真实 Electron 最终截图：`/Users/canghe/responsibility/canghe/codex-ui/.cowork-temp/onboarding-design/implementation-final.png`。
+- 参考图／实装并排对照：`/Users/canghe/responsibility/canghe/codex-ui/.cowork-temp/onboarding-design/comparison-final.png`。
+- 响应式对照（1024 × 820、760 × 820、520 × 800）：`/Users/canghe/responsibility/canghe/codex-ui/.cowork-temp/onboarding-design/responsive-comparison.png`。
 - 主对照视口：1487 × 1058；状态：首次启动、Codex 已检测、第一款主题「霓虹猎星者」选中。
 
 ## Findings
@@ -348,16 +348,16 @@ final result: passed
 
 ## Source visual truth
 
-- 用户选定参考图：`/Users/canghe/responsibility/canghe/codex-themes/.cowork-temp/custom-editor-design/reference-option-3.png`。
+- 用户选定参考图：`/Users/canghe/responsibility/canghe/codex-ui/.cowork-temp/custom-editor-design/reference-option-3.png`。
 - 目标结构：四步创建流程、左侧八种布局卡、右侧真实首页／任务页预览、当前主图摘要，以及贴底的上一步、下一步和保存草稿操作。
 - 目标风格：沿用产品现有的暖墨黑、蜂蜜金和低对比边框，不新增另一套视觉语言。
 
 ## Implementation evidence
 
-- 第一轮真实 Electron 截图：`/Users/canghe/responsibility/canghe/codex-themes/.cowork-temp/custom-editor-design/implementation-pass-1.png`。
-- 最终真实 Electron 截图：`/Users/canghe/responsibility/canghe/codex-themes/.cowork-temp/custom-editor-design/implementation-final.png`。
-- 最终同视口并排对照：`/Users/canghe/responsibility/canghe/codex-themes/.cowork-temp/custom-editor-design/comparison-final.png`。
-- 响应式证据：`/Users/canghe/responsibility/canghe/codex-themes/.cowork-temp/custom-editor-design/responsive-1024.png` 与 `/Users/canghe/responsibility/canghe/codex-themes/.cowork-temp/custom-editor-design/responsive-760.png`。
+- 第一轮真实 Electron 截图：`/Users/canghe/responsibility/canghe/codex-ui/.cowork-temp/custom-editor-design/implementation-pass-1.png`。
+- 最终真实 Electron 截图：`/Users/canghe/responsibility/canghe/codex-ui/.cowork-temp/custom-editor-design/implementation-final.png`。
+- 最终同视口并排对照：`/Users/canghe/responsibility/canghe/codex-ui/.cowork-temp/custom-editor-design/comparison-final.png`。
+- 响应式证据：`/Users/canghe/responsibility/canghe/codex-ui/.cowork-temp/custom-editor-design/responsive-1024.png` 与 `/Users/canghe/responsibility/canghe/codex-ui/.cowork-temp/custom-editor-design/responsive-760.png`。
 - 主视口：1487 × 1058 px；响应式视口：1024 × 820 px、760 × 820 px。
 
 ## Findings
@@ -441,7 +441,7 @@ final result: passed
 ## Follow-up polish
 
 - [P3] Capture the freshly reapplied theme in the signed installed Mac build when a native UI session is available.
-- [P3] Repeat the `codexthemes://theme/moonlit-immortal` smoke test in the next signed release package.
+- [P3] Repeat the `codexui://theme/moonlit-immortal` smoke test in the next signed release package.
 
 ## Final result
 
@@ -503,7 +503,7 @@ final result: passed
 ## Follow-up polish
 
 - [P3] Capture the freshly applied theme inside a live Codex task window after the next packaged desktop build is launched.
-- [P3] Repeat the installed-app `codexthemes://theme/mirror-lake-ribbon` smoke test after the next signed Mac package is produced.
+- [P3] Repeat the installed-app `codexui://theme/mirror-lake-ribbon` smoke test after the next signed Mac package is produced.
 
 ## Final result
 
@@ -564,20 +564,20 @@ final result: passed
 
 ---
 
-# Codex Themes 官网 Design QA
+# Codex-UI 官网 Design QA
 
 ## Source visual truth
 
-- Reference home capture: `/tmp/codex-themes-qa/reference-home.png`
-- Reference detail capture: `/tmp/codex-themes-qa/reference-detail.png`
-- Reference: `https://codexthemes.ai/`，仅用于编辑式标题、大留白、主题大图和详情页节奏；品牌、文案、主题与安装路径均为本项目原创实现。
+- Reference home capture: `/tmp/codex-ui-qa/reference-home.png`
+- Reference detail capture: `/tmp/codex-ui-qa/reference-detail.png`
+- Reference: `https://codexui.ai/`，仅用于编辑式标题、大留白、主题大图和详情页节奏；品牌、文案、主题与安装路径均为本项目原创实现。
 
 ## Implementation evidence
 
-- Home capture: `/tmp/codex-themes-qa/implementation-home.png`
-- Theme detail capture: `/tmp/codex-themes-qa/implementation-detail.png`
-- Full home comparison: `/tmp/codex-themes-qa/home-comparison.jpg`
-- Detail comparison: `/tmp/codex-themes-qa/detail-comparison.jpg`
+- Home capture: `/tmp/codex-ui-qa/implementation-home.png`
+- Theme detail capture: `/tmp/codex-ui-qa/implementation-detail.png`
+- Full home comparison: `/tmp/codex-ui-qa/home-comparison.jpg`
+- Detail comparison: `/tmp/codex-ui-qa/detail-comparison.jpg`
 - Browser-rendered viewport: 1229 × 720 CSS px.
 - States checked: Chinese home, Chinese Blue Window detail, English theme gallery, 15-card gallery inventory, canonical/alternate metadata, and production download URLs.
 - Browser console: no warnings or errors.
@@ -603,7 +603,7 @@ final result: passed
 
 - CSS breakpoints cover three-, two-, and one-column galleries at 1080px, 820px, and 590px, collapse feature/step grids, move the detail install panel below the preview, and replace desktop navigation with a labeled menu.
 - The connected browser's temporary viewport override did not change its fixed in-app viewport, so a mobile browser screenshot could not be captured in this run. The responsive rules remain production-built and type-checked; this is a P3 evidence gap rather than an observed responsive defect.
-- The browser security policy blocked executing the external `codexthemes://` protocol. URL parsing, malicious-input rejection, queued delivery, and renderer confirmation are covered by code tests and production builds; the native installed-app round trip remains a real-machine release smoke test.
+- The browser security policy blocked executing the external `codexui://` protocol. URL parsing, malicious-input rejection, queued delivery, and renderer confirmation are covered by code tests and production builds; the native installed-app round trip remains a real-machine release smoke test.
 
 ## Final result
 
@@ -660,7 +660,7 @@ final result: passed
 ## Follow-up polish
 
 - [P3] Capture the freshly applied theme inside a live Codex task window after the native Mac UI session is available.
-- [P3] Repeat the installed-app `codexthemes://theme/starcap-teemo` smoke test after the next signed desktop package is produced.
+- [P3] Repeat the installed-app `codexui://theme/starcap-teemo` smoke test after the next signed desktop package is produced.
 
 ## Final result
 
@@ -774,7 +774,7 @@ final result: passed
 ## Follow-up polish
 
 - [P3] Capture the reapplied theme in a signed installed Codex window; browser QA intentionally uses a scaled harness for the fixed-DPR in-app capture, while face sharpness is verified from the original production pixels.
-- [P3] Repeat the `codexthemes://theme/moonlit-immortal` smoke test in the next signed release package.
+- [P3] Repeat the `codexui://theme/moonlit-immortal` smoke test in the next signed release package.
 
 ## Final result
 
@@ -787,7 +787,7 @@ final result: passed
 ## Source visual truth
 
 - User-approved reference: `/Users/canghe/Downloads/已生成图像 1.png`.
-- User mismatch evidence: `/Users/canghe/responsibility/canghe/codex-themes/.cowork-temp/codex-clipboard-df8fe86b-e8f4-4c08-8c66-4e114839ed20.png`.
+- User mismatch evidence: `/Users/canghe/responsibility/canghe/codex-ui/.cowork-temp/codex-clipboard-df8fe86b-e8f4-4c08-8c66-4e114839ed20.png`.
 - Target: replace the generic oversized welcome headline with the approved upper-left conversation/code panel while preserving native suggestions and composer behavior.
 
 ## Implementation evidence
@@ -838,14 +838,14 @@ final result: passed
 
 ## Source visual truth
 
-- User-reported live screenshot: `/Users/canghe/responsibility/canghe/codex-themes/.cowork-temp/codex-clipboard-45e93b9c-4827-43e8-bde2-7dacd82af2f7.png`.
+- User-reported live screenshot: `/Users/canghe/responsibility/canghe/codex-ui/.cowork-temp/codex-clipboard-45e93b9c-4827-43e8-bde2-7dacd82af2f7.png`.
 - Target state: keep the full-canvas hero artwork, but remove near-black conversation and activity text from the bright blue image field. Long-form content needs a readable theme-native surface rather than a page-wide opaque overlay.
 
 ## Implementation evidence
 
-- Live Codex task capture: `/Users/canghe/responsibility/canghe/codex-themes/.cowork-temp/moonlit-readability-final-target-1496x1000.png`.
-- Full-view before/after comparison: `/Users/canghe/responsibility/canghe/codex-themes/.cowork-temp/moonlit-readability-comparison.png`.
-- Focused text comparison: `/Users/canghe/responsibility/canghe/codex-themes/.cowork-temp/moonlit-readability-focus-comparison.png`.
+- Live Codex task capture: `/Users/canghe/responsibility/canghe/codex-ui/.cowork-temp/moonlit-readability-final-target-1496x1000.png`.
+- Full-view before/after comparison: `/Users/canghe/responsibility/canghe/codex-ui/.cowork-temp/moonlit-readability-comparison.png`.
+- Focused text comparison: `/Users/canghe/responsibility/canghe/codex-ui/.cowork-temp/moonlit-readability-focus-comparison.png`.
 - Viewport/state: 748 × 500 CSS px at DPR 2, producing the same 1496 × 1000 raster size as the source; live task thread, light shell, `moonlit-immortal` applied.
 - Runtime stylesheet: `assets/inject/dream-skin.css`; preset version: `1.3.1`.
 
@@ -888,16 +888,16 @@ final result: passed
 
 ## Source visual truth
 
-- 用户选定参考图：`/Users/canghe/responsibility/canghe/codex-themes/.cowork-temp/ai-studio-design/reference-option-2.png`。
+- 用户选定参考图：`/Users/canghe/responsibility/canghe/codex-ui/.cowork-temp/ai-studio-design/reference-option-2.png`。
 - 目标结构：墨黑桌面壳层、大幅主题预览画布、画布下方的紧凑配置摘要与对话式提示词输入，以及集中承载生成轨迹、候选图和微调的右侧栏。
 - 目标交互：主要创作路径始终保持在一个工作台中，复杂配置放入弹层，生成中和完成后的操作不跳转页面。
 
 ## Implementation evidence
 
-- 真实 Electron 空闲态：`/Users/canghe/responsibility/canghe/codex-themes/.cowork-temp/ai-studio-design/implementation-pass-1.png`。
-- 真实 Electron 提示词态：`/Users/canghe/responsibility/canghe/codex-themes/.cowork-temp/ai-studio-design/implementation-final.png`。
-- 生成设置弹层：`/Users/canghe/responsibility/canghe/codex-themes/.cowork-temp/ai-studio-design/settings-modal.png`。
-- 最终并排对照：`/Users/canghe/responsibility/canghe/codex-themes/.cowork-temp/ai-studio-design/comparison-final.png`。
+- 真实 Electron 空闲态：`/Users/canghe/responsibility/canghe/codex-ui/.cowork-temp/ai-studio-design/implementation-pass-1.png`。
+- 真实 Electron 提示词态：`/Users/canghe/responsibility/canghe/codex-ui/.cowork-temp/ai-studio-design/implementation-final.png`。
+- 生成设置弹层：`/Users/canghe/responsibility/canghe/codex-ui/.cowork-temp/ai-studio-design/settings-modal.png`。
+- 最终并排对照：`/Users/canghe/responsibility/canghe/codex-ui/.cowork-temp/ai-studio-design/comparison-final.png`。
 - 窗口：953 × 651 px；状态：Codex CLI 已就绪、空闲预览、灵感提示词已填充、生成按钮可用。
 
 ## Findings
@@ -941,9 +941,9 @@ final result: passed
 **Comparison target**
 
 - Source visual truth: `/Users/canghe/.codex/generated_images/019f6d53-2b44-7703-8395-9bdf833bf567/exec-8237f33b-a7d0-4ab1-9ec4-45b36c87304e.png`
-- Rendered implementation: `/Users/canghe/responsibility/canghe/codex-themes/tmp/design-qa/blue-window-home.png`
-- Full-view comparison: `/Users/canghe/responsibility/canghe/codex-themes/tmp/design-qa/blue-window-comparison.png`
-- Focused center comparison: `/Users/canghe/responsibility/canghe/codex-themes/tmp/design-qa/blue-window-center-comparison.png`
+- Rendered implementation: `/Users/canghe/responsibility/canghe/codex-ui/tmp/design-qa/blue-window-home.png`
+- Full-view comparison: `/Users/canghe/responsibility/canghe/codex-ui/tmp/design-qa/blue-window-comparison.png`
+- Focused center comparison: `/Users/canghe/responsibility/canghe/codex-ui/tmp/design-qa/blue-window-center-comparison.png`
 - State: Codex home/new-task screen with `blue-window-messenger` active.
 - CSS viewport: `945 × 633`.
 - Source pixels: `1537 × 1023`; aspect-fitted to `945 × 629` and centered on a `945 × 633` comparison canvas.
@@ -990,9 +990,9 @@ final result: passed
 # Account and points redesign QA
 
 - Source visual truth: `/Users/canghe/.codex/generated_images/019f8e03-7663-7d43-941f-9b4008b07bf4/call_Um1UtjjzJt1sFibuhg5ksMq2.png`
-- Implementation screenshot: `/Users/canghe/responsibility/canghe/codex-themes/tmp/design-qa/account-implementation-final.jpeg`
-- Full-view comparison: `/Users/canghe/responsibility/canghe/codex-themes/tmp/design-qa/account-comparison-final.jpeg`
-- Focused hero comparison: `/Users/canghe/responsibility/canghe/codex-themes/tmp/design-qa/account-comparison-hero-final.jpeg`
+- Implementation screenshot: `/Users/canghe/responsibility/canghe/codex-ui/tmp/design-qa/account-implementation-final.jpeg`
+- Full-view comparison: `/Users/canghe/responsibility/canghe/codex-ui/tmp/design-qa/account-comparison-final.jpeg`
+- Focused hero comparison: `/Users/canghe/responsibility/canghe/codex-ui/tmp/design-qa/account-comparison-hero-final.jpeg`
 - Viewport/state: full-screen Electron window, authenticated account page, dark theme, zero-balance/empty-ledger live state.
 - Source pixels: 1536 × 1024.
 - Implementation capture pixels: 1147 × 716.
@@ -1055,10 +1055,10 @@ final result: passed
 ## 对照基准
 
 - source visual truth: `/Users/canghe/Library/Containers/at.EternalStorms.Yoink/Data/Documents/YoinkPromisedFiles.noIndex/yoinkFilePromiseCreationFolder5A5D4DF2-C63E-4204-9126-3720C298456C/add5A5D4DF2-C63E-4204-9126-3720C298456C/c4d87ae0baf2a3935b7b98d4ecf4794a.mp4`
-- source frame: `/Users/canghe/responsibilty/canghe/codex-themes/tmp/design-qa/nightbound-reference-frame.png`
-- implementation screenshot: `/Users/canghe/responsibilty/canghe/codex-themes/tmp/design-qa/nightbound-1280x800-home-final.png`
-- full-view comparison: `/Users/canghe/responsibilty/canghe/codex-themes/tmp/design-qa/nightbound-reference-vs-implementation.png`
-- focused comparison: `/Users/canghe/responsibilty/canghe/codex-themes/tmp/design-qa/nightbound-focused-reference-vs-implementation.png`
+- source frame: `/Users/canghe/responsibilty/canghe/codex-ui/tmp/design-qa/nightbound-reference-frame.png`
+- implementation screenshot: `/Users/canghe/responsibilty/canghe/codex-ui/tmp/design-qa/nightbound-1280x800-home-final.png`
+- full-view comparison: `/Users/canghe/responsibilty/canghe/codex-ui/tmp/design-qa/nightbound-reference-vs-implementation.png`
+- focused comparison: `/Users/canghe/responsibilty/canghe/codex-ui/tmp/design-qa/nightbound-focused-reference-vs-implementation.png`
 - viewport: 1280 × 800 CSS px
 - source pixels: 1280 × 800
 - implementation pixels: 1280 × 800
@@ -1091,7 +1091,7 @@ final result: passed
 2. P1 任务页原生内容曾被动态背景层遮挡，浅色文字 token 影响可读性。
    - Earlier evidence: 任务消息、文件变更卡片和输入框落在错误层级，部分文字与背景接近。
    - Fix: 提升原生 Codex 主界面层级，任务主表面改为半透明，并补齐消息、菜单、代码和输入框的深色 token。
-   - Post-fix evidence: `/Users/canghe/responsibilty/canghe/codex-themes/tmp/design-qa/nightbound-1280x800-task-final.png`
+   - Post-fix evidence: `/Users/canghe/responsibilty/canghe/codex-ui/tmp/design-qa/nightbound-1280x800-task-final.png`
 
 3. P2 新版任务页缺少旧消息标记。
    - Earlier evidence: 当前 Codex 任务 DOM 没有 `article`、`.message` 或 `data-message-author-role`，稳定标记为 `.thread-scroll-container`。
@@ -1105,9 +1105,9 @@ final result: passed
 
 ## Responsive and interaction checks
 
-- 1512 × 982 首页: `/Users/canghe/responsibilty/canghe/codex-themes/tmp/design-qa/nightbound-1512x982-home-final.png`
-- 1280 × 800 任务页: `/Users/canghe/responsibilty/canghe/codex-themes/tmp/design-qa/nightbound-1280x800-task-final.png`
-- 860 × 800 任务页: `/Users/canghe/responsibilty/canghe/codex-themes/tmp/design-qa/nightbound-860x800-task-final.png`
+- 1512 × 982 首页: `/Users/canghe/responsibilty/canghe/codex-ui/tmp/design-qa/nightbound-1512x982-home-final.png`
+- 1280 × 800 任务页: `/Users/canghe/responsibilty/canghe/codex-ui/tmp/design-qa/nightbound-1280x800-task-final.png`
+- 860 × 800 任务页: `/Users/canghe/responsibilty/canghe/codex-ui/tmp/design-qa/nightbound-860x800-task-final.png`
 - 小于 900 px 时视频隐藏，静态封面显示。
 - “开始对话”将焦点交给原生 ProseMirror 输入区。
 - “重播氛围”将视频进度归零。
@@ -1135,11 +1135,11 @@ final result: passed
 
 - Source visual truth: `/Users/canghe/.codex/generated_images/019f9db6-bbd7-77c1-a111-ae14a241f76f/call_kHWvZgA7E8G1dLFoqEivMTrG.png`
 - Source pixels: `1510 × 1042`
-- Implementation screenshot: `/tmp/codex-themes-download-desktop-qa-final.png`
-- Implementation full-page screenshot: `/tmp/codex-themes-download-full-qa-final.png`
-- Mobile hero screenshot: `/tmp/codex-themes-download-mobile-v2.png`
-- Mobile download dock screenshot: `/tmp/codex-themes-download-mobile-dock-v2.png`
-- Full-view comparison: `/tmp/codex-themes-download-design-compare-final.png`
+- Implementation screenshot: `/tmp/codex-ui-download-desktop-qa-final.png`
+- Implementation full-page screenshot: `/tmp/codex-ui-download-full-qa-final.png`
+- Mobile hero screenshot: `/tmp/codex-ui-download-mobile-v2.png`
+- Mobile download dock screenshot: `/tmp/codex-ui-download-mobile-dock-v2.png`
+- Full-view comparison: `/tmp/codex-ui-download-design-compare-final.png`
 - Desktop CSS viewport: `1536 × 1024`
 - Desktop implementation pixels: `1521 × 1014`
 - Mobile CSS viewport: `390 × 844`
@@ -1148,7 +1148,7 @@ final result: passed
 
 ## Full-view Comparison
 
-The final desktop capture preserves the selected composition: dark atmospheric hero, two-line editorial headline, real Codex Themes client preview, three-column download dock, contextual Windows note, and a full-width warm-paper installation section. The first installation heading begins inside the initial viewport at the same transition point as the source.
+The final desktop capture preserves the selected composition: dark atmospheric hero, two-line editorial headline, real Codex-UI client preview, three-column download dock, contextual Windows note, and a full-width warm-paper installation section. The first installation heading begins inside the initial viewport at the same transition point as the source.
 
 The implementation uses the repository's existing mascot in the header. The generated concept used a gold lettermark that is not part of the current brand assets. This is an accepted product constraint.
 

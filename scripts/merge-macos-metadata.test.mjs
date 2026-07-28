@@ -29,13 +29,13 @@ releaseDate: '2026-07-28T00:00:00.000Z'
 }
 
 test("macOS metadata merge validates both architectures and keeps ARM64 compatibility fields", (t) => {
-  const releaseDir = fs.mkdtempSync(path.join(os.tmpdir(), "codex-themes-metadata-"));
+  const releaseDir = fs.mkdtempSync(path.join(os.tmpdir(), "codex-ui-metadata-"));
   t.after(() => fs.rmSync(releaseDir, { recursive: true, force: true }));
   const names = [
-    `Codex-Themes-${VERSION}-mac-arm64.zip`,
-    `Codex-Themes-${VERSION}-mac-arm64.dmg`,
-    `Codex-Themes-${VERSION}-mac-x64.zip`,
-    `Codex-Themes-${VERSION}-mac-x64.dmg`,
+    `Codex-UI-${VERSION}-mac-arm64.zip`,
+    `Codex-UI-${VERSION}-mac-arm64.dmg`,
+    `Codex-UI-${VERSION}-mac-x64.zip`,
+    `Codex-UI-${VERSION}-mac-x64.dmg`,
   ];
   const entries = names.map((name, index) => {
     const file = path.join(releaseDir, name);
@@ -57,15 +57,15 @@ test("macOS metadata merge validates both architectures and keeps ARM64 compatib
 });
 
 test("macOS metadata merge rejects version drift and stale hashes", (t) => {
-  const releaseDir = fs.mkdtempSync(path.join(os.tmpdir(), "codex-themes-metadata-"));
+  const releaseDir = fs.mkdtempSync(path.join(os.tmpdir(), "codex-ui-metadata-"));
   t.after(() => fs.rmSync(releaseDir, { recursive: true, force: true }));
   const armNames = [
-    `Codex-Themes-${VERSION}-mac-arm64.zip`,
-    `Codex-Themes-${VERSION}-mac-arm64.dmg`,
+    `Codex-UI-${VERSION}-mac-arm64.zip`,
+    `Codex-UI-${VERSION}-mac-arm64.dmg`,
   ];
   const x64Names = [
-    `Codex-Themes-${VERSION}-mac-x64.zip`,
-    `Codex-Themes-${VERSION}-mac-x64.dmg`,
+    `Codex-UI-${VERSION}-mac-x64.zip`,
+    `Codex-UI-${VERSION}-mac-x64.dmg`,
   ];
   const makeEntries = (names) => names.map((name) => {
     const file = path.join(releaseDir, name);

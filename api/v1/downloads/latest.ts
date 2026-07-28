@@ -5,7 +5,7 @@ import {
 } from "../../../server/downloads/github-release.js";
 
 const LATEST_RELEASE_PAGE =
-  "https://github.com/freestylefly/codex-themes/releases/latest";
+  "https://github.com/tuguojian0128/-/releases/latest";
 
 export default async function handler(req: VercelRequest, res: VercelResponse) {
   if (req.method !== "GET" && req.method !== "HEAD") {
@@ -29,7 +29,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
     res.setHeader("CDN-Cache-Control", "no-store");
     res.setHeader("Vercel-CDN-Cache-Control", "no-store");
     res.setHeader("Location", download.url);
-    res.setHeader("X-Codex-Themes-Release", download.tagName);
+    res.setHeader("X-Codex-UI-Release", download.tagName);
     res.statusCode = 307;
     return res.end();
   } catch (error) {

@@ -1,6 +1,7 @@
 import assert from "node:assert/strict";
 import test from "node:test";
 import {
+  isTrustedWindowsAppxPackage,
   isTrustedWindowsPublisher,
   parseWindowsInstallCandidate,
   parseWindowsProcessRows,
@@ -26,6 +27,31 @@ test("Windows publisher validation requires a valid OpenAI signature", () => {
   );
 });
 
+
+test("Windows AppX validation accepts only the official Codex package signature", () => {
+  const appxExe = "C:\\Program Files\\WindowsApps\\OpenAI.Codex_26.721.4979.0_x64__2p2nqsd0c76g0\\app\\ChatGPT.exe";
+  assert.equal(
+    isTrustedWindowsAppxPackage(
+      "Valid",
+      "CN=50BDFD77-8903-4850-9FFE-6E8522F64D5B",
+      "OpenAI.Codex",
+      "CN=50BDFD77-8903-4850-9FFE-6E8522F64D5B",
+      appxExe,
+    ),
+    true,
+  );
+  assert.equal(
+    isTrustedWindowsAppxPackage(
+      "Valid",
+      "CN=Untrusted",
+      "OpenAI.Codex",
+      "CN=50BDFD77-8903-4850-9FFE-6E8522F64D5B",
+      appxExe,
+    ),
+    false,
+  );
+});
+
 test("Windows install candidates must be absolute and signed by OpenAI", () => {
   assert.deepEqual(
     parseWindowsInstallCandidate(JSON.stringify({
@@ -40,6 +66,25 @@ test("Windows install candidates must be absolute and signed by OpenAI", () => {
       executable: CHATGPT_EXE,
       installPath: "C:\\Program Files\\WindowsApps\\OpenAI.ChatGPT",
       version: "1.2.3",
+    },
+  );
+  const appxExe = "C:\\Program Files\\WindowsApps\\OpenAI.Codex_26.721.4979.0_x64__2p2nqsd0c76g0\\app\\ChatGPT.exe";
+  assert.deepEqual(
+    parseWindowsInstallCandidate(JSON.stringify({
+      executable: appxExe,
+      installPath: "C:\\Program Files\\WindowsApps\\OpenAI.Codex_26.721.4979.0_x64__2p2nqsd0c76g0\\app",
+      version: "26.721.4979.0",
+      signatureStatus: "Valid",
+      signerSubject: "CN=50BDFD77-8903-4850-9FFE-6E8522F64D5B",
+      trustType: "appx",
+      packageName: "OpenAI.Codex",
+      packagePublisher: "CN=50BDFD77-8903-4850-9FFE-6E8522F64D5B",
+    })),
+    {
+      platform: "win32",
+      executable: appxExe,
+      installPath: "C:\\Program Files\\WindowsApps\\OpenAI.Codex_26.721.4979.0_x64__2p2nqsd0c76g0\\app",
+      version: "26.721.4979.0",
     },
   );
   assert.equal(parseWindowsInstallCandidate("{invalid"), null);

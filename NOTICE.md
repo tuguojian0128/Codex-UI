@@ -1,6 +1,10 @@
 # NOTICE
 
-Codex Themes incorporates code ported from
+Codex-UI is a derivative work based on
+[freestylefly/codex-themes](https://github.com/freestylefly/codex-themes),
+used and redistributed under the MIT License. The original license text is preserved in `UPSTREAM-LICENSE`.
+
+Codex-UI also incorporates code ported from
 [Codex-Dream-Skin](https://github.com/Fei-Away/Codex-Dream-Skin),
 licensed under the MIT License:
 

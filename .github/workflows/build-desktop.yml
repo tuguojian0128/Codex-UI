@@ -139,10 +139,10 @@ jobs:
           retention-days: 14
           if-no-files-found: error
           path: |
-            release/Codex-Themes-${{ env.APP_VERSION }}-mac-arm64.dmg
-            release/Codex-Themes-${{ env.APP_VERSION }}-mac-arm64.dmg.blockmap
-            release/Codex-Themes-${{ env.APP_VERSION }}-mac-arm64.zip
-            release/Codex-Themes-${{ env.APP_VERSION }}-mac-arm64.zip.blockmap
+            release/Codex-UI-${{ env.APP_VERSION }}-mac-arm64.dmg
+            release/Codex-UI-${{ env.APP_VERSION }}-mac-arm64.dmg.blockmap
+            release/Codex-UI-${{ env.APP_VERSION }}-mac-arm64.zip
+            release/Codex-UI-${{ env.APP_VERSION }}-mac-arm64.zip.blockmap
             release/latest-mac-arm64.yml
 
       - name: Clean temporary keychain
@@ -241,10 +241,10 @@ jobs:
           retention-days: 14
           if-no-files-found: error
           path: |
-            release/Codex-Themes-${{ env.APP_VERSION }}-mac-x64.dmg
-            release/Codex-Themes-${{ env.APP_VERSION }}-mac-x64.dmg.blockmap
-            release/Codex-Themes-${{ env.APP_VERSION }}-mac-x64.zip
-            release/Codex-Themes-${{ env.APP_VERSION }}-mac-x64.zip.blockmap
+            release/Codex-UI-${{ env.APP_VERSION }}-mac-x64.dmg
+            release/Codex-UI-${{ env.APP_VERSION }}-mac-x64.dmg.blockmap
+            release/Codex-UI-${{ env.APP_VERSION }}-mac-x64.zip
+            release/Codex-UI-${{ env.APP_VERSION }}-mac-x64.zip.blockmap
             release/latest-mac-x64.yml
 
       - name: Clean temporary keychain
@@ -299,9 +299,9 @@ jobs:
         shell: pwsh
         run: |
           $ErrorActionPreference = "Stop"
-          $installer = Resolve-Path "release/Codex-Themes-$env:APP_VERSION-win-x64.exe"
+          $installer = Resolve-Path "release/Codex-UI-$env:APP_VERSION-win-x64.exe"
           $installDir = Join-Path $env:RUNNER_TEMP "CodexThemesSmoke"
-          $installedApp = Join-Path $installDir "Codex Themes.exe"
+          $installedApp = Join-Path $installDir "Codex-UI.exe"
           try {
             $install = Start-Process -FilePath $installer `
               -ArgumentList @("/S", "/D=$installDir") `
@@ -344,8 +344,8 @@ jobs:
           retention-days: 14
           if-no-files-found: error
           path: |
-            release/Codex-Themes-${{ env.APP_VERSION }}-win-x64.exe
-            release/Codex-Themes-${{ env.APP_VERSION }}-win-x64.exe.blockmap
+            release/Codex-UI-${{ env.APP_VERSION }}-win-x64.exe
+            release/Codex-UI-${{ env.APP_VERSION }}-win-x64.exe.blockmap
             release/latest.yml
 
   release:
@@ -422,19 +422,19 @@ jobs:
           GH_TOKEN: ${{ github.token }}
         run: |
           set -euo pipefail
-          title="Codex Themes ${RELEASE_TAG}"
+          title="Codex-UI ${RELEASE_TAG}"
           assets=(
-            "release/Codex-Themes-${APP_VERSION}-mac-arm64.dmg"
-            "release/Codex-Themes-${APP_VERSION}-mac-arm64.dmg.blockmap"
-            "release/Codex-Themes-${APP_VERSION}-mac-arm64.zip"
-            "release/Codex-Themes-${APP_VERSION}-mac-arm64.zip.blockmap"
-            "release/Codex-Themes-${APP_VERSION}-mac-x64.dmg"
-            "release/Codex-Themes-${APP_VERSION}-mac-x64.dmg.blockmap"
-            "release/Codex-Themes-${APP_VERSION}-mac-x64.zip"
-            "release/Codex-Themes-${APP_VERSION}-mac-x64.zip.blockmap"
+            "release/Codex-UI-${APP_VERSION}-mac-arm64.dmg"
+            "release/Codex-UI-${APP_VERSION}-mac-arm64.dmg.blockmap"
+            "release/Codex-UI-${APP_VERSION}-mac-arm64.zip"
+            "release/Codex-UI-${APP_VERSION}-mac-arm64.zip.blockmap"
+            "release/Codex-UI-${APP_VERSION}-mac-x64.dmg"
+            "release/Codex-UI-${APP_VERSION}-mac-x64.dmg.blockmap"
+            "release/Codex-UI-${APP_VERSION}-mac-x64.zip"
+            "release/Codex-UI-${APP_VERSION}-mac-x64.zip.blockmap"
             "release/latest-mac.yml"
-            "release/Codex-Themes-${APP_VERSION}-win-x64.exe"
-            "release/Codex-Themes-${APP_VERSION}-win-x64.exe.blockmap"
+            "release/Codex-UI-${APP_VERSION}-win-x64.exe"
+            "release/Codex-UI-${APP_VERSION}-win-x64.exe.blockmap"
             "release/latest.yml"
           )
           for asset in "${assets[@]}"; do

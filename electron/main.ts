@@ -27,7 +27,7 @@ import { registerIpc } from "./ipc";
 import { AppTray } from "./tray";
 import { resolvePickedImage } from "./picked-images";
 import { initAutoUpdater } from "./updater";
-import { CODEX_THEMES_PROTOCOL, parseOpenThemeUrl, parseAuthCallbackUrl, parsePaymentResultUrl } from "./deep-links";
+import { CODEX_UI_PROTOCOL, parseOpenThemeUrl, parseAuthCallbackUrl, parsePaymentResultUrl } from "./deep-links";
 import type { OpenThemeAction } from "./shared/types";
 import type { PaymentResultAction } from "./deep-links";
 import { AuthClient } from "./auth/client";
@@ -84,7 +84,7 @@ protocol.registerSchemesAsPrivileged([
 // The CDP client needs Node's built-in WebSocket (Node >= 22 / Electron >= 35).
 if (typeof globalThis.WebSocket !== "function") {
   dialog.showErrorBox(
-    "Codex Themes 无法启动",
+    "Codex-UI 无法启动",
     "当前 Electron 运行时不提供内置 WebSocket,无法连接 Codex 调试端口。",
   );
   app.exit(1);
@@ -100,11 +100,11 @@ for (const argument of process.argv) {
 }
 
 if (process.defaultApp && process.argv[1]) {
-  app.setAsDefaultProtocolClient(CODEX_THEMES_PROTOCOL.slice(0, -1), process.execPath, [
+  app.setAsDefaultProtocolClient(CODEX_UI_PROTOCOL.slice(0, -1), process.execPath, [
     path.resolve(process.argv[1]),
   ]);
 } else {
-  app.setAsDefaultProtocolClient(CODEX_THEMES_PROTOCOL.slice(0, -1));
+  app.setAsDefaultProtocolClient(CODEX_UI_PROTOCOL.slice(0, -1));
 }
 
 let mainWindow: BrowserWindow | null = null;
@@ -150,7 +150,7 @@ function createWindow(paths: AppPaths): void {
     height: 760,
     minWidth: 760,
     minHeight: 620,
-    title: "Codex Themes",
+    title: "Codex-UI",
     ...platformWindowOptions,
     backgroundColor: "#141518",
     show: false,
@@ -164,7 +164,7 @@ function createWindow(paths: AppPaths): void {
 
   mainWindow.once("ready-to-show", () => {
     if (ciSmokeTest) {
-      console.log("CODEX_THEMES_CI_SMOKE_READY");
+      console.log("CODEX_UI_CI_SMOKE_READY");
       app.exit(0);
       return;
     }
@@ -252,7 +252,7 @@ app.on("second-instance", (_event, argv) => {
   showWindow();
   const file = argv.find((arg) => isCodexthemeFile(arg));
   if (file) pendingOpenFiles.push(file);
-  const url = argv.find((arg) => arg.startsWith(CODEX_THEMES_PROTOCOL));
+  const url = argv.find((arg) => arg.startsWith(CODEX_UI_PROTOCOL));
   if (url) {
     if (parseAuthCallbackUrl(url)) {
       if (authClient) void authClient.handleAuthCallback(url);
@@ -275,7 +275,7 @@ app.on("activate", () => {
 
 app.whenReady().then(async () => {
   if (process.platform === "win32") {
-    app.setAppUserModelId("com.codexthemes.app");
+    app.setAppUserModelId("com.codexui.app");
   }
   const paths = await resolveAppPaths();
   const settings = new SettingsStore(paths.settingsFile);
@@ -305,15 +305,19 @@ app.whenReady().then(async () => {
       tokenStore: new AuthTokenStore(paths.userDataRoot),
       onOpenExternalUrl: (url) => shell.openExternal(url),
     });
-    commerceService = new CommerceService({
-      apiBaseUrl: commerceApiUrl,
-      supabaseUrl,
-      supabaseAnonKey,
-      authClient,
-      store,
-      purchasedThemesRoot: paths.purchasedThemesRoot,
-      onOpenCheckoutUrl: (url) => shell.openExternal(url),
-    });
+    if (commerceApiUrl) {
+      commerceService = new CommerceService({
+        apiBaseUrl: commerceApiUrl,
+        supabaseUrl,
+        supabaseAnonKey,
+        authClient,
+        store,
+        purchasedThemesRoot: paths.purchasedThemesRoot,
+        onOpenCheckoutUrl: (url) => shell.openExternal(url),
+      });
+    } else {
+      console.warn("VITE_COMMERCE_API_URL not set; payments and paid themes are disabled.");
+    }
     await authClient.init().catch((err) => {
       console.error("Auth init failed:", (err as Error).message);
     });
@@ -402,7 +406,7 @@ app.whenReady().then(async () => {
 
   const startupUrls = new Set([
     ...pendingOpenThemeUrls.splice(0),
-    ...process.argv.filter((arg) => arg.startsWith(CODEX_THEMES_PROTOCOL)),
+    ...process.argv.filter((arg) => arg.startsWith(CODEX_UI_PROTOCOL)),
   ]);
   for (const raw of startupUrls) {
     if (parseAuthCallbackUrl(raw)) {
@@ -427,7 +431,7 @@ async function requestQuit(): Promise<void> {
     if (state.activeThemeId && mainWindow) {
       const { response } = await dialog.showMessageBox(mainWindow, {
         type: "info",
-        title: "退出 Codex Themes",
+        title: "退出 Codex-UI",
         message: "退出后注入守护将停止",
         detail:
           "当前主题已在 Codex 中生效。退出本应用后,主题会保留到 Codex 下次刷新或重启;届时将恢复官方外观,直到你再次打开本应用。",

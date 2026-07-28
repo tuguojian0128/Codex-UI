@@ -129,7 +129,7 @@ export class CodexAppServerClient extends EventEmitter {
 
   private async handshake(): Promise<void> {
     const result = await this.request("initialize", {
-      clientInfo: { name: "codex-themes", version: process.env.npm_package_version ?? "0.2.0" },
+      clientInfo: { name: "codex-ui", version: process.env.npm_package_version ?? "0.2.0" },
     }, 10_000);
     this.emit("log", "info", `App Server initialized: ${JSON.stringify(result)}`);
     this.notify("initialized", {});
@@ -186,7 +186,7 @@ export class CodexAppServerClient extends EventEmitter {
       if ("method" in msg && msg.method) {
         this.emit("serverRequest", msg.id, msg.method, msg.params);
         if (this.listenerCount("serverRequest") === 0) {
-          this.rejectServerRequest(msg.id, -32601, `Method ${msg.method} not supported by Codex Themes`);
+          this.rejectServerRequest(msg.id, -32601, `Method ${msg.method} not supported by Codex-UI`);
         }
         return;
       }

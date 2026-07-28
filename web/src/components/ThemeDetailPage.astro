@@ -50,11 +50,11 @@ const priceText = item.isPaid ? `¥${(item.priceCents! / 100).toFixed(2)}` : nul
         <p>
           {item.isPaid
             ? (locale === "zh"
-                ? `这款主题售价 ${priceText}，请在 Codex Themes 客户端中登录并购买。官网不处理支付。`
-                : `This theme costs ${priceText}. Please log in and purchase it inside the Codex Themes desktop app. The website does not handle payments.`)
+                ? `这款主题售价 ${priceText}，请在 Codex-UI 客户端中登录并购买。官网不处理支付。`
+                : `This theme costs ${priceText}. Please log in and purchase it inside the Codex-UI desktop app. The website does not handle payments.`)
             : (locale === "zh"
-                ? "点击后会尝试打开 Codex Themes，并定位到这个主题。真正应用前仍会向你确认。"
-                : "We’ll open Codex Themes and take you straight here. The app still asks before applying anything.")}
+                ? "点击后会尝试打开 Codex-UI，并定位到这个主题。真正应用前仍会向你确认。"
+                : "We’ll open Codex-UI and take you straight here. The app still asks before applying anything.")}
         </p>
         <button class={`button ${item.isPaid ? "button-gold" : "button-blue"} button-full`} type="button" data-deep-link={item.deepLink}>
           {item.isPaid ? (locale === "zh" ? `在客户端购买 ${priceText}` : `Buy in app ${priceText}`) : t.useTheme}
