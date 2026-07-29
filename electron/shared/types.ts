@@ -546,7 +546,7 @@ export interface ThemeSummary {
 /** ---------------------------------------------------------------------- */
 
 export interface CodexDesktopStatus {
-  platform: "darwin" | "win32" | "unsupported";
+  platform: "darwin" | "win32" | "linux" | "unsupported";
   installed: boolean;
   installPath: string | null;
   version: string | null;
@@ -937,8 +937,8 @@ export type AppUpdateStatus =
   | "error";
 
 export interface AppUpdateState {
-  platform: "mac" | "win" | "unsupported";
-  packageLabel: "DMG" | "EXE" | "安装包";
+  platform: "mac" | "win" | "linux" | "unsupported";
+  packageLabel: "DMG" | "EXE" | "AppImage" | "安装包";
   status: AppUpdateStatus;
   currentVersion: string;
   availableVersion: string | null;

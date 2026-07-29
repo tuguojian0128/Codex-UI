@@ -138,7 +138,9 @@ export function registerIpc(ctx: IpcContext): void {
   ipcMain.handle("codex:selectDesktop", async () => {
     const win = getWindow();
     const result = await dialog.showOpenDialog(win!, {
-      title: "选择 ChatGPT / Codex 桌面端",
+      title: process.platform === "linux"
+        ? "选择兼容的 Electron Codex / ChatGPT 可执行文件或 AppImage"
+        : "选择 ChatGPT / Codex 桌面端",
       properties: process.platform === "darwin" ? ["openDirectory"] : ["openFile"],
       ...(process.platform === "win32" ? { filters: DESKTOP_FILE_FILTERS } : {}),
     });

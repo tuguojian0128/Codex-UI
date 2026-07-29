@@ -1,4 +1,4 @@
-export type CodexDesktopPlatform = "darwin" | "win32" | "unsupported";
+export type CodexDesktopPlatform = "darwin" | "win32" | "linux" | "unsupported";
 
 export interface CodexInstall {
   platform: CodexDesktopPlatform;

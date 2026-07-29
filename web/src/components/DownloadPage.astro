@@ -10,11 +10,14 @@ import {
   PackageOpen,
   PanelsTopLeft,
   ShieldCheck,
+  Terminal,
 } from "lucide-astro";
 import themeGalleryClient from "../assets/product/theme-gallery-client.jpg";
 import BaseLayout from "../layouts/BaseLayout.astro";
 import {
   GITHUB_REPO_URL,
+  LINUX_X64_APPIMAGE_URL,
+  LINUX_X64_DEB_URL,
   MAC_ARM64_DMG_URL,
   MAC_ARM64_ZIP_URL,
   MAC_X64_DMG_URL,
@@ -26,8 +29,8 @@ import type { Locale } from "../lib/i18n";
 const { locale } = Astro.props as { locale: Locale };
 const description =
   locale === "zh"
-    ? "下载适用于 Apple 芯片 Mac、Intel Mac 和 Windows x64 的最新版 Codex-UI。"
-    : "Download the latest Codex-UI for Apple silicon Macs, Intel Macs, and Windows x64.";
+    ? "下载适用于 macOS、Windows x64 和 Linux x64 的最新版 Codex-UI。"
+    : "Download the latest Codex-UI for macOS, Windows x64, and Linux x64.";
 const isZh = locale === "zh";
 ---
 
@@ -42,7 +45,7 @@ const isZh = locale === "zh";
     <div class="download-stage-inner">
       <div class="download-hero-grid">
         <div class="download-hero-copy">
-          <div class="download-hero-kicker">CODEX THEMES FOR DESKTOP · v0.2.14</div>
+          <div class="download-hero-kicker">CODEX THEMES FOR DESKTOP · v0.3.3</div>
           <h1>
             {isZh ? (
               <>先下载，再把<br /><span class="download-title-second">Codex 变成你的<em>工作空间。</em></span></>
@@ -153,6 +156,27 @@ const isZh = locale === "zh";
               </a>
             </div>
           </article>
+
+          <article class="download-platform" data-platform="linux-x64">
+            <div class="download-platform-badge" data-platform-badge>{isZh ? "推荐" : "Recommended"}</div>
+            <div class="download-platform-summary">
+              <Terminal size={40} stroke-width={1.55} aria-hidden="true" />
+              <div>
+                <div class="download-platform-title-row">
+                  <h2>Linux x64</h2>
+                  <span>{isZh ? "兼容版" : "Compatible"}</span>
+                </div>
+                <p>Ubuntu / Debian · x64</p>
+              </div>
+            </div>
+            <div class="download-platform-actions">
+              <a class="download-primary-action" href={LINUX_X64_APPIMAGE_URL}>
+                <Download size={17} stroke-width={1.9} aria-hidden="true" />
+                {isZh ? "下载 AppImage" : "Download AppImage"}
+              </a>
+              <a class="download-alt-action" href={LINUX_X64_DEB_URL}>DEB</a>
+            </div>
+          </article>
         </div>
       </div>
 
@@ -160,8 +184,8 @@ const isZh = locale === "zh";
         <Info size={16} stroke-width={1.8} aria-hidden="true" />
         <span>
           {isZh
-            ? "Windows 首次安装可能出现 SmartScreen 提示"
-            : "Windows may show a SmartScreen prompt on first install"}
+            ? "Linux 换肤需要兼容的 Electron Codex / ChatGPT 客户端；Codex CLI 没有可换肤的桌面界面。"
+            : "Linux theming requires a compatible Electron Codex / ChatGPT client; the Codex CLI has no desktop UI to skin."}
         </span>
         <a href="#install-guide">
           {isZh ? "查看安装说明" : "View installation help"}
@@ -192,8 +216,8 @@ const isZh = locale === "zh";
           <h3>{isZh ? "下载对应安装包" : "Download your installer"}</h3>
           <p>
             {isZh
-              ? "Apple 芯片和 Intel Mac 使用对应的 DMG；Windows x64 使用 EXE。"
-              : "Choose the matching DMG for Apple silicon or Intel Mac, or the EXE for Windows x64."}
+              ? "Mac 使用对应的 DMG，Windows 使用 EXE，Linux x64 可使用 AppImage 或 DEB。"
+              : "Use the matching DMG on Mac, EXE on Windows, or AppImage/DEB on Linux x64."}
           </p>
         </article>
         <article>
@@ -204,8 +228,8 @@ const isZh = locale === "zh";
           <h3>{isZh ? "完成桌面端安装" : "Install the desktop app"}</h3>
           <p>
             {isZh
-              ? "Mac 将应用拖入“应用程序”；Windows 运行安装程序并按提示完成。"
-              : "On Mac, drag the app into Applications. On Windows, run the installer and follow the prompts."}
+              ? "Mac 拖入“应用程序”，Windows 运行安装程序；Linux 可安装 DEB，或给 AppImage 增加执行权限后启动。"
+              : "Drag the app into Applications on Mac, run the installer on Windows, or install the DEB / make the AppImage executable on Linux."}
           </p>
         </article>
         <article>
@@ -216,8 +240,8 @@ const isZh = locale === "zh";
           <h3>{isZh ? "打开 Codex 并应用主题" : "Open Codex and apply a theme"}</h3>
           <p>
             {isZh
-              ? "选择喜欢的主题并应用；遇到显示异常时，先更新两个应用再重新应用。"
-              : "Choose a theme and apply it. If something looks wrong, update both apps and apply again."}
+              ? "Linux 用户需先在设置中选择兼容客户端的可执行文件或 AppImage，再选择主题并应用。"
+              : "On Linux, first select the compatible client executable or AppImage in Settings, then choose and apply a theme."}
           </p>
         </article>
       </div>
@@ -245,12 +269,14 @@ const isZh = locale === "zh";
         "mac-arm64": "已识别：Apple 芯片 Mac",
         "mac-x64": "已识别：Intel Mac",
         "windows-x64": "已识别：Windows x64",
+        "linux-x64": "已识别：Linux x64",
         fallback: "当前推荐：Apple 芯片 Mac",
       },
       en: {
         "mac-arm64": "Detected: Apple silicon Mac",
         "mac-x64": "Detected: Intel Mac",
         "windows-x64": "Detected: Windows x64",
+        "linux-x64": "Detected: Linux x64",
         fallback: "Recommended: Apple silicon Mac",
       },
     };
@@ -271,9 +297,12 @@ const isZh = locale === "zh";
     const userAgent = navigator.userAgent;
     const isWindows = /Windows/i.test(userAgent);
     const isMac = /Macintosh|Mac OS X/i.test(userAgent);
+    const isLinux = /Linux/i.test(userAgent) && !/Android/i.test(userAgent);
 
     if (isWindows) {
       setRecommended("windows-x64");
+    } else if (isLinux) {
+      setRecommended("linux-x64");
     } else if (isMac && navigator.userAgentData?.getHighEntropyValues) {
       navigator.userAgentData
         .getHighEntropyValues(["architecture"])

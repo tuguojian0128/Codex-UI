@@ -1821,7 +1821,7 @@ h3 {
 .download-platform-grid {
   display: grid;
   overflow: hidden;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
+  grid-template-columns: repeat(4, minmax(0, 1fr));
   border: 1px solid rgba(126, 164, 215, 0.22);
   border-radius: 11px;
   background: rgba(5, 16, 31, 0.58);

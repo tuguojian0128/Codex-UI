@@ -1,6 +1,7 @@
 import type { CodexDesktopAdapter } from "./codex-desktop";
 import { macosCodexDesktopAdapter } from "./codex-macos";
 import { windowsCodexDesktopAdapter } from "./codex-windows";
+import { linuxCodexDesktopAdapter } from "./codex-linux";
 
 const unsupportedCodexDesktopAdapter: CodexDesktopAdapter = {
   platform: "unsupported",
@@ -31,6 +32,7 @@ export function createCodexDesktopAdapter(
 ): CodexDesktopAdapter {
   if (platform === "darwin") return macosCodexDesktopAdapter;
   if (platform === "win32") return windowsCodexDesktopAdapter;
+  if (platform === "linux") return linuxCodexDesktopAdapter;
   return unsupportedCodexDesktopAdapter;
 }
 

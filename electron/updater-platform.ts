@@ -1,6 +1,6 @@
 export interface UpdatePlatformInfo {
-  platform: "mac" | "win" | "unsupported";
-  packageLabel: "DMG" | "EXE" | "安装包";
+  platform: "mac" | "win" | "linux" | "unsupported";
+  packageLabel: "DMG" | "EXE" | "AppImage" | "安装包";
   manualDownloadUrl: string;
 }
 
@@ -21,6 +21,13 @@ export function getUpdatePlatformInfo(
     return {
       platform: "win",
       packageLabel: "EXE",
+      manualDownloadUrl: RELEASES_URL,
+    };
+  }
+  if (platform === "linux" && arch === "x64") {
+    return {
+      platform: "linux",
+      packageLabel: "AppImage",
       manualDownloadUrl: RELEASES_URL,
     };
   }

@@ -35,6 +35,16 @@ const release = {
       browser_download_url:
         "https://github.com/tuguojian0128/Codex-UI/releases/download/v0.2.3/Codex-UI-0.2.3-win-x64.exe",
     },
+    {
+      name: "Codex-UI-0.2.3-linux-x64.AppImage",
+      browser_download_url:
+        "https://github.com/tuguojian0128/Codex-UI/releases/download/v0.2.3/Codex-UI-0.2.3-linux-x64.AppImage",
+    },
+    {
+      name: "Codex-UI-0.2.3-linux-x64.deb",
+      browser_download_url:
+        "https://github.com/tuguojian0128/Codex-UI/releases/download/v0.2.3/Codex-UI-0.2.3-linux-x64.deb",
+    },
   ],
 };
 
@@ -42,6 +52,8 @@ test("download format only accepts supported package types", () => {
   assert.equal(parseDownloadFormat("dmg"), "dmg");
   assert.equal(parseDownloadFormat(["zip", "dmg"]), "zip");
   assert.equal(parseDownloadFormat("exe"), "exe");
+  assert.equal(parseDownloadFormat("appimage"), "appimage");
+  assert.equal(parseDownloadFormat("deb"), "deb");
   assert.equal(parseDownloadFormat(undefined), null);
 });
 
@@ -66,6 +78,18 @@ test("download target parser keeps old Mac links and rejects invalid combination
   );
   assert.equal(
     parseDownloadTarget({ platform: "win", arch: "x64", format: "dmg" }),
+    null,
+  );
+  assert.deepEqual(
+    parseDownloadTarget({ platform: "linux", arch: "x64", format: "appimage" }),
+    { platform: "linux", arch: "x64", format: "appimage" },
+  );
+  assert.deepEqual(
+    parseDownloadTarget({ platform: "linux", format: "deb" }),
+    { platform: "linux", arch: "x64", format: "deb" },
+  );
+  assert.equal(
+    parseDownloadTarget({ platform: "linux", arch: "arm64", format: "appimage" }),
     null,
   );
 });
@@ -95,6 +119,16 @@ test("release resolver selects the package attached to the latest tag", () => {
     arch: "x64",
     format: "exe",
   })?.name, "Codex-UI-0.2.3-win-x64.exe");
+  assert.equal(selectReleaseDownload(release, {
+    platform: "linux",
+    arch: "x64",
+    format: "appimage",
+  })?.name, "Codex-UI-0.2.3-linux-x64.AppImage");
+  assert.equal(selectReleaseDownload(release, {
+    platform: "linux",
+    arch: "x64",
+    format: "deb",
+  })?.name, "Codex-UI-0.2.3-linux-x64.deb");
 });
 
 test("release resolver refuses download URLs outside the official repository", () => {

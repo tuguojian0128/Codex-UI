@@ -16,7 +16,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
   const target = parseDownloadTarget(req.query);
   if (!target) {
     return res.status(400).json({
-      error: "supported targets: mac/arm64 dmg|zip, mac/x64 dmg|zip, win/x64 exe",
+      error: "supported targets: mac/arm64 dmg|zip, mac/x64 dmg|zip, win/x64 exe, linux/x64 appimage|deb",
     });
   }
 

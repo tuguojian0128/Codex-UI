@@ -1,6 +1,6 @@
-export type DownloadPlatform = "mac" | "win";
+export type DownloadPlatform = "mac" | "win" | "linux";
 export type DownloadArch = "arm64" | "x64";
-export type DownloadFormat = "dmg" | "zip" | "exe";
+export type DownloadFormat = "dmg" | "zip" | "exe" | "appimage" | "deb";
 
 export interface DownloadTarget {
   platform: DownloadPlatform;
@@ -30,7 +30,9 @@ const RELEASE_DOWNLOAD_PREFIX = `https://github.com/${REPOSITORY}/releases/downl
 
 export function parseDownloadFormat(value: string | string[] | undefined): DownloadFormat | null {
   const format = Array.isArray(value) ? value[0] : value;
-  return format === "dmg" || format === "zip" || format === "exe" ? format : null;
+  return format === "dmg" || format === "zip" || format === "exe" || format === "appimage" || format === "deb"
+    ? format
+    : null;
 }
 
 function firstQueryValue(value: string | string[] | undefined): string | undefined {
@@ -51,14 +53,14 @@ export function parseDownloadTarget(input: {
     return { platform: "mac", arch: "arm64", format };
   }
 
-  const platform = platformValue === "mac" || platformValue === "win"
+  const platform = platformValue === "mac" || platformValue === "win" || platformValue === "linux"
     ? platformValue
     : format === "exe" && !platformValue
       ? "win"
       : null;
   const arch = archValue === "arm64" || archValue === "x64"
     ? archValue
-    : platform === "win" && !archValue
+    : (platform === "win" || platform === "linux") && !archValue
       ? "x64"
       : null;
   if (!platform || !arch) return null;
@@ -66,6 +68,9 @@ export function parseDownloadTarget(input: {
     return { platform, arch, format };
   }
   if (platform === "win" && arch === "x64" && format === "exe") {
+    return { platform, arch, format };
+  }
+  if (platform === "linux" && arch === "x64" && (format === "appimage" || format === "deb")) {
     return { platform, arch, format };
   }
   return null;
@@ -83,8 +88,9 @@ export function selectReleaseDownload(
   const version = release.tag_name.startsWith("v")
     ? release.tag_name.slice(1)
     : release.tag_name;
+  const extension = target.format === "appimage" ? "AppImage" : target.format;
   const expectedName =
-    `Codex-UI-${version}-${target.platform}-${target.arch}.${target.format}`;
+    `Codex-UI-${version}-${target.platform}-${target.arch}.${extension}`;
   const assets = release.assets.filter(
     (asset): asset is GitHubReleaseAsset => Boolean(asset && typeof asset === "object"),
   );
@@ -93,7 +99,7 @@ export function selectReleaseDownload(
       typeof asset.name === "string" &&
       typeof asset.browser_download_url === "string" &&
       asset.name.endsWith(
-        `-${target.platform}-${target.arch}.${target.format}`,
+        `-${target.platform}-${target.arch}.${extension}`,
       ) &&
       asset.browser_download_url.startsWith(RELEASE_DOWNLOAD_PREFIX),
   );

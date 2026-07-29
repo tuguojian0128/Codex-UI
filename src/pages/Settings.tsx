@@ -26,7 +26,9 @@ export function Settings() {
       ? "Windows"
       : state.codexDesktop.platform === "darwin"
         ? "macOS"
-        : "当前系统";
+        : state.codexDesktop.platform === "linux"
+          ? "Linux"
+          : "当前系统";
   const cliStatusText = !cli.installed
     ? "未安装"
     : !cli.supported
@@ -116,6 +118,13 @@ export function Settings() {
             {state.watcherActive ? "运行中(刷新/新窗口自动重注入)" : "未运行"}
           </span>
         </div>
+        {state.codexDesktop.platform === "linux" && (
+          <div className="settings-legal-note">
+            Linux 换肤需要兼容的 Electron Codex / ChatGPT 客户端或 AppImage。
+            Codex CLI 没有可换肤的桌面界面。调试连接只绑定本机 127.0.0.1，
+            并会校验端口是否属于已选客户端的进程树。
+          </div>
+        )}
         <div className="row-actions">
           <button
             className="btn"

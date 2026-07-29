@@ -42,6 +42,13 @@ mac:
   notarize: true
 dmg:
   artifactName: Codex-UI-${version}-mac-${arch}.${ext}
+linux:
+  category: Utility
+  icon: assets/build/icon.png
+  target:
+    - AppImage
+    - deb
+  artifactName: Codex-UI-${version}-linux-x64.${ext}
 win:
   icon: assets/build/icon.png
   target:

@@ -14,3 +14,7 @@ export const MAC_X64_ZIP_URL =
   "/api/v1/downloads/latest?platform=mac&arch=x64&format=zip";
 export const WINDOWS_X64_EXE_URL =
   "/api/v1/downloads/latest?platform=win&arch=x64&format=exe";
+export const LINUX_X64_APPIMAGE_URL =
+  "/api/v1/downloads/latest?platform=linux&arch=x64&format=appimage";
+export const LINUX_X64_DEB_URL =
+  "/api/v1/downloads/latest?platform=linux&arch=x64&format=deb";

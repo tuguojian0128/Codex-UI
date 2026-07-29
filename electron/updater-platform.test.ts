@@ -20,8 +20,16 @@ test("Windows manual downloads open this fork's releases page", () => {
   });
 });
 
-test("unsupported systems fall back to this fork's releases page", () => {
+test("Linux x64 updates use the AppImage release", () => {
   assert.deepEqual(getUpdatePlatformInfo("linux", "x64"), {
+    platform: "linux",
+    packageLabel: "AppImage",
+    manualDownloadUrl: RELEASES_URL,
+  });
+});
+
+test("unsupported systems fall back to this fork's releases page", () => {
+  assert.deepEqual(getUpdatePlatformInfo("freebsd", "x64"), {
     platform: "unsupported",
     packageLabel: "安装包",
     manualDownloadUrl: RELEASES_URL,

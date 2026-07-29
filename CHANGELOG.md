@@ -1,5 +1,23 @@
 # Changelog
 
+## 0.3.3 - 2026-07-29
+
+### 中文
+
+- 新增 Linux x64 版 Codex-UI，GitHub Release 同时生成 AppImage 和 Debian / Ubuntu 的 DEB 安装包。
+- 新增 Linux Electron Codex / ChatGPT 兼容层，支持自动探测常见客户端，也可手动选择可执行文件或 AppImage。
+- 调试端口仅绑定 `127.0.0.1`，并校验监听进程属于已选客户端的进程树，防止连接到其他本机程序。
+- 官网下载页新增 Linux 设备识别、AppImage / DEB 下载入口和中英文安装说明。
+- 明确 Linux 换肤需要兼容的 Electron 桌面客户端；`codex` CLI 本身没有可换肤的桌面 UI。
+
+### English
+
+- Added Codex-UI for Linux x64 with AppImage and Debian / Ubuntu DEB packages in GitHub Releases.
+- Added a Linux compatibility adapter for Electron Codex / ChatGPT clients, including narrow automatic discovery and explicit executable / AppImage selection.
+- Bound Chrome DevTools Protocol to `127.0.0.1` and verified that every listener belongs to the selected client's process tree.
+- Added Linux device detection, AppImage / DEB download links, and bilingual installation guidance to the website.
+- Clarified that Linux theming requires a compatible Electron desktop client; the `codex` CLI itself has no desktop UI to skin.
+
 ## 0.3.2 - 2026-07-29
 
 ### 中文

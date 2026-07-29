@@ -414,6 +414,65 @@ jobs:
             release/Codex-UI-${{ env.APP_VERSION }}-win-x64.exe.blockmap
             release/latest.yml
 
+  linux-x64:
+    name: Linux x64
+    needs: quality
+    runs-on: ubuntu-24.04
+    timeout-minutes: 55
+
+    steps:
+      - name: Check out source
+        uses: actions/checkout@v5
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v5
+        with:
+          node-version: "22"
+          cache: npm
+
+      - name: Validate native architecture and version
+        shell: bash
+        run: |
+          set -euo pipefail
+          test "$(uname -m)" = "x86_64"
+          test "$(node -p 'process.arch')" = "x64"
+          app_version="$(node -p "require('./package.json').version")"
+          echo "APP_VERSION=${app_version}" >> "$GITHUB_ENV"
+          if [[ "${GITHUB_REF_TYPE:-}" == "tag" ]]; then
+            test "$GITHUB_REF_NAME" = "v${app_version}"
+            echo "RELEASE_TAG=${GITHUB_REF_NAME}" >> "$GITHUB_ENV"
+          fi
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build Linux x64 packages
+        env:
+          CSC_IDENTITY_AUTO_DISCOVERY: "false"
+        run: npm run dist:linux:x64
+
+      - name: Smoke test AppImage
+        shell: bash
+        run: |
+          set -euo pipefail
+          appimage="release/Codex-UI-${APP_VERSION}-linux-x64.AppImage"
+          chmod +x "$appimage"
+          timeout 60s xvfb-run -a env APPIMAGE_EXTRACT_AND_RUN=1 \
+            "$appimage" --no-sandbox --ci-smoke-test
+
+      - name: Upload Linux x64 artifact
+        uses: actions/upload-artifact@v6
+        with:
+          name: linux-x64
+          compression-level: 0
+          retention-days: 14
+          if-no-files-found: error
+          path: |
+            release/Codex-UI-${{ env.APP_VERSION }}-linux-x64.AppImage
+            release/Codex-UI-${{ env.APP_VERSION }}-linux-x64.AppImage.blockmap
+            release/Codex-UI-${{ env.APP_VERSION }}-linux-x64.deb
+            release/latest-linux.yml
+
   release:
     name: Publish GitHub Release
     if: startsWith(github.ref, 'refs/tags/v')
@@ -421,6 +480,7 @@ jobs:
       - mac-arm64
       - mac-x64
       - win-x64
+      - linux-x64
     runs-on: ubuntu-24.04
     timeout-minutes: 25
     permissions:
@@ -468,6 +528,17 @@ jobs:
             assertWindowsArtifactsExist(artifacts);
             verifyWindowsUpdateMetadata(fs.readFileSync(artifacts.updateMetadata, "utf8"), artifacts);
           '
+          node --input-type=module -e '
+            import fs from "node:fs";
+            import {
+              getLinuxArtifactPaths,
+              assertLinuxArtifactsExist,
+              verifyLinuxUpdateMetadata,
+            } from "./scripts/package-linux.mjs";
+            const artifacts = getLinuxArtifactPaths(process.cwd(), process.env.APP_VERSION);
+            assertLinuxArtifactsExist(artifacts);
+            verifyLinuxUpdateMetadata(fs.readFileSync(artifacts.updateMetadata, "utf8"), artifacts);
+          '
 
       - name: Prepare release notes
         shell: bash
@@ -502,6 +573,10 @@ jobs:
             "release/Codex-UI-${APP_VERSION}-win-x64.exe"
             "release/Codex-UI-${APP_VERSION}-win-x64.exe.blockmap"
             "release/latest.yml"
+            "release/Codex-UI-${APP_VERSION}-linux-x64.AppImage"
+            "release/Codex-UI-${APP_VERSION}-linux-x64.AppImage.blockmap"
+            "release/Codex-UI-${APP_VERSION}-linux-x64.deb"
+            "release/latest-linux.yml"
           )
           for asset in "${assets[@]}"; do
             test -s "$asset"
@@ -539,7 +614,7 @@ jobs:
               LC_ALL=C sort
           )"
           if [[ "$actual_assets" != "$expected_assets" ]]; then
-            echo "Release assets do not match the expected 12-file set."
+            echo "Release assets do not match the expected 16-file set."
             diff <(printf '%s\n' "$expected_assets") <(printf '%s\n' "$actual_assets") || true
             exit 1
           fi
