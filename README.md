@@ -15,15 +15,26 @@ Codex-UI is a desktop theme manager for the OpenAI Codex desktop application. It
 - Optional self-hosted paid-theme and Alipay backend
 - GitHub Releases update support
 
-## Included custom themes
+## Included themes
 
-- Aurora Observatory
-- Porcelain Circuit
-- Ember Archive
-- Nocturne Bloom
-- Polar Signal
+Codex-UI 0.3.0 includes 61 bundled themes. The expanded collection adds 35 new interfaces, including eight liquid-glass designs:
 
-Theme sources are stored in `assets/presets/`.
+- Aqua Lens
+- Orchid Prism
+- Sunrise Gel
+- Graphite Orbit
+- Mint Capsule
+- Coral Spectrum
+- Arctic Pearl
+- Midnight Wave
+
+The remaining additions cover terminal, paper-board, minimal, blueprint, cinematic, retro-window, and full-canvas directions. See [`docs/EXPANDED-UI-COLLECTION.md`](docs/EXPANDED-UI-COLLECTION.md) for the complete list.
+
+Theme sources are stored in `assets/presets/`. Regenerate the expanded collection with:
+
+```bash
+npm run gen:expanded-ui
+```
 
 ## Development
 
@@ -50,7 +61,7 @@ npm run dist:win:x64
 Artifacts are written to `release/` using names such as:
 
 ```text
-Codex-UI-0.2.16-win-x64.exe
+Codex-UI-0.3.0-win-x64.exe
 ```
 
 ## Login and payment configuration

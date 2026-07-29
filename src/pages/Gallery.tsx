@@ -13,6 +13,17 @@ const ImportPreviewModal = lazy(() => import("../components/ImportPreviewModal")
 const ThemePreviewModal = lazy(() => import("../components/ThemePreviewModal").then((module) => ({ default: module.ThemePreviewModal })));
 
 type FilterTab = "official" | "community" | "owned" | "local";
+type CollectionFilter = "all" | "liquid" | "studio" | "canvas" | "terminal" | "paper" | "minimal";
+
+const COLLECTION_LABELS: Record<CollectionFilter, string> = {
+  all: "????",
+  liquid: "????",
+  studio: "???",
+  canvas: "????",
+  terminal: "??",
+  paper: "??",
+  minimal: "??",
+};
 
 const FILTER_LABELS: Record<FilterTab, string> = {
   official: "官方精选",
@@ -44,6 +55,7 @@ export function Gallery() {
   const pendingWebThemeId = useApp((s) => s.pendingWebThemeId);
 
   const [filter, setFilter] = useState<FilterTab>("official");
+  const [collection, setCollection] = useState<CollectionFilter>("all");
   const [search, setSearch] = useState("");
   const [sort, setSort] = useState<"latest" | "popular" | "price">("latest");
   const [inspection, setInspection] = useState<InspectedThemePackage | null>(null);
@@ -83,10 +95,25 @@ export function Gallery() {
         return merged.filter((item) => item.entitlement);
       case "local":
         return merged.filter((item) => item.local?.source === "custom");
-      default:
-        return merged.filter((item) => item.product?.origin !== "community");
+      default: {
+        const needle = search.trim().toLowerCase();
+        return merged
+          .filter((item) => item.product?.origin !== "community")
+          .filter((item) => !needle || `${item.name} ${item.tagline} ${item.description} ${item.id}`
+            .toLowerCase()
+            .includes(needle))
+          .filter((item) => {
+            if (collection === "all") return true;
+            if (collection === "liquid") return item.id.startsWith("liquid-");
+            if (collection === "studio") return item.layout === "split-studio" || item.layout === "dream-banner";
+            if (collection === "canvas") return item.layout === "full-canvas" || item.layout === "cinematic-live";
+            if (collection === "terminal") return item.layout === "terminal-grid" || item.layout === "retro-messenger";
+            if (collection === "paper") return item.layout === "paper-board" || item.layout === "silk-scroll";
+            return item.layout === "minimal-focus";
+          });
+      }
     }
-  }, [merged, filter, search, sort]);
+  }, [merged, filter, collection, search, sort]);
 
   const closeInspection = () => {
     if (inspection) void api.discardInspection(inspection.tempDir).catch(() => {});
@@ -196,6 +223,31 @@ export function Gallery() {
           </button>
         ))}
       </div>
+
+      {filter === "official" && (
+        <div className="marketplace-toolbar gallery-library-toolbar">
+          <label className="account-field marketplace-search">
+            <Search size={14} />
+            <input
+              value={search}
+              onChange={(event) => setSearch(event.target.value)}
+              placeholder="?????????"
+            />
+          </label>
+          <div className="gallery-collections" aria-label="????">
+            {(Object.keys(COLLECTION_LABELS) as CollectionFilter[]).map((key) => (
+              <button
+                type="button"
+                key={key}
+                className={`gallery-collection${collection === key ? " active" : ""}`}
+                onClick={() => setCollection(key)}
+              >
+                {COLLECTION_LABELS[key]}
+              </button>
+            ))}
+          </div>
+        </div>
+      )}
 
       {filter === "community" && (
         <div className="marketplace-toolbar">

@@ -6,11 +6,19 @@ import type {
 } from "../electron/shared/types";
 
 /**
- * Curated gallery order: presets with original character or scene artwork and
- * richer, high-resolution previews define the gallery. Palette-only bundled
- * presets are filtered by the main process using theme metadata.
+ * Curated gallery order: liquid-glass releases and presets with original
+ * character or scene artwork lead the gallery. Remaining bundled presets keep
+ * their stable filesystem order after preview quality is considered.
  */
 const FEATURED_PRESET_IDS = [
+  "liquid-aqua-lens",
+  "liquid-orchid-prism",
+  "liquid-sunrise-gel",
+  "liquid-graphite-orbit",
+  "liquid-mint-capsule",
+  "liquid-coral-spectrum",
+  "liquid-arctic-pearl",
+  "liquid-midnight-wave",
   "nightbound-companion",
   "moonlit-immortal",
   "blue-window-messenger",

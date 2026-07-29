@@ -6,6 +6,8 @@
 
 import { describe, it } from "node:test";
 import assert from "node:assert/strict";
+import fs from "node:fs/promises";
+import path from "node:path";
 import { normalizeTheme, contrastRatio, validateContrast, deriveDarkPalette } from "./normalize";
 import { compileTheme } from "./compiler";
 import { buildPayload, loadTheme } from "./payload";
@@ -413,6 +415,39 @@ describe("loadTheme", () => {
       assert.doesNotThrow(() => new Function(built.payload));
       assert.ok(!built.payload.includes("__DREAM_SKIN_ART_JSON__"));
     }
+  });
+
+  it("loads the expanded UI collection and enables liquid glass material", async () => {
+    const presetsRoot = path.resolve("assets", "presets");
+    const ids = await fs.readdir(presetsRoot);
+    const expanded: string[] = [];
+    const liquid: string[] = [];
+
+    for (const id of ids) {
+      const dir = path.join(presetsRoot, id);
+      const raw = JSON.parse(await fs.readFile(path.join(dir, "theme.json"), "utf8")) as {
+        uuid?: string;
+      };
+      if (!raw.uuid?.startsWith("collection-")) continue;
+      const loaded = await loadTheme(dir);
+      assert.equal(loaded.theme.id, id);
+      assert.equal(loaded.theme.resources.hero, "hero.webp");
+      assert.equal(loaded.theme.resources.preview, "preview.webp");
+      expanded.push(id);
+      if (id.startsWith("liquid-")) liquid.push(id);
+    }
+
+    assert.equal(expanded.length, 35);
+    assert.equal(liquid.length, 8);
+
+    const built = await buildPayload(
+      "./assets/inject",
+      "./assets/presets/liquid-aqua-lens",
+    );
+    assert.ok(built.theme.tags.includes("\u6db2\u6001\u73bb\u7483"));
+    assert.ok(built.payload.includes("data-dream-material"));
+    assert.ok(built.payload.includes("liquid-glass"));
+    assert.doesNotThrow(() => new Function(built.payload));
   });
 
   it("embeds the Nightbound Companion video and fallback poster", async () => {

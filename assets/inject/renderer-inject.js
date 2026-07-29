@@ -10,6 +10,11 @@
   const SHELL_ATTR = "data-dream-shell";
   const VERSION = version || "1.0.0";
   const THEME = themeConfig && typeof themeConfig === "object" ? themeConfig : {};
+  const THEME_TAGS = Array.isArray(THEME.tags) ? THEME.tags.map((tag) => String(tag).toLowerCase()) : [];
+  const DREAM_MATERIAL = String(THEME.id || "").startsWith("liquid-") ||
+    THEME_TAGS.some((tag) => tag.includes("\u6db2\u6001\u73bb\u7483") || tag.includes("liquid glass"))
+    ? "liquid-glass"
+    : "standard";
   const CUSTOM_HOME_THEME_IDS = new Set([
     "blue-window-messenger",
   ]);
@@ -828,6 +833,7 @@
     root?.removeAttribute(SHELL_ATTR);
     root?.removeAttribute("data-dream-layout");
     root?.removeAttribute("data-dream-theme");
+    root?.removeAttribute("data-dream-material");
     root?.removeAttribute("data-dream-wallpaper");
     root?.removeAttribute("data-dream-native-layout");
     root?.style.removeProperty("--dream-skin-art");
@@ -870,6 +876,7 @@
     root.setAttribute(SHELL_ATTR, shell);
     root.setAttribute("data-dream-layout", layout);
     root.setAttribute("data-dream-theme", THEME.id || "theme");
+    root.setAttribute("data-dream-material", DREAM_MATERIAL);
     root.setAttribute("data-dream-wallpaper", THEME.wallpaper?.enabled ? "true" : "false");
     root.setAttribute("data-dream-native-layout", PRESERVE_NATIVE_LAYOUT ? "true" : "false");
     try {

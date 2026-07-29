@@ -1,5 +1,20 @@
 # Changelog
 
+## 0.3.0 - 2026-07-29
+
+### New UI collection
+
+- Added 35 bundled UI themes across liquid glass, terminal, paper, minimal, blueprint, cinematic, retro-window, and full-canvas directions.
+- Added eight optical liquid-glass themes with translucent chrome, refractive borders, soft inner highlights, and reduced-motion fallbacks.
+- Added high-resolution generated hero artwork and gallery previews for every new theme without remote brand assets.
+- Added official-theme search and layout collection filters so the expanded 61-theme library remains easy to browse.
+- Added a reproducible `npm run gen:expanded-ui` asset-generation workflow.
+
+### Performance and accessibility
+
+- Limited expensive liquid-glass blur to primary chrome and cards instead of applying it to every message surface.
+- Reduced blur strength on narrow screens and disabled hover motion when reduced motion is requested.
+
 ## 0.2.16 - 2026-07-29
 
 ### Performance
