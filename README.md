@@ -50,7 +50,7 @@ npm run dist:win:x64
 Artifacts are written to `release/` using names such as:
 
 ```text
-Codex-UI-0.2.14-win-x64.exe
+Codex-UI-0.2.16-win-x64.exe
 ```
 
 ## Login and payment configuration

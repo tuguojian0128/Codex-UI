@@ -891,7 +891,8 @@ body {
   border: 1px solid var(--line);
   border-radius: var(--radius);
   background: var(--panel);
-  backdrop-filter: blur(10px);
+  content-visibility: auto;
+  contain-intrinsic-size: auto 340px;
   overflow: hidden;
   display: flex;
   flex-direction: column;
@@ -6473,6 +6474,10 @@ body {
   color: var(--text-faint);
 }
 
+.page-loading {
+  min-height: 320px;
+}
+
 ::-webkit-scrollbar {
   width: 10px;
   height: 10px;
@@ -10345,12 +10350,45 @@ input[type="range"] {
 
 .creator-trend {
   height: 118px;
-  padding: 0 4px 2px;
+  padding: 8px 8px 4px;
   border-top: 1px solid rgba(240, 230, 215, .045);
 }
 
-.creator-trend .recharts-tooltip-label {
-  margin-bottom: 3px;
+.creator-mini-chart {
+  height: 100%;
+  display: grid;
+  grid-template-rows: minmax(0, 1fr) 16px;
+}
+
+.creator-mini-chart svg {
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+}
+
+.creator-mini-chart__area {
+  fill: url(#creator-trend-fill);
+}
+
+.creator-mini-chart__line {
+  fill: none;
+  stroke: #e8b95d;
+  stroke-width: 2;
+  vector-effect: non-scaling-stroke;
+}
+
+.creator-mini-chart__hit {
+  fill: transparent;
+  pointer-events: all;
+}
+
+.creator-mini-chart__labels {
+  display: flex;
+  align-items: end;
+  justify-content: space-between;
+  color: #77717d;
+  font-size: 10px;
+  line-height: 1;
 }
 
 .creator-version-history {

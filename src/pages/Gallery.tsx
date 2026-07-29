@@ -1,8 +1,6 @@
 import { FolderOpen, RotateCcw, Search, Upload } from "lucide-react";
-import { useEffect, useMemo, useState } from "react";
+import { lazy, Suspense, useEffect, useMemo, useState } from "react";
 import { ThemeCard } from "../components/ThemeCard";
-import { ImportPreviewModal } from "../components/ImportPreviewModal";
-import { ThemePreviewModal } from "../components/ThemePreviewModal";
 import { useApp } from "../store";
 import { api } from "../api";
 import { mergeGalleryThemes } from "../galleryThemes";
@@ -10,6 +8,9 @@ import type {
   CommerceThemeSummary,
   InspectedThemePackage,
 } from "../../electron/shared/types";
+
+const ImportPreviewModal = lazy(() => import("../components/ImportPreviewModal").then((module) => ({ default: module.ImportPreviewModal })));
+const ThemePreviewModal = lazy(() => import("../components/ThemePreviewModal").then((module) => ({ default: module.ThemePreviewModal })));
 
 type FilterTab = "official" | "community" | "owned" | "local";
 
@@ -25,7 +26,9 @@ export function Gallery() {
   const catalog = useApp((s) => s.catalog);
   const entitlements = useApp((s) => s.entitlements);
   const auth = useApp((s) => s.auth);
-  const state = useApp((s) => s.state);
+  const activeThemeId = useApp((s) => s.state?.activeThemeId ?? null);
+  const activeThemeName = useApp((s) => s.state?.activeThemeName ?? null);
+  const activeLayout = useApp((s) => s.state?.activeLayout ?? null);
   const refreshThemes = useApp((s) => s.refreshThemes);
   const refreshCatalog = useApp((s) => s.refreshCatalog);
   const refreshEntitlements = useApp((s) => s.refreshEntitlements);
@@ -155,8 +158,8 @@ export function Gallery() {
         <div>
           <h1 className="page-title">主题画廊</h1>
           <p className="page-sub">
-            {state?.activeThemeName
-              ? `当前主题:${state.activeThemeName}${state.activeLayout ? ` · ${state.activeLayout}` : ""}`
+            {activeThemeName
+              ? `当前主题:${activeThemeName}${activeLayout ? ` · ${activeLayout}` : ""}`
               : "选择一款主题,一键让 Codex 变身。"}
           </p>
         </div>
@@ -169,7 +172,7 @@ export function Gallery() {
             <FolderOpen size={14} />
             打开 Codex
           </button>
-          {state?.activeThemeId && (
+          {activeThemeId && (
             <button className="btn" onClick={() => void restore()}>
               <RotateCcw size={14} />
               还原官方外观
@@ -228,11 +231,12 @@ export function Gallery() {
         </div>
       ) : (
         <div className="theme-grid theme-grid--curated-presets">
-          {filtered.map((theme) => (
+          {filtered.map((theme, index) => (
             <ThemeCard
               theme={theme}
               key={theme.id}
               isPurchasing={purchasingThemeId === theme.id}
+              priority={index < 8}
               onPreview={setPreviewTheme}
               onPurchase={() => void handleUnlock(theme)}
               onAlipay={() => void handleAlipay(theme)}
@@ -242,6 +246,7 @@ export function Gallery() {
         </div>
       )}
 
+      <Suspense fallback={null}>
       {inspection && (
         <ImportPreviewModal
           inspection={inspection}
@@ -260,6 +265,7 @@ export function Gallery() {
           onDownload={() => void handleDownload(previewTheme)}
         />
       )}
+      </Suspense>
     </div>
   );
 }

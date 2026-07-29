@@ -31,6 +31,10 @@ import type {
 } from "../electron/shared/types";
 import { api } from "./api";
 
+function sameAppState(left: AppState | null, right: AppState): boolean {
+  return left !== null && JSON.stringify(left) === JSON.stringify(right);
+}
+
 export type Page = "gallery" | "editor" | "ai-studio" | "creator" | "admin" | "settings" | "account";
 
 export interface Toast {
@@ -224,7 +228,9 @@ export const useApp = create<AppStore>((set, get) => ({
     api.onOpenThemeActionAvailable(() => {
       if (get().ready) void consumeOpenThemeActions();
     });
-    api.onStateChanged((state) => set({ state }));
+    api.onStateChanged((state) => {
+      if (!sameAppState(get().state, state)) set({ state });
+    });
     api.onAppUpdateStateChanged((appUpdate) => set({ appUpdate }));
     api.onLog((line) =>
       set((s) => ({ logs: [...s.logs.slice(-199), line] })),

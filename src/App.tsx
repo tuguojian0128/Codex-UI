@@ -11,7 +11,7 @@ import {
   User,
   Wand2,
 } from "lucide-react";
-import { useEffect, useRef, useState, type CSSProperties } from "react";
+import { lazy, Suspense, useEffect, useRef, useState, type CSSProperties } from "react";
 import defaultCreatorAvatar from "./assets/creator-default-avatar.webp";
 import { AppUpdateNotice } from "./components/AppUpdateNotice";
 import { AuthRequiredModal } from "./components/AuthRequiredModal";
@@ -19,15 +19,24 @@ import { ConfirmRestartModal } from "./components/ConfirmRestartModal";
 import { OpenThemeModal } from "./components/OpenThemeModal";
 import { StatusCard } from "./components/StatusCard";
 import { Toasts } from "./components/Toasts";
-import { AiStudio } from "./pages/AiStudio";
-import { Editor } from "./pages/Editor";
 import { Gallery } from "./pages/Gallery";
-import { Onboarding } from "./pages/Onboarding";
-import { Settings } from "./pages/Settings";
-import { Account } from "./pages/Account";
-import { Admin } from "./pages/Admin";
-import { CreatorCenter } from "./pages/CreatorCenter";
 import { useApp, type Page } from "./store";
+
+const AiStudio = lazy(() => import("./pages/AiStudio").then((module) => ({ default: module.AiStudio })));
+const Editor = lazy(() => import("./pages/Editor").then((module) => ({ default: module.Editor })));
+const Onboarding = lazy(() => import("./pages/Onboarding").then((module) => ({ default: module.Onboarding })));
+const Settings = lazy(() => import("./pages/Settings").then((module) => ({ default: module.Settings })));
+const Account = lazy(() => import("./pages/Account").then((module) => ({ default: module.Account })));
+const Admin = lazy(() => import("./pages/Admin").then((module) => ({ default: module.Admin })));
+const CreatorCenter = lazy(() => import("./pages/CreatorCenter").then((module) => ({ default: module.CreatorCenter })));
+
+function PageLoadingFallback() {
+  return (
+    <div className="loading-screen page-loading" aria-label="Loading page">
+      <Loader2 size={22} className="spin" />
+    </div>
+  );
+}
 
 const NAV: { page: Page; label: string; icon: React.ReactNode }[] = [
   { page: "gallery", label: "主题画廊", icon: <LayoutGrid size={15} /> },
@@ -101,7 +110,11 @@ export function App() {
   }
 
   if (settings && !settings.onboardingDone) {
-    return <Onboarding />;
+    return (
+      <Suspense fallback={<PageLoadingFallback />}>
+        <Onboarding />
+      </Suspense>
+    );
   }
 
   const isAuthenticated = auth?.status === "authenticated";
@@ -260,13 +273,15 @@ export function App() {
         </button>
       </aside>
       <main className="main">
-        {page === "gallery" && <Gallery />}
-        {page === "ai-studio" && <AiStudio />}
-        {page === "editor" && <Editor />}
-        {page === "creator" && <CreatorCenter />}
-        {page === "admin" && <Admin />}
-        {page === "settings" && <Settings />}
-        {page === "account" && <Account />}
+        <Suspense fallback={<PageLoadingFallback />}>
+          {page === "gallery" && <Gallery />}
+          {page === "ai-studio" && <AiStudio />}
+          {page === "editor" && <Editor />}
+          {page === "creator" && <CreatorCenter />}
+          {page === "admin" && <Admin />}
+          {page === "settings" && <Settings />}
+          {page === "account" && <Account />}
+        </Suspense>
       </main>
       <AuthRequiredModal />
       <ConfirmRestartModal />

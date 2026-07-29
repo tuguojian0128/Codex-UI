@@ -17,19 +17,62 @@ import {
   XCircle,
 } from "lucide-react";
 import { useEffect, useMemo, useState } from "react";
-import {
-  Line,
-  LineChart,
-  ResponsiveContainer,
-  Tooltip,
-  XAxis,
-} from "recharts";
 import type {
   ThemeSubmission,
   ThemeSubmissionStatus,
   ThemeSummary,
 } from "../../electron/shared/types";
 import { useApp } from "../store";
+
+interface TrendPoint {
+  label: string;
+  count: number;
+}
+
+function CreatorTrendChart({ data }: { data: TrendPoint[] }) {
+  const width = 600;
+  const height = 86;
+  const insetX = 8;
+  const insetY = 8;
+  const maxCount = Math.max(1, ...data.map((point) => point.count));
+  const denominator = Math.max(1, data.length - 1);
+  const points = data.map((point, index) => ({
+    ...point,
+    x: insetX + (index / denominator) * (width - insetX * 2),
+    y: insetY + (1 - point.count / maxCount) * (height - insetY * 2),
+  }));
+  const line = points
+    .map((point, index) => `${index === 0 ? "M" : "L"}${point.x.toFixed(1)},${point.y.toFixed(1)}`)
+    .join(" ");
+  const area = points.length > 0
+    ? `${line} L${points[points.length - 1].x.toFixed(1)},${height} L${points[0].x.toFixed(1)},${height} Z`
+    : "";
+  const labelIndexes = Array.from(new Set([0, 7, 14, 21, data.length - 1]))
+    .filter((index) => index >= 0 && index < data.length);
+
+  return (
+    <div className="creator-mini-chart">
+      <svg viewBox={`0 0 ${width} ${height}`} preserveAspectRatio="none" role="img" aria-label="Recent theme unlock trend">
+        <defs>
+          <linearGradient id="creator-trend-fill" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0%" stopColor="#e8b95d" stopOpacity="0.22" />
+            <stop offset="100%" stopColor="#e8b95d" stopOpacity="0" />
+          </linearGradient>
+        </defs>
+        <path className="creator-mini-chart__area" d={area} />
+        <path className="creator-mini-chart__line" d={line} />
+        {points.map((point, index) => (
+          <circle className="creator-mini-chart__hit" cx={point.x} cy={point.y} r="7" key={`${point.label}-${index}`}>
+            <title>{`${point.label || `Day ${index + 1}`}: ${point.count}`}</title>
+          </circle>
+        ))}
+      </svg>
+      <div className="creator-mini-chart__labels" aria-hidden="true">
+        {labelIndexes.map((index) => <span key={index}>{data[index]?.label}</span>)}
+      </div>
+    </div>
+  );
+}
 
 const PRICE_TIERS = [0, 49, 99, 199, 399] as const;
 
@@ -678,36 +721,7 @@ export function CreatorCenter() {
                   </div>
                 </div>
                 <div className="creator-trend">
-                  <ResponsiveContainer width="100%" height={112}>
-                    <LineChart data={chartData} margin={{ top: 8, right: 6, bottom: 0, left: 6 }}>
-                      <XAxis
-                        dataKey="label"
-                        axisLine={false}
-                        tickLine={false}
-                        interval={6}
-                        tick={{ fill: "#77717d", fontSize: 10 }}
-                      />
-                      <Tooltip
-                        cursor={{ stroke: "rgba(231, 185, 92, .18)" }}
-                        contentStyle={{
-                          background: "#17171a",
-                          border: "1px solid rgba(255,255,255,.1)",
-                          borderRadius: 8,
-                          fontSize: 11,
-                        }}
-                        labelStyle={{ color: "#aaa4af" }}
-                        formatter={(value) => [`${Number(value)} 人`, "新增使用"]}
-                      />
-                      <Line
-                        type="monotone"
-                        dataKey="count"
-                        stroke="#e8b95d"
-                        strokeWidth={2}
-                        dot={false}
-                        activeDot={{ r: 3, fill: "#f2c66f", strokeWidth: 0 }}
-                      />
-                    </LineChart>
-                  </ResponsiveContainer>
+                  <CreatorTrendChart data={chartData} />
                 </div>
               </section>
 

@@ -9,6 +9,7 @@ const SOURCE_LABEL = { preset: "预设", custom: "自定义", imported: "导入"
 interface ThemeCardProps {
   theme: CommerceThemeSummary;
   isPurchasing?: boolean;
+  priority?: boolean;
   onPreview(theme: CommerceThemeSummary): void;
   onPurchase?(): void;
   onAlipay?(): void;
@@ -18,12 +19,14 @@ interface ThemeCardProps {
 export function ThemeCard({
   theme,
   isPurchasing,
+  priority = false,
   onPreview,
   onPurchase,
   onAlipay,
   onDownload,
 }: ThemeCardProps) {
-  const state = useApp((s) => s.state);
+  const activeThemeId = useApp((s) => s.state?.activeThemeId ?? null);
+  const codexInstalled = useApp((s) => s.state?.codexDesktop.installed ?? false);
   const applyingId = useApp((s) => s.applyingId);
   const apply = useApp((s) => s.apply);
   const refreshThemes = useApp((s) => s.refreshThemes);
@@ -33,7 +36,7 @@ export function ThemeCard({
   const pendingWebThemeId = useApp((s) => s.pendingWebThemeId);
   const setPage = useApp((s) => s.setPage);
 
-  const isActive = state?.activeThemeId === theme.id;
+  const isActive = activeThemeId === theme.id;
   const isApplying = applyingId === theme.id;
   const isOwned = Boolean(theme.entitlement);
   const isMarketplace = Boolean(theme.product);
@@ -119,9 +122,9 @@ export function ThemeCard({
     return (
       <button
         className="btn btn-primary"
-        disabled={Boolean(applyingId) || !state?.codexDesktop.installed}
+        disabled={Boolean(applyingId) || !codexInstalled}
         onClick={() => void apply(theme.id)}
-        title={state?.codexDesktop.installed ? "应用到 Codex" : "未检测到 Codex"}
+        title={codexInstalled ? "应用到 Codex" : "未检测到 Codex"}
       >
         {isApplying ? (
           <Loader2 size={13} className="spin" />
@@ -146,7 +149,14 @@ export function ThemeCard({
         onClick={() => onPreview(theme)}
         aria-label={`放大查看${theme.name}`}
       >
-        <img src={theme.previewUrl} alt={theme.name} draggable={false} />
+        <img
+          src={theme.previewUrl}
+          alt={theme.name}
+          draggable={false}
+          loading={priority ? "eager" : "lazy"}
+          decoding="async"
+          fetchPriority={priority ? "high" : "low"}
+        />
         <span className="card-preview-expand" aria-hidden="true">
           <Maximize2 size={14} />
           放大查看

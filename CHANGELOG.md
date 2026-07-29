@@ -1,5 +1,20 @@
 # Changelog
 
+## 0.2.16 - 2026-07-29
+
+### Performance
+
+- Split secondary pages and preview dialogs into lazy-loaded renderer chunks.
+- Reduced the initial renderer JavaScript bundle from about 1.81 MB to about 0.66 MB.
+- Replaced the 820 KB chart dependency with a lightweight SVG trend chart.
+- Deferred off-screen theme card rendering and non-priority preview image decoding.
+- Prevented unchanged five-second desktop status heartbeats from rerendering the UI.
+- Removed per-card backdrop blur to improve gallery scrolling on integrated GPUs.
+
+### Fixes
+
+- Activate the protected Windows AppX/MSIX Codex package through AppUserModelId instead of direct process spawning, avoiding `spawn EPERM`.
+
 ## 0.2.14 — 2026-07-28
 
 本次版本新增 Intel Mac 与 Windows x64 客户端支持，并改善跨平台更新体验。
