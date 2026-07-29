@@ -16,10 +16,12 @@ interface WindowsInstallCandidate {
   trustType?: "authenticode" | "appx";
   packageName?: string;
   packagePublisher?: string;
+  appUserModelId?: string;
 }
 
 const OFFICIAL_CODEX_PACKAGE_NAME = "OpenAI.Codex";
 const OFFICIAL_CODEX_PACKAGE_PUBLISHER = "CN=50BDFD77-8903-4850-9FFE-6E8522F64D5B";
+export const OFFICIAL_CODEX_APP_USER_MODEL_ID = "OpenAI.Codex_2p2nqsd0c76g0!App";
 
 export interface WindowsProcessRow {
   pid: number;
@@ -103,6 +105,7 @@ export function parseWindowsInstallCandidate(raw: string): CodexInstall | null {
     (parsed.trustType === "appx"
       ? typeof parsed.packageName === "string" &&
         typeof parsed.packagePublisher === "string" &&
+        parsed.appUserModelId === OFFICIAL_CODEX_APP_USER_MODEL_ID &&
         isTrustedWindowsAppxPackage(
           parsed.signatureStatus,
           parsed.signerSubject,
@@ -127,6 +130,9 @@ export function parseWindowsInstallCandidate(raw: string): CodexInstall | null {
     version: typeof parsed.version === "string" && parsed.version.trim()
       ? parsed.version.trim()
       : "unknown",
+    ...(parsed.trustType === "appx"
+      ? { appUserModelId: OFFICIAL_CODEX_APP_USER_MODEL_ID }
+      : {}),
   };
 }
 
@@ -188,6 +194,7 @@ foreach ($packageRoot in $packageRoots) {
       trustType = "appx"
       packageName = $packageName
       packagePublisher = $packagePublisher
+      appUserModelId = "OpenAI.Codex_2p2nqsd0c76g0!$([string]$application.Id)"
     }
     break
   }
@@ -223,6 +230,59 @@ if (-not $result) {
 
 if ($result) { $result | ConvertTo-Json -Compress }
 `
+
+const APPX_ACTIVATE_SCRIPT = String.raw`
+$ErrorActionPreference = "Stop"
+Add-Type -TypeDefinition @"
+using System;
+using System.Runtime.InteropServices;
+
+[ComImport]
+[Guid("2e941141-7f97-4756-ba1d-9decde894a3d")]
+[InterfaceType(ComInterfaceType.InterfaceIsIUnknown)]
+interface IApplicationActivationManager
+{
+    [PreserveSig]
+    int ActivateApplication(
+        [MarshalAs(UnmanagedType.LPWStr)] string appUserModelId,
+        [MarshalAs(UnmanagedType.LPWStr)] string arguments,
+        uint options,
+        out uint processId);
+}
+
+[ComImport]
+[Guid("45BA127D-10A8-46EA-8AB7-56EA9078943C")]
+class ApplicationActivationManager { }
+
+public static class CodexAppActivation
+{
+    public static uint Activate(string appUserModelId, string arguments)
+    {
+        var manager = (IApplicationActivationManager)new ApplicationActivationManager();
+        uint processId;
+        int result = manager.ActivateApplication(appUserModelId, arguments ?? "", 0, out processId);
+        Marshal.ThrowExceptionForHR(result);
+        return processId;
+    }
+}
+"@
+[CodexAppActivation]::Activate($env:CODEX_UI_APP_USER_MODEL_ID, $env:CODEX_UI_APP_ARGUMENTS) | Out-Null
+`
+
+export function windowsAppActivationArguments(args: string[]): string {
+  return args.join(" ");
+}
+
+async function activatePackagedCodex(install: CodexInstall, args: string[]): Promise<void> {
+  if (!install.appUserModelId) {
+    throw new Error("The verified Codex AppX installation is missing its AppUserModelId.");
+  }
+  await powershell(APPX_ACTIVATE_SCRIPT, {
+    ...process.env,
+    CODEX_UI_APP_USER_MODEL_ID: install.appUserModelId,
+    CODEX_UI_APP_ARGUMENTS: windowsAppActivationArguments(args),
+  });
+}
 
 export async function discoverWindowsCodexApp(
   configured?: string | null,
@@ -402,15 +462,24 @@ async function waitForCdp(
 }
 
 async function launchWithCdp(install: CodexInstall, port: number): Promise<void> {
+  const args = windowsCdpArguments(port);
+  if (install.appUserModelId) {
+    await activatePackagedCodex(install, args);
+    return;
+  }
   const child = spawn(
     install.executable,
-    windowsCdpArguments(port),
+    args,
     { detached: true, stdio: "ignore", windowsHide: false },
   );
   child.unref();
 }
 
 async function launchNormally(install: CodexInstall): Promise<void> {
+  if (install.appUserModelId) {
+    await activatePackagedCodex(install, []);
+    return;
+  }
   const child = spawn(install.executable, [], {
     detached: true,
     stdio: "ignore",
@@ -430,7 +499,12 @@ export const windowsCodexDesktopAdapter: CodexDesktopAdapter = {
   waitForCdp,
   launchWithCdp,
   openCodexMode: async (install) => {
-    const child = spawn(install.executable, windowsCodexModeArguments(), {
+    const args = windowsCodexModeArguments();
+    if (install.appUserModelId) {
+      await activatePackagedCodex(install, args);
+      return;
+    }
+    const child = spawn(install.executable, args, {
       detached: true,
       stdio: "ignore",
       windowsHide: false,

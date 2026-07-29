@@ -3,9 +3,11 @@ import test from "node:test";
 import {
   isTrustedWindowsAppxPackage,
   isTrustedWindowsPublisher,
+  OFFICIAL_CODEX_APP_USER_MODEL_ID,
   parseWindowsInstallCandidate,
   parseWindowsProcessRows,
   portBelongsToWindowsInstall,
+  windowsAppActivationArguments,
   windowsCdpArguments,
   windowsCodexModeArguments,
   windowsTaskkillArguments,
@@ -80,12 +82,14 @@ test("Windows install candidates must be absolute and signed by OpenAI", () => {
       trustType: "appx",
       packageName: "OpenAI.Codex",
       packagePublisher: "CN=50BDFD77-8903-4850-9FFE-6E8522F64D5B",
+      appUserModelId: OFFICIAL_CODEX_APP_USER_MODEL_ID,
     })),
     {
       platform: "win32",
       executable: appxExe,
       installPath: "C:\\Program Files\\WindowsApps\\OpenAI.Codex_26.721.4979.0_x64__2p2nqsd0c76g0\\app",
       version: "26.721.4979.0",
+      appUserModelId: OFFICIAL_CODEX_APP_USER_MODEL_ID,
     },
   );
   assert.equal(parseWindowsInstallCandidate("{invalid"), null);
@@ -154,6 +158,11 @@ test("Windows launch and stop arguments keep the requested scope", () => {
     "--remote-debugging-port=9222",
   ]);
   assert.deepEqual(windowsCodexModeArguments(), ["codex://threads/new"]);
+  assert.equal(
+    windowsAppActivationArguments(windowsCdpArguments(9222)),
+    "--remote-debugging-address=127.0.0.1 --remote-debugging-port=9222",
+  );
+  assert.equal(windowsAppActivationArguments([]), "");
   assert.deepEqual(windowsTaskkillArguments(120, false), ["/PID", "120", "/T"]);
   assert.deepEqual(windowsTaskkillArguments(120, true), ["/PID", "120", "/T", "/F"]);
 });

@@ -5,6 +5,8 @@ export interface CodexInstall {
   installPath: string;
   executable: string;
   version: string;
+  /** Windows AppUserModelId for verified AppX/MSIX installations. */
+  appUserModelId?: string;
 }
 
 export interface CodexDesktopAdapter {
