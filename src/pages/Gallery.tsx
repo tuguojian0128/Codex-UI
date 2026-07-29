@@ -16,13 +16,13 @@ type FilterTab = "official" | "community" | "owned" | "local";
 type CollectionFilter = "all" | "liquid" | "studio" | "canvas" | "terminal" | "paper" | "minimal";
 
 const COLLECTION_LABELS: Record<CollectionFilter, string> = {
-  all: "????",
-  liquid: "????",
-  studio: "???",
-  canvas: "????",
-  terminal: "??",
-  paper: "??",
-  minimal: "??",
+  all: "全部主题",
+  liquid: "液态玻璃",
+  studio: "创作工作室",
+  canvas: "沉浸画布",
+  terminal: "终端科技",
+  paper: "纸感手账",
+  minimal: "极简专注",
 };
 
 const FILTER_LABELS: Record<FilterTab, string> = {
@@ -211,7 +211,9 @@ export function Gallery() {
       <div className="gallery-filters">
         {(Object.keys(FILTER_LABELS) as FilterTab[]).map((key) => (
           <button
+            type="button"
             key={key}
+            aria-pressed={filter === key}
             className={`gallery-filter${filter === key ? " active" : ""}`}
             onClick={() => {
               setFilter(key);
@@ -231,14 +233,16 @@ export function Gallery() {
             <input
               value={search}
               onChange={(event) => setSearch(event.target.value)}
-              placeholder="?????????"
+              placeholder="搜索主题名称、标签或风格"
+              aria-label="搜索官方主题"
             />
           </label>
-          <div className="gallery-collections" aria-label="????">
+          <div className="gallery-collections" aria-label="主题风格分类">
             {(Object.keys(COLLECTION_LABELS) as CollectionFilter[]).map((key) => (
               <button
                 type="button"
                 key={key}
+                aria-pressed={collection === key}
                 className={`gallery-collection${collection === key ? " active" : ""}`}
                 onClick={() => setCollection(key)}
               >
@@ -246,6 +250,7 @@ export function Gallery() {
               </button>
             ))}
           </div>
+          <span className="gallery-result-count" aria-live="polite">{filtered.length} 款主题</span>
         </div>
       )}
 

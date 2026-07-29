@@ -4601,14 +4601,16 @@ html.codex-dream-skin--cinematic-live :where([role="dialog"], [role="menu"], [ro
 
 /* Codex-UI liquid glass material collection */
 html.codex-dream-skin[data-dream-material="liquid-glass"] {
-  --ds-liquid-edge: color-mix(in srgb, white 68%, var(--ds-cyan) 32%);
-  --ds-liquid-tint: color-mix(in srgb, var(--ds-panel) 64%, transparent);
-  --ds-liquid-tint-strong: color-mix(in srgb, var(--ds-panel) 78%, transparent);
-  --ds-liquid-shadow: 0 18px 48px color-mix(in srgb, var(--ds-text) 16%, transparent);
+  --ds-liquid-edge: color-mix(in srgb, white 66%, var(--ds-cyan) 34%);
+  --ds-liquid-tint: color-mix(in srgb, var(--ds-panel) 68%, transparent);
+  --ds-liquid-tint-strong: color-mix(in srgb, var(--ds-panel) 82%, transparent);
+  --ds-liquid-blur: 14px;
+  --ds-liquid-saturation: 126%;
+  --ds-liquid-shadow: 0 16px 42px color-mix(in srgb, var(--ds-text) 14%, transparent);
 }
 
 html.codex-dream-skin[data-dream-material="liquid-glass"] body {
-  background-attachment: fixed !important;
+  background-attachment: scroll !important;
 }
 
 html.codex-dream-skin[data-dream-material="liquid-glass"] aside.app-shell-left-panel,
@@ -4621,18 +4623,15 @@ html.codex-dream-skin[data-dream-material="liquid-glass"] [role="menu"],
 html.codex-dream-skin[data-dream-material="liquid-glass"] [role="listbox"],
 html.codex-dream-skin[data-dream-material="liquid-glass"] [data-radix-popper-content-wrapper] > * {
   background:
-    linear-gradient(145deg,
-      color-mix(in srgb, white 18%, transparent),
-      transparent 36%),
-    linear-gradient(155deg,
-      var(--ds-liquid-tint-strong),
-      color-mix(in srgb, var(--ds-panel-2) 58%, transparent)) !important;
-  border: 1px solid color-mix(in srgb, var(--ds-liquid-edge) 62%, transparent) !important;
+    linear-gradient(145deg, color-mix(in srgb, white 16%, transparent), transparent 34%),
+    linear-gradient(155deg, var(--ds-liquid-tint-strong), color-mix(in srgb, var(--ds-panel-2) 64%, transparent)) !important;
+  border: 1px solid color-mix(in srgb, var(--ds-liquid-edge) 58%, transparent) !important;
   box-shadow:
-    inset 0 1px 0 color-mix(in srgb, white 72%, transparent),
-    inset 0 -1px 0 color-mix(in srgb, var(--ds-cyan) 16%, transparent),
+    inset 0 1px 0 color-mix(in srgb, white 68%, transparent),
+    inset 0 -1px 0 color-mix(in srgb, var(--ds-cyan) 12%, transparent),
     var(--ds-liquid-shadow) !important;
-  backdrop-filter: blur(16px) saturate(132%) !important;
+  -webkit-backdrop-filter: blur(var(--ds-liquid-blur)) saturate(var(--ds-liquid-saturation)) !important;
+  backdrop-filter: blur(var(--ds-liquid-blur)) saturate(var(--ds-liquid-saturation)) !important;
 }
 
 html.codex-dream-skin[data-dream-material="liquid-glass"] aside.app-shell-left-panel {
@@ -4643,9 +4642,9 @@ html.codex-dream-skin[data-dream-material="liquid-glass"] aside.app-shell-left-p
 
 html.codex-dream-skin[data-dream-material="liquid-glass"] main.main-surface {
   background:
-    radial-gradient(circle at 82% 8%, color-mix(in srgb, var(--ds-cyan) 18%, transparent), transparent 34%),
-    radial-gradient(circle at 18% 94%, color-mix(in srgb, var(--ds-purple) 16%, transparent), transparent 38%),
-    color-mix(in srgb, var(--ds-bg) 54%, transparent) !important;
+    radial-gradient(circle at 82% 8%, color-mix(in srgb, var(--ds-cyan) 14%, transparent), transparent 34%),
+    radial-gradient(circle at 18% 94%, color-mix(in srgb, var(--ds-purple) 12%, transparent), transparent 38%),
+    color-mix(in srgb, var(--ds-bg) 58%, transparent) !important;
 }
 
 html.codex-dream-skin[data-dream-material="liquid-glass"] main.main-surface > header.app-header-tint {
@@ -4658,7 +4657,7 @@ html.codex-dream-skin[data-dream-material="liquid-glass"] .dream-skin-home .grou
   position: relative;
   overflow: hidden;
   border-radius: calc(var(--ds-radius) + 2px) !important;
-  transition: transform 180ms ease, border-color 180ms ease, box-shadow 180ms ease !important;
+  transition: border-color 180ms ease, box-shadow 180ms ease, transform 180ms ease !important;
 }
 
 html.codex-dream-skin[data-dream-material="liquid-glass"] .dream-skin-home .group\/home-suggestions button::after {
@@ -4666,16 +4665,13 @@ html.codex-dream-skin[data-dream-material="liquid-glass"] .dream-skin-home .grou
   position: absolute;
   inset: 1px 12% auto;
   height: 1px;
-  background: linear-gradient(90deg, transparent, color-mix(in srgb, white 88%, transparent), transparent);
+  background: linear-gradient(90deg, transparent, color-mix(in srgb, white 82%, transparent), transparent);
   pointer-events: none;
 }
 
-html.codex-dream-skin[data-dream-material="liquid-glass"] .dream-skin-home .group\/home-suggestions button:hover {
-  transform: translateY(-2px) scale(1.008);
-  border-color: color-mix(in srgb, var(--ds-green) 42%, white 28%) !important;
-  box-shadow:
-    inset 0 1px 0 color-mix(in srgb, white 78%, transparent),
-    0 18px 36px color-mix(in srgb, var(--ds-green) 18%, transparent) !important;
+html.codex-dream-skin[data-dream-material="liquid-glass"] .dream-skin-home .group\/home-suggestions button:focus-visible {
+  outline: 2px solid color-mix(in srgb, var(--ds-cyan) 68%, white);
+  outline-offset: 2px;
 }
 
 html.codex-dream-skin[data-dream-material="liquid-glass"] .composer-surface-chrome {
@@ -4684,20 +4680,25 @@ html.codex-dream-skin[data-dream-material="liquid-glass"] .composer-surface-chro
 
 html.codex-dream-skin[data-dream-material="liquid-glass"] aside.app-shell-left-panel [aria-current="page"],
 html.codex-dream-skin[data-dream-material="liquid-glass"] aside.app-shell-left-panel [class~="bg-token-list-hover-background"] {
-  background:
-    linear-gradient(135deg,
-      color-mix(in srgb, var(--ds-green) 22%, transparent),
-      color-mix(in srgb, var(--ds-cyan) 12%, transparent)) !important;
-  border: 1px solid color-mix(in srgb, var(--ds-green) 32%, transparent) !important;
-  box-shadow: inset 0 1px color-mix(in srgb, white 50%, transparent) !important;
+  background: linear-gradient(135deg, color-mix(in srgb, var(--ds-green) 20%, transparent), color-mix(in srgb, var(--ds-cyan) 10%, transparent)) !important;
+  border: 1px solid color-mix(in srgb, var(--ds-green) 30%, transparent) !important;
+  box-shadow: inset 0 1px color-mix(in srgb, white 46%, transparent) !important;
 }
 
 html.codex-dream-skin[data-dream-material="liquid-glass"] .dream-skin-orbit {
-  opacity: .72;
-  filter: drop-shadow(0 12px 24px color-mix(in srgb, var(--ds-cyan) 24%, transparent));
+  opacity: .66;
+  filter: drop-shadow(0 8px 18px color-mix(in srgb, var(--ds-cyan) 18%, transparent));
 }
 
-@supports not (backdrop-filter: blur(1px)) {
+@media (hover: hover) and (pointer: fine) {
+  html.codex-dream-skin[data-dream-material="liquid-glass"] .dream-skin-home .group\/home-suggestions button:hover {
+    transform: translateY(-2px);
+    border-color: color-mix(in srgb, var(--ds-green) 38%, white 24%) !important;
+    box-shadow: inset 0 1px 0 color-mix(in srgb, white 74%, transparent), 0 14px 28px color-mix(in srgb, var(--ds-green) 14%, transparent) !important;
+  }
+}
+
+@supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
   html.codex-dream-skin[data-dream-material="liquid-glass"] aside.app-shell-left-panel,
   html.codex-dream-skin[data-dream-material="liquid-glass"] main.main-surface > header.app-header-tint,
   html.codex-dream-skin[data-dream-material="liquid-glass"] .composer-surface-chrome,
@@ -4706,12 +4707,30 @@ html.codex-dream-skin[data-dream-material="liquid-glass"] .dream-skin-orbit {
   }
 }
 
-@media (max-width: 900px) {
+@media (max-width: 1100px), (update: slow) {
+  html.codex-dream-skin[data-dream-material="liquid-glass"] {
+    --ds-liquid-blur: 8px;
+    --ds-liquid-saturation: 112%;
+    --ds-liquid-shadow: 0 10px 28px color-mix(in srgb, var(--ds-text) 12%, transparent);
+  }
+
+  html.codex-dream-skin[data-dream-material="liquid-glass"] .dream-skin-orbit {
+    filter: none;
+  }
+}
+
+@media (prefers-reduced-transparency: reduce) {
   html.codex-dream-skin[data-dream-material="liquid-glass"] aside.app-shell-left-panel,
   html.codex-dream-skin[data-dream-material="liquid-glass"] main.main-surface > header.app-header-tint,
   html.codex-dream-skin[data-dream-material="liquid-glass"] .composer-surface-chrome,
-  html.codex-dream-skin[data-dream-material="liquid-glass"] .dream-skin-home .group\/home-suggestions button {
-    backdrop-filter: blur(10px) saturate(118%) !important;
+  html.codex-dream-skin[data-dream-material="liquid-glass"] .dream-skin-home [data-feature="game-source"],
+  html.codex-dream-skin[data-dream-material="liquid-glass"] .dream-skin-home .group\/home-suggestions button,
+  html.codex-dream-skin[data-dream-material="liquid-glass"] [role="dialog"],
+  html.codex-dream-skin[data-dream-material="liquid-glass"] [role="menu"],
+  html.codex-dream-skin[data-dream-material="liquid-glass"] [role="listbox"] {
+    background: color-mix(in srgb, var(--ds-panel) 96%, var(--ds-bg)) !important;
+    -webkit-backdrop-filter: none !important;
+    backdrop-filter: none !important;
   }
 }
 
@@ -4719,6 +4738,7 @@ html.codex-dream-skin[data-dream-material="liquid-glass"] .dream-skin-orbit {
   html.codex-dream-skin[data-dream-material="liquid-glass"] .dream-skin-home .group\/home-suggestions button {
     transition: none !important;
   }
+
   html.codex-dream-skin[data-dream-material="liquid-glass"] .dream-skin-home .group\/home-suggestions button:hover {
     transform: none;
   }

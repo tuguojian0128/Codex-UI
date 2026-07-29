@@ -1,5 +1,23 @@
 # Changelog
 
+## 0.3.2 - 2026-07-29
+
+### 中文
+
+- 修复主题画廊分类和搜索框中的乱码，并补充无障碍状态与主题数量提示。
+- 重新设计液态玻璃主题卡片，增加更清晰的材质标识、高光层次和键盘焦点反馈。
+- 为 8 套液态玻璃主题分别调整透明度、壁纸强度、光晕、噪点和浮动效果，提升差异化与文字可读性。
+- 降低大面积模糊和阴影开销，在窄屏、低刷新设备以及减少动态/透明度设置下自动降级。
+- 液态主题版本升级至 1.1.0，并增加性能参数回归测试。
+
+### English
+
+- Fixed corrupted gallery collection labels and search copy, with improved accessibility state and result counts.
+- Refined liquid-glass theme cards with clearer material badges, optical highlights, and keyboard focus feedback.
+- Tuned opacity, wallpaper intensity, glow, noise, and floating effects individually across all eight liquid-glass themes.
+- Reduced large-area blur and shadow costs with automatic fallbacks for narrow screens, slow-update devices, and reduced-motion/transparency preferences.
+- Upgraded liquid theme manifests to 1.1.0 and added performance-profile regression coverage.
+
 ## 0.3.1 - 2026-07-29
 
 ### 中文

@@ -44,9 +44,9 @@ npm run gen:expanded-ui
 
 GitHub Release 会提供以下版本：
 
-- Windows x64：`Codex-UI-0.3.1-win-x64.exe`
-- macOS Apple 芯片：`Codex-UI-0.3.1-mac-arm64.dmg`
-- macOS Intel：`Codex-UI-0.3.1-mac-x64.dmg`
+- Windows x64：`Codex-UI-0.3.2-win-x64.exe`
+- macOS Apple 芯片：`Codex-UI-0.3.2-mac-arm64.dmg`
+- macOS Intel：`Codex-UI-0.3.2-mac-x64.dmg`
 
 如果仓库没有配置 Apple Developer 签名与公证密钥，GitHub Actions 仍会生成 macOS 预览版。首次打开未签名预览版时，需要在 Finder 中右键应用并选择“打开”，或在“系统设置 → 隐私与安全性”中允许打开。正式分发建议配置 Apple Developer ID 签名和公证。
 
@@ -146,9 +146,9 @@ Codex-UI is an open-source desktop UI theme manager for the OpenAI Codex desktop
 
 GitHub Releases provide:
 
-- Windows x64: `Codex-UI-0.3.1-win-x64.exe`
-- macOS Apple Silicon: `Codex-UI-0.3.1-mac-arm64.dmg`
-- macOS Intel: `Codex-UI-0.3.1-mac-x64.dmg`
+- Windows x64: `Codex-UI-0.3.2-win-x64.exe`
+- macOS Apple Silicon: `Codex-UI-0.3.2-mac-arm64.dmg`
+- macOS Intel: `Codex-UI-0.3.2-mac-x64.dmg`
 
 When Apple Developer signing and notarization secrets are unavailable, GitHub Actions still creates unsigned macOS preview packages. To open an unsigned preview for the first time, right-click the app in Finder and choose **Open**, or allow it under **System Settings → Privacy & Security**. Signed and notarized builds are recommended for general distribution.
 

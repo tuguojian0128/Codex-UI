@@ -46,6 +46,7 @@ export function ThemeCard({
     : Boolean(theme.local);
   const isLimitedEdition = theme.id === "moonlit-immortal";
   const isPopular = theme.id === "blue-window-messenger";
+  const isLiquidGlass = theme.id.startsWith("liquid-");
   const hasUpdate = isInstalled && theme.local && theme.product && theme.local.version !== theme.product.version;
   const purchaseState = getThemePurchaseState(theme, isOwned);
 
@@ -138,7 +139,7 @@ export function ThemeCard({
 
   return (
     <div
-      className={`theme-card${isActive ? " active" : ""}${
+      className={`theme-card${isLiquidGlass ? " theme-card--liquid" : ""}${isActive ? " active" : ""}${
         pendingWebThemeId === theme.id ? " web-target" : ""
       }`}
       data-theme-id={theme.id}
@@ -194,6 +195,7 @@ export function ThemeCard({
           <span className={`badge badge-${theme.source}`}>{SOURCE_LABEL[theme.source]}</span>
         </div>
         <div className="card-meta">
+          {isLiquidGlass && <span className="badge badge-liquid">液态玻璃</span>}
           <span className="badge badge-layout">{theme.layout}</span>
           {theme.version && <span className="badge badge-version">v{theme.version}</span>}
           {theme.readOnly && <span className="badge badge-readonly">只读</span>}

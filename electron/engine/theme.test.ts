@@ -427,6 +427,9 @@ describe("loadTheme", () => {
       const dir = path.join(presetsRoot, id);
       const raw = JSON.parse(await fs.readFile(path.join(dir, "theme.json"), "utf8")) as {
         uuid?: string;
+        version?: string;
+        wallpaperBlur?: number;
+        effects?: { aurora?: number; noise?: number; float?: number };
       };
       if (!raw.uuid?.startsWith("collection-")) continue;
       const loaded = await loadTheme(dir);
@@ -434,7 +437,14 @@ describe("loadTheme", () => {
       assert.equal(loaded.theme.resources.hero, "hero.webp");
       assert.equal(loaded.theme.resources.preview, "preview.webp");
       expanded.push(id);
-      if (id.startsWith("liquid-")) liquid.push(id);
+      if (id.startsWith("liquid-")) {
+        assert.equal(raw.version, "1.1.0");
+        assert.ok((raw.wallpaperBlur ?? 99) <= 1);
+        assert.ok((raw.effects?.aurora ?? 99) <= .3);
+        assert.ok((raw.effects?.noise ?? 99) <= .02);
+        assert.ok((raw.effects?.float ?? 99) <= .12);
+        liquid.push(id);
+      }
     }
 
     assert.equal(expanded.length, 35);

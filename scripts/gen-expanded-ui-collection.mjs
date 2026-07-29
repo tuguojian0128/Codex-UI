@@ -45,6 +45,17 @@ const THEMES = [
   { id: "pixel-messenger", zh: "像素信使", en: "Pixel Messenger", motif: "grid", layout: "retro-messenger", mode: "light", colors: ["#eaf5ff", "#b7d8f2", "#2778b9", "#f2b84b"], tagline: "用熟悉的窗口感快速回到工作状态。", description: "浅蓝窗口、像素网格与暖黄提示组成的轻复古消息主题。", tags: ["像素", "复古", "消息", "窗口"] },
 ];
 
+const LIQUID_PROFILES = {
+  "liquid-aqua-lens": { heroFocusX: .68, wallpaperOpacity: .58, wallpaperBlur: 1, decoration: .54, particles: .04, aurora: .22, glow: .12, noise: .01, grid: .03, float: .08 },
+  "liquid-orchid-prism": { heroFocusX: .63, wallpaperOpacity: .72, wallpaperBlur: 1, decoration: .58, particles: .05, aurora: .28, glow: .24, noise: .02, grid: .04, float: .10 },
+  "liquid-sunrise-gel": { heroFocusX: .60, wallpaperOpacity: .60, wallpaperBlur: 1, decoration: .50, particles: .03, aurora: .18, glow: .12, noise: .008, grid: .02, float: .06 },
+  "liquid-graphite-orbit": { heroFocusX: .58, wallpaperOpacity: .50, wallpaperBlur: 0, decoration: .42, particles: .02, aurora: .12, glow: .15, noise: .012, grid: .02, float: .04 },
+  "liquid-mint-capsule": { heroFocusX: .65, wallpaperOpacity: .56, wallpaperBlur: 1, decoration: .50, particles: .03, aurora: .20, glow: .10, noise: .008, grid: .02, float: .06 },
+  "liquid-coral-spectrum": { heroFocusX: .66, wallpaperOpacity: .70, wallpaperBlur: 1, decoration: .62, particles: .06, aurora: .26, glow: .26, noise: .018, grid: .03, float: .10 },
+  "liquid-arctic-pearl": { heroFocusX: .58, wallpaperOpacity: .48, wallpaperBlur: 0, decoration: .40, particles: .02, aurora: .14, glow: .08, noise: .006, grid: .01, float: .04 },
+  "liquid-midnight-wave": { heroFocusX: .64, wallpaperOpacity: .74, wallpaperBlur: 1, decoration: .64, particles: .08, aurora: .30, glow: .28, noise: .02, grid: .04, float: .12 },
+};
+
 const escapeXml = (value) => String(value).replace(/[&<>"']/g, (char) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&apos;" })[char]);
 const clamp = (value, min = 0, max = 255) => Math.max(min, Math.min(max, value));
 const hexRgb = (hex) => {
@@ -173,12 +184,13 @@ function makePalette(theme, dark) {
 
 function manifest(theme) {
   const liquid=theme.motif === "liquid";
+  const liquidProfile=LIQUID_PROFILES[theme.id] ?? {};
   const layoutHeroHeight = theme.layout === "minimal-focus" ? 280 : theme.layout === "full-canvas" ? 360 : 330;
   return {
     schemaVersion: 2,
     uuid: `collection-${theme.id}`,
     id: theme.id,
-    version: "1.0.0",
+    version: liquid ? "1.1.0" : "1.0.0",
     minEngineVersion: "2.0.0",
     galleryVisible: true,
     name: `${theme.zh} ${theme.en}`,
@@ -192,7 +204,7 @@ function manifest(theme) {
     dark: makePalette(theme,true),
     layout: theme.layout,
     heroFit: "cover",
-    heroFocusX: liquid ? .68 : .62,
+    heroFocusX: liquidProfile.heroFocusX ?? (liquid ? .68 : .62),
     heroFocusY: .44,
     heroZoom: 1,
     heroHeight: layoutHeroHeight,
@@ -201,21 +213,21 @@ function manifest(theme) {
     wallpaperEnabled: true,
     wallpaperFocusX: .62,
     wallpaperFocusY: .44,
-    wallpaperOpacity: theme.mode === "dark" ? .78 : .68,
-    wallpaperBlur: liquid ? 2 : 0,
+    wallpaperOpacity: liquidProfile.wallpaperOpacity ?? (theme.mode === "dark" ? .78 : .68),
+    wallpaperBlur: liquidProfile.wallpaperBlur ?? (liquid ? 1 : 0),
     radius: liquid ? "xl" : (["terminal-grid","retro-messenger"].includes(theme.layout) ? "sm" : "lg"),
     density: theme.layout === "minimal-focus" ? "spacious" : theme.layout === "terminal-grid" ? "compact" : "normal",
     fontPreset: theme.layout === "terminal-grid" ? "mono" : liquid ? "rounded" : "system",
     glass: liquid || ["cinematic-live","full-canvas"].includes(theme.layout),
     shadow: theme.layout === "minimal-focus" ? "sm" : liquid ? "lg" : "md",
-    decoration: liquid ? .62 : .48,
+    decoration: liquidProfile.decoration ?? (liquid ? .62 : .48),
     effects: {
-      particles: ["aurora","petals","waves"].includes(theme.motif) ? .22 : .07,
-      aurora: ["aurora","ribbons","waves","liquid"].includes(theme.motif) ? .34 : .08,
-      glow: theme.mode === "dark" ? .32 : .17,
-      noise: theme.mode === "dark" ? .035 : .018,
-      grid: ["grid","blueprint","terminal"].includes(theme.motif) ? .34 : .06,
-      float: liquid ? .14 : .06,
+      particles: liquidProfile.particles ?? (["aurora","petals","waves"].includes(theme.motif) ? .22 : .07),
+      aurora: liquidProfile.aurora ?? (["aurora","ribbons","waves","liquid"].includes(theme.motif) ? .34 : .08),
+      glow: liquidProfile.glow ?? (theme.mode === "dark" ? .32 : .17),
+      noise: liquidProfile.noise ?? (theme.mode === "dark" ? .035 : .018),
+      grid: liquidProfile.grid ?? (["grid","blueprint","terminal"].includes(theme.motif) ? .34 : .06),
+      float: liquidProfile.float ?? (liquid ? .14 : .06),
     },
     brandSubtitle: liquid ? "LIQUID GLASS COLLECTION" : `${theme.en.toUpperCase()} · CODEX-UI`,
     projectPrefix: "当前项目 · ",
