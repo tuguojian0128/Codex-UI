@@ -24,7 +24,7 @@ interface GitHubRelease {
   tag_name?: unknown;
 }
 
-const REPOSITORY = "tuguojian0128/-";
+const REPOSITORY = "tuguojian0128/Codex-UI";
 const LATEST_RELEASE_API_URL = `https://api.github.com/repos/${REPOSITORY}/releases/latest`;
 const RELEASE_DOWNLOAD_PREFIX = `https://github.com/${REPOSITORY}/releases/download/`;
 

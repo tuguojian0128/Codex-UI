@@ -18,7 +18,7 @@ const unsupportedCodexDesktopAdapter: CodexDesktopAdapter = {
   launchWithCdp: async () => {
     throw new Error("当前系统尚未支持 Codex 桌面端主题应用。");
   },
-  openCodexMode: async () => {
+  openCodexMode: async (_install) => {
     throw new Error("当前系统尚未支持 Codex 桌面端主题应用。");
   },
   launchNormally: async () => {

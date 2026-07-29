@@ -2,7 +2,7 @@ import assert from "node:assert/strict";
 import test from "node:test";
 import { getUpdatePlatformInfo } from "./updater-platform";
 
-const RELEASES_URL = "https://github.com/tuguojian0128/-/releases/latest";
+const RELEASES_URL = "https://github.com/tuguojian0128/Codex-UI/releases/latest";
 
 test("macOS manual downloads open this fork's releases page", () => {
   assert.deepEqual(getUpdatePlatformInfo("darwin", "arm64"), {

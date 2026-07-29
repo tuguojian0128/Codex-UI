@@ -7,6 +7,7 @@ import {
   parseWindowsProcessRows,
   portBelongsToWindowsInstall,
   windowsCdpArguments,
+  windowsCodexModeArguments,
   windowsTaskkillArguments,
 } from "./codex-windows";
 
@@ -152,6 +153,7 @@ test("Windows launch and stop arguments keep the requested scope", () => {
     "--remote-debugging-address=127.0.0.1",
     "--remote-debugging-port=9222",
   ]);
+  assert.deepEqual(windowsCodexModeArguments(), ["codex://threads/new"]);
   assert.deepEqual(windowsTaskkillArguments(120, false), ["/PID", "120", "/T"]);
   assert.deepEqual(windowsTaskkillArguments(120, true), ["/PID", "120", "/T", "/F"]);
 });

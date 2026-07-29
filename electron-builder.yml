@@ -55,4 +55,4 @@ npmRebuild: false
 publish:
   provider: github
   owner: tuguojian0128
-  repo: "-"
+  repo: Codex-UI

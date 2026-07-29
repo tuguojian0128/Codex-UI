@@ -17,6 +17,6 @@ export interface CodexDesktopAdapter {
   verifiedCdpEndpoint(port: number, install: CodexInstall): Promise<boolean>;
   waitForCdp(port: number, install: CodexInstall, timeoutMs?: number): Promise<void>;
   launchWithCdp(install: CodexInstall, port: number): Promise<void>;
-  openCodexMode(): Promise<void>;
+  openCodexMode(install: CodexInstall): Promise<void>;
   launchNormally(install: CodexInstall): Promise<void>;
 }

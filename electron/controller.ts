@@ -403,7 +403,7 @@ export class ThemeController extends EventEmitter {
       const appMode = await detectDesktopAppMode(port).catch(() => "unknown" as const);
       if (appMode === "chatgpt") {
         this.log("info", "检测到 ChatGPT / Work 模式,正在自动切换到 Codex…");
-        await this.desktop.openCodexMode();
+        await this.desktop.openCodexMode(this.install);
         if (!(await waitForDesktopAppMode(port, "codex", 15_000))) {
           throw new Error("无法自动切换到 Codex,请从左上角模式菜单手动选择 Codex 后重试。");
         }

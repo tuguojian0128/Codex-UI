@@ -1,7 +1,6 @@
 import { execFile, spawn } from "node:child_process";
 import path from "node:path";
 import { promisify } from "node:util";
-import { shell } from "electron";
 import type { CodexDesktopAdapter, CodexInstall } from "./codex-desktop";
 
 const execFileAsync = promisify(execFile);
@@ -38,6 +37,14 @@ export function windowsCdpArguments(port: number): string[] {
     "--remote-debugging-address=127.0.0.1",
     `--remote-debugging-port=${port}`,
   ];
+}
+
+/**
+ * Route the Codex deep link through the verified OpenAI executable instead of
+ * Windows' global codex:// association, which another editor can register.
+ */
+export function windowsCodexModeArguments(): string[] {
+  return [CODEX_NEW_THREAD_URL];
 }
 
 function normalizeWindowsPath(value: string): string {
@@ -422,6 +429,13 @@ export const windowsCodexDesktopAdapter: CodexDesktopAdapter = {
   verifiedCdpEndpoint,
   waitForCdp,
   launchWithCdp,
-  openCodexMode: async () => shell.openExternal(CODEX_NEW_THREAD_URL),
+  openCodexMode: async (install) => {
+    const child = spawn(install.executable, windowsCodexModeArguments(), {
+      detached: true,
+      stdio: "ignore",
+      windowsHide: false,
+    });
+    child.unref();
+  },
   launchNormally,
 };

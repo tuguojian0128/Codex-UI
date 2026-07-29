@@ -1,8 +1,8 @@
 export const SITE_NAME = "Codex-UI";
-export const SITE_URL = "https://tuguojian0128.github.io/-";
+export const SITE_URL = "https://tuguojian0128.github.io/Codex-UI";
 export const APP_PROTOCOL = "codexui";
-export const GITHUB_REPO_URL = "https://github.com/tuguojian0128/-";
-export const COMMUNITY_JOIN_URL = "https://github.com/tuguojian0128/-/issues";
+export const GITHUB_REPO_URL = "https://github.com/tuguojian0128/Codex-UI";
+export const COMMUNITY_JOIN_URL = "https://github.com/tuguojian0128/Codex-UI/issues";
 export const DOWNLOAD_URL = "/download";
 export const MAC_ARM64_DMG_URL =
   "/api/v1/downloads/latest?platform=mac&arch=arm64&format=dmg";

@@ -4,7 +4,7 @@ export interface UpdatePlatformInfo {
   manualDownloadUrl: string;
 }
 
-const RELEASES_URL = "https://github.com/tuguojian0128/-/releases/latest";
+const RELEASES_URL = "https://github.com/tuguojian0128/Codex-UI/releases/latest";
 
 export function getUpdatePlatformInfo(
   platform: NodeJS.Platform = process.platform,

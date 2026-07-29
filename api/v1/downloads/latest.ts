@@ -5,7 +5,7 @@ import {
 } from "../../../server/downloads/github-release.js";
 
 const LATEST_RELEASE_PAGE =
-  "https://github.com/tuguojian0128/-/releases/latest";
+  "https://github.com/tuguojian0128/Codex-UI/releases/latest";
 
 export default async function handler(req: VercelRequest, res: VercelResponse) {
   if (req.method !== "GET" && req.method !== "HEAD") {

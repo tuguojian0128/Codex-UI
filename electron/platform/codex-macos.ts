@@ -242,7 +242,7 @@ export async function launchCodexWithCdp(install: CodexInstall, port: number): P
 }
 
 /** Select the Codex surface in the already-running unified desktop app. */
-export async function openCodexMode(): Promise<void> {
+export async function openCodexMode(_install: CodexInstall): Promise<void> {
   await run("/usr/bin/open", ["-b", CODEX_BUNDLE_ID, CODEX_NEW_THREAD_URL]);
 }
 

@@ -27,7 +27,7 @@ const UPDATE_CHECK_INTERVAL_MS = 4 * 60 * 60 * 1000;
 const FIRST_UPDATE_CHECK_DELAY_MS = 5_000;
 const UPDATE_PREPARATION_TIMEOUT_MS = 5_000;
 const LATEST_RELEASE_URL =
-  "https://github.com/tuguojian0128/-/releases/latest";
+  "https://github.com/tuguojian0128/Codex-UI/releases/latest";
 const PLATFORM_INFO = getUpdatePlatformInfo();
 
 type Logger = (level: LogLine["level"], message: string) => void;
@@ -280,7 +280,7 @@ export class AppUpdaterService extends EventEmitter {
   private async hydrateGitHubRelease(version: string): Promise<void> {
     try {
       const response = await fetch(
-        `https://api.github.com/repos/tuguojian0128/-/releases/tags/v${encodeURIComponent(version)}`,
+        `https://api.github.com/repos/tuguojian0128/Codex-UI/releases/tags/v${encodeURIComponent(version)}`,
         {
           headers: {
             Accept: "application/vnd.github+json",
