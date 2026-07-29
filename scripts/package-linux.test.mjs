@@ -28,7 +28,6 @@ test("Linux artifact validation and metadata cover AppImage and DEB", (t) => {
   const artifacts = getLinuxArtifactPaths(root, "0.3.3");
   fs.mkdirSync(artifacts.releaseDir);
   fs.writeFileSync(artifacts.appImage, "appimage");
-  fs.writeFileSync(artifacts.appImageBlockmap, "blockmap");
   fs.writeFileSync(artifacts.deb, "deb");
   const metadata = `version: 0.3.3
 files:

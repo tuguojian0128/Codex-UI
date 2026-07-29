@@ -469,7 +469,6 @@ jobs:
           if-no-files-found: error
           path: |
             release/Codex-UI-${{ env.APP_VERSION }}-linux-x64.AppImage
-            release/Codex-UI-${{ env.APP_VERSION }}-linux-x64.AppImage.blockmap
             release/Codex-UI-${{ env.APP_VERSION }}-linux-x64.deb
             release/latest-linux.yml
 
@@ -574,7 +573,6 @@ jobs:
             "release/Codex-UI-${APP_VERSION}-win-x64.exe.blockmap"
             "release/latest.yml"
             "release/Codex-UI-${APP_VERSION}-linux-x64.AppImage"
-            "release/Codex-UI-${APP_VERSION}-linux-x64.AppImage.blockmap"
             "release/Codex-UI-${APP_VERSION}-linux-x64.deb"
             "release/latest-linux.yml"
           )
@@ -614,7 +612,7 @@ jobs:
               LC_ALL=C sort
           )"
           if [[ "$actual_assets" != "$expected_assets" ]]; then
-            echo "Release assets do not match the expected 16-file set."
+            echo "Release assets do not match the expected 15-file set."
             diff <(printf '%s\n' "$expected_assets") <(printf '%s\n' "$actual_assets") || true
             exit 1
           fi

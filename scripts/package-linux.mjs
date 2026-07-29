@@ -38,7 +38,6 @@ export function getLinuxArtifactPaths(rootDir, version) {
   return {
     releaseDir,
     appImage: path.join(releaseDir, `${baseName}.AppImage`),
-    appImageBlockmap: path.join(releaseDir, `${baseName}.AppImage.blockmap`),
     deb: path.join(releaseDir, `${baseName}.deb`),
     updateMetadata: path.join(releaseDir, "latest-linux.yml"),
   };
@@ -47,7 +46,6 @@ export function getLinuxArtifactPaths(rootDir, version) {
 export function assertLinuxArtifactsExist(artifacts) {
   const required = [
     artifacts.appImage,
-    artifacts.appImageBlockmap,
     artifacts.deb,
     artifacts.updateMetadata,
   ];
