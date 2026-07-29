@@ -44,6 +44,7 @@ dmg:
   artifactName: Codex-UI-${version}-mac-${arch}.${ext}
 linux:
   category: Utility
+  maintainer: tuguojian0128 <tuguojian0128@users.noreply.github.com>
   icon: assets/build/icon.png
   target:
     - AppImage
