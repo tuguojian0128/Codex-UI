@@ -481,7 +481,7 @@ jobs:
       - win-x64
       - linux-x64
     runs-on: ubuntu-24.04
-    timeout-minutes: 25
+    timeout-minutes: 60
     permissions:
       contents: write
 
