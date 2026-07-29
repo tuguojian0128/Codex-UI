@@ -38,6 +38,7 @@ import {
   DEFAULT_SUPABASE_URL,
 } from "./commerce/config";
 import { CommerceService } from "./commerce/service";
+import { installApplicationMenu } from "./application-menu";
 
 // Files launched before the app is ready (double-click / drag to Dock).
 const pendingOpenFiles: string[] = [];
@@ -274,8 +275,9 @@ app.on("activate", () => {
 });
 
 app.whenReady().then(async () => {
+  installApplicationMenu();
   if (process.platform === "win32") {
-    app.setAppUserModelId("com.codexui.app");
+    app.setAppUserModelId("com.tuguojian0128.codexui");
   }
   const paths = await resolveAppPaths();
   const settings = new SettingsStore(paths.settingsFile);

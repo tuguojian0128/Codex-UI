@@ -83,7 +83,28 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
+      - name: Detect macOS signing availability
+        id: signing
+        shell: bash
+        env:
+          MACOS_CERTIFICATE: ${{ secrets.MACOS_CERTIFICATE }}
+          MACOS_CERTIFICATE_PWD: ${{ secrets.MACOS_CERTIFICATE_PWD }}
+          MACOS_SIGNING_IDENTITY: ${{ secrets.MACOS_SIGNING_IDENTITY }}
+          APPLE_ID: ${{ secrets.APPLE_ID }}
+          APPLE_APP_PWD: ${{ secrets.APPLE_APP_PWD }}
+          APPLE_TEAM_ID: ${{ secrets.APPLE_TEAM_ID }}
+        run: |
+          if [[ -n "$MACOS_CERTIFICATE" && -n "$MACOS_CERTIFICATE_PWD" && \
+            -n "$MACOS_SIGNING_IDENTITY" && -n "$APPLE_ID" && \
+            -n "$APPLE_APP_PWD" && -n "$APPLE_TEAM_ID" ]]; then
+            echo "signed=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "signed=false" >> "$GITHUB_OUTPUT"
+            echo "::warning::macOS signing secrets are incomplete; publishing an unsigned preview build."
+          fi
+
       - name: Import macOS signing certificate
+        if: steps.signing.outputs.signed == 'true'
         shell: bash
         env:
           MACOS_CERTIFICATE: ${{ secrets.MACOS_CERTIFICATE }}
@@ -123,13 +144,25 @@ jobs:
             grep -F "$MACOS_SIGNING_IDENTITY"
           echo "CSC_KEYCHAIN=${keychain_path}" >> "$GITHUB_ENV"
 
-      - name: Build macOS ARM64 package
+      - name: Build signed macOS ARM64 package
+        if: steps.signing.outputs.signed == 'true'
         env:
           APPLE_ID: ${{ secrets.APPLE_ID }}
           APPLE_APP_PWD: ${{ secrets.APPLE_APP_PWD }}
           APPLE_TEAM_ID: ${{ secrets.APPLE_TEAM_ID }}
           MACOS_SIGNING_IDENTITY: ${{ secrets.MACOS_SIGNING_IDENTITY }}
         run: npm run dist:mac:arm64
+
+      - name: Build unsigned macOS ARM64 preview
+        if: steps.signing.outputs.signed != 'true'
+        shell: bash
+        env:
+          MACOS_UNSIGNED_BUILD: "true"
+          CSC_IDENTITY_AUTO_DISCOVERY: "false"
+        run: |
+          npm run build
+          node scripts/build-dist.mjs --platform mac --arch arm64
+          mv release/latest-mac.yml release/latest-mac-arm64.yml
 
       - name: Upload macOS ARM64 artifact
         uses: actions/upload-artifact@v6
@@ -185,7 +218,28 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
+      - name: Detect macOS signing availability
+        id: signing
+        shell: bash
+        env:
+          MACOS_CERTIFICATE: ${{ secrets.MACOS_CERTIFICATE }}
+          MACOS_CERTIFICATE_PWD: ${{ secrets.MACOS_CERTIFICATE_PWD }}
+          MACOS_SIGNING_IDENTITY: ${{ secrets.MACOS_SIGNING_IDENTITY }}
+          APPLE_ID: ${{ secrets.APPLE_ID }}
+          APPLE_APP_PWD: ${{ secrets.APPLE_APP_PWD }}
+          APPLE_TEAM_ID: ${{ secrets.APPLE_TEAM_ID }}
+        run: |
+          if [[ -n "$MACOS_CERTIFICATE" && -n "$MACOS_CERTIFICATE_PWD" && \
+            -n "$MACOS_SIGNING_IDENTITY" && -n "$APPLE_ID" && \
+            -n "$APPLE_APP_PWD" && -n "$APPLE_TEAM_ID" ]]; then
+            echo "signed=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "signed=false" >> "$GITHUB_OUTPUT"
+            echo "::warning::macOS signing secrets are incomplete; publishing an unsigned preview build."
+          fi
+
       - name: Import macOS signing certificate
+        if: steps.signing.outputs.signed == 'true'
         shell: bash
         env:
           MACOS_CERTIFICATE: ${{ secrets.MACOS_CERTIFICATE }}
@@ -225,13 +279,25 @@ jobs:
             grep -F "$MACOS_SIGNING_IDENTITY"
           echo "CSC_KEYCHAIN=${keychain_path}" >> "$GITHUB_ENV"
 
-      - name: Build macOS Intel package
+      - name: Build signed macOS Intel package
+        if: steps.signing.outputs.signed == 'true'
         env:
           APPLE_ID: ${{ secrets.APPLE_ID }}
           APPLE_APP_PWD: ${{ secrets.APPLE_APP_PWD }}
           APPLE_TEAM_ID: ${{ secrets.APPLE_TEAM_ID }}
           MACOS_SIGNING_IDENTITY: ${{ secrets.MACOS_SIGNING_IDENTITY }}
         run: npm run dist:mac:x64
+
+      - name: Build unsigned macOS Intel preview
+        if: steps.signing.outputs.signed != 'true'
+        shell: bash
+        env:
+          MACOS_UNSIGNED_BUILD: "true"
+          CSC_IDENTITY_AUTO_DISCOVERY: "false"
+        run: |
+          npm run build
+          node scripts/build-dist.mjs --platform mac --arch x64
+          mv release/latest-mac.yml release/latest-mac-x64.yml
 
       - name: Upload macOS Intel artifact
         uses: actions/upload-artifact@v6

@@ -117,7 +117,21 @@ const targetNames = dir
       ? ["nsis"]
       : undefined;
 
+const unsignedMacBuild =
+  platform === Platform.MAC && process.env.MACOS_UNSIGNED_BUILD === "true";
+
 await build({
   targets: platform.createTarget(targetNames, arch),
   publish,
+  ...(unsignedMacBuild
+    ? {
+        config: {
+          forceCodeSigning: false,
+          mac: {
+            identity: null,
+            notarize: false,
+          },
+        },
+      }
+    : {}),
 });

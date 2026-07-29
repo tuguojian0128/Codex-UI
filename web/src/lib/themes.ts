@@ -9,6 +9,7 @@ interface ThemeManifest {
   galleryVisible?: boolean;
   tags?: string[];
   layout: string;
+  hero?: string;
   wallpaper?: string;
   wallpaperFocusX?: number;
   wallpaperFocusY?: number;
@@ -40,17 +41,26 @@ const manifestModules = import.meta.glob<{ default: ThemeManifest }>(
 );
 
 const previewModules = import.meta.glob<{ default: ImageMetadata }>(
-  "../../../assets/presets/*/preview.png",
+  [
+    "../../../assets/presets/*/preview.png",
+    "../../../assets/presets/*/preview.webp",
+  ],
   { eager: true },
 );
 
 const heroModules = import.meta.glob<{ default: ImageMetadata }>(
-  "../../../assets/presets/*/hero.png",
+  [
+    "../../../assets/presets/*/hero.png",
+    "../../../assets/presets/*/hero.webp",
+  ],
   { eager: true },
 );
 
 const wallpaperModules = import.meta.glob<{ default: ImageMetadata }>(
-  "../../../assets/presets/*/wallpaper.png",
+  [
+    "../../../assets/presets/*/wallpaper.png",
+    "../../../assets/presets/*/wallpaper.webp",
+  ],
   { eager: true },
 );
 
@@ -85,7 +95,7 @@ const allThemes: WebTheme[] = Object.entries(manifestModules)
     if (!folderId || manifest.id !== folderId || !preview) {
       throw new Error(`Invalid web theme source: ${file}`);
     }
-    const backdropFilename = manifest.motionPoster ?? manifest.wallpaper ?? "hero.png";
+    const backdropFilename = manifest.motionPoster ?? manifest.wallpaper ?? manifest.hero ?? "hero.png";
     const backdropArtwork = backdropByPath.get(`${folderId}/${backdropFilename}`);
     return {
       id: manifest.id,
@@ -110,6 +120,14 @@ const allThemes: WebTheme[] = Object.entries(manifestModules)
   })
   .sort((a, b) => {
     const featuredOrder = [
+      "liquid-aqua-lens",
+      "liquid-orchid-prism",
+      "liquid-sunrise-gel",
+      "liquid-graphite-orbit",
+      "liquid-mint-capsule",
+      "liquid-coral-spectrum",
+      "liquid-arctic-pearl",
+      "liquid-midnight-wave",
       "nightbound-companion",
       "moonlit-immortal",
       "blue-window-messenger",
@@ -132,8 +150,8 @@ const allThemes: WebTheme[] = Object.entries(manifestModules)
     return a.name.localeCompare(b.name, "zh-CN");
   });
 
-if (allThemes.length !== 21 || new Set(allThemes.map((theme) => theme.id)).size !== allThemes.length) {
-  throw new Error(`Expected 21 unique built-in themes, received ${allThemes.length}.`);
+if (allThemes.length !== 61 || new Set(allThemes.map((theme) => theme.id)).size !== allThemes.length) {
+  throw new Error(`Expected 61 unique built-in themes, received ${allThemes.length}.`);
 }
 
 export const themes = allThemes.filter((theme) => theme.galleryVisible);
