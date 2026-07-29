@@ -32,7 +32,7 @@ Codex-UI 是一个面向 OpenAI Codex 桌面端的开源 UI 主题管理器。�
 - 极地珍珠 Arctic Pearl
 - 午夜流波 Midnight Wave
 
-全部扩展主题见 [`docs/EXPANDED-UI-COLLECTION.md`](docs/EXPANDED-UI-COLLECTION.md)。主题源文件位于 `assets/presets/`。
+全部内置主题源文件位于 `assets/presets/`。
 
 重新生成扩展主题资源：
 
