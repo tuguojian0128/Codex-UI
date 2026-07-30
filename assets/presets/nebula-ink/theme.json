@@ -2,7 +2,7 @@
   "schemaVersion": 2,
   "uuid": "collection-nebula-ink",
   "id": "nebula-ink",
-  "version": "1.2.1",
+  "version": "1.3.0",
   "minEngineVersion": "2.0.0",
   "galleryVisible": true,
   "name": "星云墨迹 Nebula Ink",
@@ -12,7 +12,9 @@
     "星云",
     "紫色",
     "电影感",
-    "深空"
+    "深空",
+    "原创角色",
+    "动漫游戏风"
   ],
   "hero": "hero.webp",
   "wallpaper": "hero.webp",

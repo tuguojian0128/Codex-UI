@@ -1,6 +1,6 @@
 {
   "name": "codex-ui",
-  "version": "0.3.5",
+  "version": "0.4.0",
   "description": "Codex-UI desktop theme manager for macOS, Windows, and Linux-compatible Electron clients",
   "type": "module",
   "main": "dist/main/index.js",
@@ -23,7 +23,9 @@
     "dist:mac:x64": "electron-vite build && node scripts/package-macos.mjs --arch x64",
     "dist:win:x64": "electron-vite build && node scripts/package-windows.mjs --arch x64",
     "dist:linux:x64": "electron-vite build && node scripts/package-linux.mjs --arch x64",
-    "dist:dir": "electron-vite build && node scripts/build-dist.mjs --dir"
+    "dist:dir": "electron-vite build && node scripts/build-dist.mjs --dir",
+    "gen:legacy-characters": "node scripts/enhance-legacy-character-themes.mjs",
+    "gen:characters": "npm run gen:expanded-ui && npm run gen:legacy-characters"
   },
   "dependencies": {
     "@supabase/supabase-js": "^2.110.8",

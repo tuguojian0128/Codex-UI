@@ -1,5 +1,24 @@
 # Changelog
 
+## 0.4.0 - 2026-07-30
+
+### 中文
+
+- 为全部 61 套主题完成角色化升级：35 套扩展主题生成大型原创人物，15 套旧主题补充角色和 Codex 工作区预览，其余原有完整人物、动态角色与特色场景继续保留。
+- 建立原创动漫与游戏职业体系，包含术士、魔女、炼金师、守卫、游侠、工程师、特工、武僧、舰长、锻造师等角色定位。
+- 角色从小图标升级为主要视觉主体，增加发型、肤色、表情、服装、护甲、腰带、头饰、眼镜、护目镜以及职业武器和道具。
+- 新增可重复执行的角色插画生成模块和旧主题升级脚本，通过 `npm run gen:characters` 可重新生成完整角色主题库。
+- 扩展主题资源升级至 1.3.0，旧主题角色资源升级至 2.1.0，并增加 15 套旧主题的资源加载回归测试。
+- 修复角色主题中文标签写入编码问题，确保 61 套主题不存在乱码标签或缺失的 Hero / Preview 资源。
+### English
+
+- Completed a character-led upgrade for all 61 themes: 35 expanded themes now generate full-size original characters, 15 legacy themes received character artwork and Codex workspace previews, and existing full-character, animated, and signature-scene themes remain intact.
+- Added an original anime/game-inspired profession system spanning oracles, witches, alchemists, sentinels, rangers, engineers, agents, monks, captains, smiths, and other roles.
+- Replaced icon-sized mascots with primary character compositions featuring varied hair, skin tones, expressions, outfits, armor, belts, headgear, glasses, goggles, weapons, and profession-specific props.
+- Added reusable character illustration generation and legacy-theme enhancement scripts; run `npm run gen:characters` to rebuild the complete character theme library.
+- Upgraded expanded resources to 1.3.0 and legacy character resources to 2.1.0, with regression coverage for all 15 upgraded legacy themes.
+- Fixed character-theme tag encoding and verified that all 61 themes have valid Hero and Preview assets without corrupted labels.
+
 ## 0.3.5 - 2026-07-30
 
 ### 中文

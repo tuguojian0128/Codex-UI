@@ -2,6 +2,7 @@ import fs from "node:fs/promises";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 import sharp from "sharp";
+import { characterDefs, characterMarkup, getCharacterConcept } from "./lib/character-illustration.mjs";
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 const presetsRoot = path.join(root, "assets", "presets");
@@ -132,27 +133,28 @@ function sceneSvg(theme, width, height, preview = false) {
   const baseA=dark ? mix(c0,"#000000",.16) : c0;
   const baseB=dark ? c1 : mix(c1,"#ffffff",.24);
   const motif=motifMarkup(theme,width,height);
+  const character=characterMarkup(theme,width,height,{preview});
   const panel=dark ? rgba(mix(c1,"#ffffff",.12),.62) : rgba("#ffffff",.66);
   const panelStrong=dark ? rgba(mix(c1,"#ffffff",.18),.8) : rgba("#ffffff",.84);
   const ink=dark ? "#f7fbff" : "#172033";
   const muted=dark ? "#aeb9c8" : "#627083";
   const chrome=preview ? `
     <g filter="url(#frameShadow)">
-      <rect x="${width*.055}" y="${height*.075}" width="${width*.89}" height="${height*.85}" rx="${height*.055}" fill="${panel}" stroke="${rgba("#ffffff",dark?.24:.72)}" stroke-width="2"/>
-      <rect x="${width*.055}" y="${height*.075}" width="${width*.19}" height="${height*.85}" rx="${height*.055}" fill="${panelStrong}"/>
-      <path d="M${width*.245} ${height*.075}V${height*.925}" stroke="${rgba(ink,.12)}"/>
-      <circle cx="${width*.09}" cy="${height*.13}" r="${height*.012}" fill="${c2}"/>
-      <circle cx="${width*.12}" cy="${height*.13}" r="${height*.012}" fill="${c3}"/>
-      <rect x="${width*.085}" y="${height*.20}" width="${width*.12}" height="${height*.035}" rx="${height*.016}" fill="${rgba(c2,.22)}"/>
-      ${[.29,.37,.45,.57,.65].map((y,i)=>`<rect x="${width*.088}" y="${height*y}" width="${width*(.08+(i%3)*.018)}" height="${height*.018}" rx="${height*.009}" fill="${rgba(i===0?c2:muted,i===0?.72:.34)}"/>`).join("")}
-      <rect x="${width*.29}" y="${height*.145}" width="${width*.24}" height="${height*.035}" rx="${height*.017}" fill="${rgba(ink,.84)}"/>
-      <rect x="${width*.29}" y="${height*.205}" width="${width*.46}" height="${height*.018}" rx="${height*.009}" fill="${rgba(muted,.42)}"/>
-      <rect x="${width*.29}" y="${height*.245}" width="${width*.32}" height="${height*.018}" rx="${height*.009}" fill="${rgba(muted,.28)}"/>
-      ${[0,1,2].map((i)=>`<g><rect x="${width*(.29+i*.205)}" y="${height*.34}" width="${width*.175}" height="${height*.22}" rx="${height*.035}" fill="${panelStrong}" stroke="${rgba("#ffffff",dark?.16:.65)}"/><circle cx="${width*(.33+i*.205)}" cy="${height*.405}" r="${height*.026}" fill="${rgba(i===1?c3:c2,.82)}"/><rect x="${width*(.31+i*.205)}" y="${height*.475}" width="${width*.11}" height="${height*.016}" rx="8" fill="${rgba(ink,.55)}"/><rect x="${width*(.31+i*.205)}" y="${height*.515}" width="${width*.085}" height="${height*.012}" rx="6" fill="${rgba(muted,.36)}"/></g>`).join("")}
-      <rect x="${width*.29}" y="${height*.68}" width="${width*.59}" height="${height*.13}" rx="${height*.045}" fill="${panelStrong}" stroke="${rgba(c2,.36)}"/>
-      <rect x="${width*.325}" y="${height*.735}" width="${width*.31}" height="${height*.016}" rx="8" fill="${rgba(muted,.35)}"/>
-      <circle cx="${width*.835}" cy="${height*.745}" r="${height*.035}" fill="${c2}"/>
-      <text x="${width*.29}" y="${height*.875}" font-family="Segoe UI,Arial,sans-serif" font-size="${height*.04}" font-weight="700" fill="${ink}" letter-spacing="1">${escapeXml(theme.en.toUpperCase())}</text>
+      <rect x="${width*.045}" y="${height*.06}" width="${width*.91}" height="${height*.88}" rx="${height*.052}" fill="${rgba(theme.mode === "dark" ? mix(c1,"#000000",.1) : "#ffffff",dark?.42:.54)}" stroke="${rgba("#ffffff",dark?.24:.78)}" stroke-width="2"/>
+      <rect x="${width*.045}" y="${height*.06}" width="${width*.17}" height="${height*.88}" rx="${height*.052}" fill="${panelStrong}"/>
+      <path d="M${width*.215} ${height*.06}V${height*.94}" stroke="${rgba(ink,.12)}"/>
+      <circle cx="${width*.075}" cy="${height*.115}" r="${height*.011}" fill="${c2}"/>
+      <circle cx="${width*.102}" cy="${height*.115}" r="${height*.011}" fill="${c3}"/>
+      <rect x="${width*.073}" y="${height*.18}" width="${width*.105}" height="${height*.032}" rx="${height*.016}" fill="${rgba(c2,.22)}"/>
+      ${[.28,.36,.44,.56,.64].map((y,i)=>`<rect x="${width*.075}" y="${height*y}" width="${width*(.068+(i%3)*.014)}" height="${height*.016}" rx="${height*.008}" fill="${rgba(i===0?c2:muted,i===0?.72:.34)}"/>`).join("")}
+      <rect x="${width*.25}" y="${height*.13}" width="${width*.23}" height="${height*.033}" rx="${height*.016}" fill="${rgba(ink,.84)}"/>
+      <rect x="${width*.25}" y="${height*.19}" width="${width*.30}" height="${height*.016}" rx="${height*.008}" fill="${rgba(muted,.42)}"/>
+      <rect x="${width*.25}" y="${height*.23}" width="${width*.22}" height="${height*.016}" rx="${height*.008}" fill="${rgba(muted,.28)}"/>
+      ${[0,1].map((i)=>`<g><rect x="${width*(.25+i*.195)}" y="${height*.32}" width="${width*.165}" height="${height*.205}" rx="${height*.032}" fill="${panelStrong}" stroke="${rgba("#ffffff",dark?.16:.65)}"/><circle cx="${width*(.286+i*.195)}" cy="${height*.383}" r="${height*.024}" fill="${rgba(i===1?c3:c2,.82)}"/><rect x="${width*(.27+i*.195)}" y="${height*.45}" width="${width*.10}" height="${height*.015}" rx="8" fill="${rgba(ink,.55)}"/><rect x="${width*(.27+i*.195)}" y="${height*.49}" width="${width*.075}" height="${height*.011}" rx="6" fill="${rgba(muted,.36)}"/></g>`).join("")}
+      <rect x="${width*.25}" y="${height*.63}" width="${width*.35}" height="${height*.12}" rx="${height*.038}" fill="${panelStrong}" stroke="${rgba(c2,.36)}"/>
+      <rect x="${width*.278}" y="${height*.682}" width="${width*.20}" height="${height*.015}" rx="8" fill="${rgba(muted,.35)}"/>
+      <circle cx="${width*.56}" cy="${height*.69}" r="${height*.03}" fill="${c2}"/>
+      <text x="${width*.25}" y="${height*.875}" font-family="Segoe UI,Arial,sans-serif" font-size="${height*.035}" font-weight="700" fill="${ink}" letter-spacing="1">${escapeXml(theme.en.toUpperCase())}</text>
     </g>` : "";
   return `<svg xmlns="http://www.w3.org/2000/svg" width="${width}" height="${height}" viewBox="0 0 ${width} ${height}">
   <defs>
@@ -163,12 +165,14 @@ function sceneSvg(theme, width, height, preview = false) {
     <filter id="blur28"><feGaussianBlur stdDeviation="28"/></filter>
     <filter id="softShadow" x="-40%" y="-40%" width="180%" height="180%"><feDropShadow dx="0" dy="16" stdDeviation="20" flood-color="#000" flood-opacity="${dark?.28:.13}"/></filter>
     <filter id="frameShadow" x="-20%" y="-20%" width="140%" height="140%"><feDropShadow dx="0" dy="22" stdDeviation="32" flood-color="#000" flood-opacity="${dark?.36:.16}"/></filter>
+    ${characterDefs(theme)}
   </defs>
   <rect width="100%" height="100%" fill="url(#bg)"/>
   <ellipse cx="${width*.82}" cy="${height*.12}" rx="${width*.34}" ry="${height*.4}" fill="url(#glow)" filter="url(#blur28)"/>
   ${motif}
-  <rect width="100%" height="100%" fill="none" stroke="${rgba("#ffffff",dark?.08:.3)}" stroke-width="2"/>
   ${chrome}
+  ${character}
+  <rect width="100%" height="100%" fill="none" stroke="${rgba("#ffffff",dark?.08:.3)}" stroke-width="2"/>
   </svg>`;
 }
 
@@ -190,13 +194,13 @@ function manifest(theme) {
     schemaVersion: 2,
     uuid: `collection-${theme.id}`,
     id: theme.id,
-    version: "1.2.1",
+    version: "1.3.0",
     minEngineVersion: "2.0.0",
     galleryVisible: true,
     name: `${theme.zh} ${theme.en}`,
     description: theme.description,
     tagline: theme.tagline,
-    tags: theme.tags,
+    tags: [...theme.tags, "\u539f\u521b\u89d2\u8272", "\u52a8\u6f2b\u6e38\u620f\u98ce"],
     hero: "hero.webp",
     wallpaper: "hero.webp",
     preview: "preview.webp",

@@ -2,7 +2,7 @@
   "schemaVersion": 2,
   "uuid": "collection-liquid-graphite-orbit",
   "id": "liquid-graphite-orbit",
-  "version": "1.2.1",
+  "version": "1.3.0",
   "minEngineVersion": "2.0.0",
   "galleryVisible": true,
   "name": "石墨光环 Graphite Orbit",
@@ -12,7 +12,9 @@
     "液态玻璃",
     "石墨",
     "极简",
-    "专业"
+    "专业",
+    "原创角色",
+    "动漫游戏风"
   ],
   "hero": "hero.webp",
   "wallpaper": "hero.webp",

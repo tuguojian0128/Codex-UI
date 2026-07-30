@@ -2,7 +2,7 @@
   "schemaVersion": 2,
   "uuid": "collection-liquid-midnight-wave",
   "id": "liquid-midnight-wave",
-  "version": "1.2.1",
+  "version": "1.3.0",
   "minEngineVersion": "2.0.0",
   "galleryVisible": true,
   "name": "午夜流波 Midnight Wave",
@@ -12,7 +12,9 @@
     "液态玻璃",
     "午夜",
     "深海",
-    "流动"
+    "流动",
+    "原创角色",
+    "动漫游戏风"
   ],
   "hero": "hero.webp",
   "wallpaper": "hero.webp",

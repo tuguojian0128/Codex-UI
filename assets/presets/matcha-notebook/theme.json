@@ -2,7 +2,7 @@
   "schemaVersion": 2,
   "uuid": "collection-matcha-notebook",
   "id": "matcha-notebook",
-  "version": "1.2.1",
+  "version": "1.3.0",
   "minEngineVersion": "2.0.0",
   "galleryVisible": true,
   "name": "抹茶手记 Matcha Notebook",
@@ -12,7 +12,9 @@
     "纸张",
     "抹茶",
     "手账",
-    "治愈"
+    "治愈",
+    "原创角色",
+    "动漫游戏风"
   ],
   "hero": "hero.webp",
   "wallpaper": "hero.webp",

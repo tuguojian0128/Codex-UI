@@ -2,7 +2,7 @@
   "schemaVersion": 2,
   "uuid": "collection-sunrise-canvas",
   "id": "sunrise-canvas",
-  "version": "1.2.1",
+  "version": "1.3.0",
   "minEngineVersion": "2.0.0",
   "galleryVisible": true,
   "name": "日出画布 Sunrise Canvas",
@@ -12,7 +12,9 @@
     "日出",
     "画布",
     "明亮",
-    "创作"
+    "创作",
+    "原创角色",
+    "动漫游戏风"
   ],
   "hero": "hero.webp",
   "wallpaper": "hero.webp",

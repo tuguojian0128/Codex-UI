@@ -2,7 +2,7 @@
   "schemaVersion": 2,
   "uuid": "collection-ocean-ribbon",
   "id": "ocean-ribbon",
-  "version": "1.2.1",
+  "version": "1.3.0",
   "minEngineVersion": "2.0.0",
   "galleryVisible": true,
   "name": "海蓝丝带 Ocean Ribbon",
@@ -12,7 +12,9 @@
     "海蓝",
     "丝带",
     "卷轴",
-    "流畅"
+    "流畅",
+    "原创角色",
+    "动漫游戏风"
   ],
   "hero": "hero.webp",
   "wallpaper": "hero.webp",

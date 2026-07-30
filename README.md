@@ -16,6 +16,7 @@ Codex-UI 是一个面向 OpenAI Codex 桌面端的开源 UI 主题管理器。�
 - 主题预览、安装、应用、暂停和恢复
 - 导入 `.codextheme` 主题包
 - 61 套内置主题和多种布局结构
+- 全部主题均包含大型人物、角色主体或完整特色场景
 - 35 套扩展 UI，其中包含 8 套液态玻璃主题
 - 官方主题搜索和风格分类筛选
 - 可选的自部署 Supabase 登录
@@ -38,18 +39,18 @@ Codex-UI 是一个面向 OpenAI Codex 桌面端的开源 UI 主题管理器。�
 重新生成扩展主题资源：
 
 ```bash
-npm run gen:expanded-ui
+npm run gen:characters
 ```
 
 ### 下载与系统支持
 
 GitHub Release 会提供以下版本：
 
-- Windows x64：`Codex-UI-0.3.3-win-x64.exe`
-- macOS Apple 芯片：`Codex-UI-0.3.3-mac-arm64.dmg`
-- macOS Intel：`Codex-UI-0.3.3-mac-x64.dmg`
-- Linux x64 AppImage：`Codex-UI-0.3.3-linux-x64.AppImage`
-- Debian / Ubuntu x64：`Codex-UI-0.3.3-linux-x64.deb`
+- Windows x64：`Codex-UI-0.4.0-win-x64.exe`
+- macOS Apple 芯片：`Codex-UI-0.4.0-mac-arm64.dmg`
+- macOS Intel：`Codex-UI-0.4.0-mac-x64.dmg`
+- Linux x64 AppImage：`Codex-UI-0.4.0-linux-x64.AppImage`
+- Debian / Ubuntu x64：`Codex-UI-0.4.0-linux-x64.deb`
 
 
 #### Linux 兼容说明
@@ -59,8 +60,8 @@ OpenAI 官方 Codex 桌面应用当前主要提供 macOS 和 Windows 版。Codex
 AppImage 使用方式：
 
 ```bash
-chmod +x Codex-UI-0.3.3-linux-x64.AppImage
-./Codex-UI-0.3.3-linux-x64.AppImage
+chmod +x Codex-UI-0.4.0-linux-x64.AppImage
+./Codex-UI-0.4.0-linux-x64.AppImage
 ```
 
 启动后进入“设置 → Codex 桌面端”，选择兼容客户端的可执行文件或 AppImage，再返回主题画廊应用主题。调试端口只绑定 `127.0.0.1`，并会校验端口监听进程是否属于已选客户端的进程树。
@@ -160,6 +161,7 @@ Codex-UI is an open-source desktop UI theme manager for the OpenAI Codex desktop
 - Theme preview, install, apply, pause, and restore
 - `.codextheme` package import
 - 61 bundled themes and multiple layout systems
+- Every theme includes a full-size character, a character-led subject, or a complete signature scene
 - 35 expanded UI themes, including eight liquid-glass designs
 - Search and collection filters for bundled themes
 - Optional self-hosted Supabase login
@@ -170,11 +172,11 @@ Codex-UI is an open-source desktop UI theme manager for the OpenAI Codex desktop
 
 GitHub Releases provide:
 
-- Windows x64: `Codex-UI-0.3.3-win-x64.exe`
-- macOS Apple Silicon: `Codex-UI-0.3.3-mac-arm64.dmg`
-- macOS Intel: `Codex-UI-0.3.3-mac-x64.dmg`
-- Linux x64 AppImage: `Codex-UI-0.3.3-linux-x64.AppImage`
-- Debian / Ubuntu x64: `Codex-UI-0.3.3-linux-x64.deb`
+- Windows x64: `Codex-UI-0.4.0-win-x64.exe`
+- macOS Apple Silicon: `Codex-UI-0.4.0-mac-arm64.dmg`
+- macOS Intel: `Codex-UI-0.4.0-mac-x64.dmg`
+- Linux x64 AppImage: `Codex-UI-0.4.0-linux-x64.AppImage`
+- Debian / Ubuntu x64: `Codex-UI-0.4.0-linux-x64.deb`
 
 
 #### Linux compatibility
@@ -184,8 +186,8 @@ The official OpenAI Codex desktop application is currently distributed primarily
 Run the AppImage with:
 
 ```bash
-chmod +x Codex-UI-0.3.3-linux-x64.AppImage
-./Codex-UI-0.3.3-linux-x64.AppImage
+chmod +x Codex-UI-0.4.0-linux-x64.AppImage
+./Codex-UI-0.4.0-linux-x64.AppImage
 ```
 
 Then open **Settings → Codex Desktop**, select the compatible client executable or AppImage, and apply a theme from the gallery. The debug port is bound to `127.0.0.1` only, and Codex-UI verifies that listeners belong to the selected client's process tree.

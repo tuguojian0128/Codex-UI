@@ -2,7 +2,7 @@
   "schemaVersion": 2,
   "uuid": "collection-arctic-blueprint",
   "id": "arctic-blueprint",
-  "version": "1.2.1",
+  "version": "1.3.0",
   "minEngineVersion": "2.0.0",
   "galleryVisible": true,
   "name": "冰原架构 Arctic Blueprint",
@@ -12,7 +12,9 @@
     "冰原",
     "蓝图",
     "架构",
-    "冷色"
+    "冷色",
+    "原创角色",
+    "动漫游戏风"
   ],
   "hero": "hero.webp",
   "wallpaper": "hero.webp",

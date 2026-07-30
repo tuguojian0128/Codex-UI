@@ -2,7 +2,7 @@
   "schemaVersion": 2,
   "uuid": "collection-pixel-messenger",
   "id": "pixel-messenger",
-  "version": "1.2.1",
+  "version": "1.3.0",
   "minEngineVersion": "2.0.0",
   "galleryVisible": true,
   "name": "像素信使 Pixel Messenger",
@@ -12,7 +12,9 @@
     "像素",
     "复古",
     "消息",
-    "窗口"
+    "窗口",
+    "原创角色",
+    "动漫游戏风"
   ],
   "hero": "hero.webp",
   "wallpaper": "hero.webp",

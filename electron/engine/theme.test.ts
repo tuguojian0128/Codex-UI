@@ -305,7 +305,7 @@ describe("loadTheme", () => {
     const loaded = await loadTheme("./assets/presets/cream-sage");
     assert.equal(loaded.theme.schemaVersion, 2);
     assert.equal(loaded.theme.layout, "dream-banner");
-    assert.equal(loaded.theme.resources.hero, "background.png");
+    assert.equal(loaded.theme.resources.hero, "character-hero.webp");
     assert.ok(loaded.imageBytes > 0);
   });
 
@@ -437,7 +437,9 @@ describe("loadTheme", () => {
       assert.equal(loaded.theme.resources.hero, "hero.webp");
       assert.equal(loaded.theme.resources.preview, "preview.webp");
       assert.equal(loaded.theme.resources.stamp, undefined);
-      assert.equal(raw.version, "1.2.1");
+      assert.equal(raw.version, "1.3.0");
+      assert.ok(loaded.theme.tags.includes("\u539f\u521b\u89d2\u8272"));
+      assert.ok(loaded.theme.tags.includes("\u52a8\u6f2b\u6e38\u620f\u98ce"));
       expanded.push(id);
       if (id.startsWith("liquid-")) {
         assert.ok((raw.wallpaperBlur ?? 99) <= 1);
@@ -459,6 +461,35 @@ describe("loadTheme", () => {
     assert.ok(built.payload.includes("data-dream-material"));
     assert.ok(built.payload.includes("liquid-glass"));
     assert.doesNotThrow(() => new Function(built.payload));
+  });
+
+  it("loads the upgraded legacy character themes with generated hero artwork", async () => {
+    const ids = [
+      "cherry-frost",
+      "clear-cyan",
+      "cream-sage",
+      "honey-milk",
+      "ink-gold",
+      "linen-rose",
+      "peach-blush",
+      "soft-moss",
+      "vanilla-sky",
+      "velvet-plum",
+      "aurora-observatory",
+      "ember-archive",
+      "nocturne-bloom",
+      "polar-signal",
+      "porcelain-circuit",
+    ];
+
+    for (const id of ids) {
+      const built = await buildPayload("./assets/inject", `./assets/presets/${id}`);
+      assert.equal(built.theme.resources.hero, "character-hero.webp");
+      assert.equal(built.theme.resources.preview, "character-preview.webp");
+      assert.ok(built.theme.tags.includes("\u539f\u521b\u89d2\u8272"));
+      assert.ok(built.theme.tags.includes("\u52a8\u6f2b\u6e38\u620f\u98ce"));
+      assert.doesNotThrow(() => new Function(built.payload));
+    }
   });
 
   it("embeds the Nightbound Companion video and fallback poster", async () => {
