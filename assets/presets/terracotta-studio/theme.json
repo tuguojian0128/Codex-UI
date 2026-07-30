@@ -2,7 +2,7 @@
   "schemaVersion": 2,
   "uuid": "collection-terracotta-studio",
   "id": "terracotta-studio",
-  "version": "1.0.0",
+  "version": "1.2.0",
   "minEngineVersion": "2.0.0",
   "galleryVisible": true,
   "name": "陶土工作室 Terracotta Studio",
@@ -12,11 +12,15 @@
     "陶土",
     "拼贴",
     "工作室",
-    "温暖"
+    "温暖",
+    "角色",
+    "动态",
+    "特色"
   ],
   "hero": "hero.webp",
   "wallpaper": "hero.webp",
   "preview": "preview.webp",
+  "stamp": "stamp.webp",
   "light": {
     "background": "#f8f0ea",
     "panel": "#ffffff",

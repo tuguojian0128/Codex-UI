@@ -2,7 +2,7 @@
   "schemaVersion": 2,
   "uuid": "collection-cobalt-blueprint",
   "id": "cobalt-blueprint",
-  "version": "1.0.0",
+  "version": "1.2.0",
   "minEngineVersion": "2.0.0",
   "galleryVisible": true,
   "name": "钴蓝蓝图 Cobalt Blueprint",
@@ -12,11 +12,15 @@
     "蓝图",
     "工程",
     "网格",
-    "深色"
+    "深色",
+    "角色",
+    "动态",
+    "特色"
   ],
   "hero": "hero.webp",
   "wallpaper": "hero.webp",
   "preview": "preview.webp",
+  "stamp": "stamp.webp",
   "light": {
     "background": "#eaf5ff",
     "panel": "#ffffff",

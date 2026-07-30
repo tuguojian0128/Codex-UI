@@ -2,7 +2,7 @@
   "schemaVersion": 2,
   "uuid": "collection-midnight-violet",
   "id": "midnight-violet",
-  "version": "1.0.0",
+  "version": "1.2.0",
   "minEngineVersion": "2.0.0",
   "galleryVisible": true,
   "name": "午夜紫电 Midnight Violet",
@@ -12,11 +12,15 @@
     "午夜",
     "紫电",
     "速度",
-    "深色"
+    "深色",
+    "角色",
+    "动态",
+    "特色"
   ],
   "hero": "hero.webp",
   "wallpaper": "hero.webp",
   "preview": "preview.webp",
+  "stamp": "stamp.webp",
   "light": {
     "background": "#f1eeff",
     "panel": "#ffffff",

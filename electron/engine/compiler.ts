@@ -169,6 +169,7 @@ export function compileTheme(theme: NormalizedTheme, opts: CompileOptions = {}):
     "data-dream-shell": mode,
     "data-dream-layout": layout,
     "data-dream-theme": theme.id,
+    "data-dream-collection": theme.uuid.startsWith("collection-") ? "expanded" : "standard",
     "data-dream-density": compact ? "compact" : theme.appearance.density,
   };
 

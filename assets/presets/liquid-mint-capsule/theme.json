@@ -2,7 +2,7 @@
   "schemaVersion": 2,
   "uuid": "collection-liquid-mint-capsule",
   "id": "liquid-mint-capsule",
-  "version": "1.1.0",
+  "version": "1.2.0",
   "minEngineVersion": "2.0.0",
   "galleryVisible": true,
   "name": "薄荷胶囊 Mint Capsule",
@@ -12,11 +12,15 @@
     "液态玻璃",
     "薄荷",
     "轻盈",
-    "效率"
+    "效率",
+    "角色",
+    "动态",
+    "特色"
   ],
   "hero": "hero.webp",
   "wallpaper": "hero.webp",
   "preview": "preview.webp",
+  "stamp": "stamp.webp",
   "light": {
     "background": "#f1fffa",
     "panel": "#ffffff",

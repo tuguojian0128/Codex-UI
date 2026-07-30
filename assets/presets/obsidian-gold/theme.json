@@ -2,7 +2,7 @@
   "schemaVersion": 2,
   "uuid": "collection-obsidian-gold",
   "id": "obsidian-gold",
-  "version": "1.0.0",
+  "version": "1.2.0",
   "minEngineVersion": "2.0.0",
   "galleryVisible": true,
   "name": "黑曜鎏金 Obsidian Gold",
@@ -12,11 +12,15 @@
     "黑曜石",
     "金色",
     "高级",
-    "克制"
+    "克制",
+    "角色",
+    "动态",
+    "特色"
   ],
   "hero": "hero.webp",
   "wallpaper": "hero.webp",
   "preview": "preview.webp",
+  "stamp": "stamp.webp",
   "light": {
     "background": "#fbf7ed",
     "panel": "#ffffff",

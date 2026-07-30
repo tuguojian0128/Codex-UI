@@ -2,7 +2,7 @@
   "schemaVersion": 2,
   "uuid": "collection-copper-circuit",
   "id": "copper-circuit",
-  "version": "1.0.0",
+  "version": "1.2.0",
   "minEngineVersion": "2.0.0",
   "galleryVisible": true,
   "name": "铜色电路 Copper Circuit",
@@ -12,11 +12,15 @@
     "铜色",
     "电路",
     "复古",
-    "工程"
+    "工程",
+    "角色",
+    "动态",
+    "特色"
   ],
   "hero": "hero.webp",
   "wallpaper": "hero.webp",
   "preview": "preview.webp",
+  "stamp": "stamp.webp",
   "light": {
     "background": "#fbf2ec",
     "panel": "#ffffff",

@@ -2,7 +2,7 @@
   "schemaVersion": 2,
   "uuid": "collection-rose-quartz-desk",
   "id": "rose-quartz-desk",
-  "version": "1.0.0",
+  "version": "1.2.0",
   "minEngineVersion": "2.0.0",
   "galleryVisible": true,
   "name": "玫瑰石英 Rose Quartz Desk",
@@ -12,11 +12,15 @@
     "玫瑰",
     "石英",
     "桌面",
-    "柔和"
+    "柔和",
+    "角色",
+    "动态",
+    "特色"
   ],
   "hero": "hero.webp",
   "wallpaper": "hero.webp",
   "preview": "preview.webp",
+  "stamp": "stamp.webp",
   "light": {
     "background": "#fff4f4",
     "panel": "#ffffff",

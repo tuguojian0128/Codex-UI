@@ -2,7 +2,7 @@
   "schemaVersion": 2,
   "uuid": "collection-volcanic-signal",
   "id": "volcanic-signal",
-  "version": "1.0.0",
+  "version": "1.2.0",
   "minEngineVersion": "2.0.0",
   "galleryVisible": true,
   "name": "火山信号 Volcanic Signal",
@@ -12,11 +12,15 @@
     "火山",
     "熔岩",
     "高强度",
-    "信号"
+    "信号",
+    "角色",
+    "动态",
+    "特色"
   ],
   "hero": "hero.webp",
   "wallpaper": "hero.webp",
   "preview": "preview.webp",
+  "stamp": "stamp.webp",
   "light": {
     "background": "#ffede9",
     "panel": "#ffffff",

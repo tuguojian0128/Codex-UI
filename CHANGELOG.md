@@ -1,5 +1,23 @@
 # Changelog
 
+## 0.3.4 - 2026-07-30
+
+### 中文
+
+- 为 35 套扩展 UI 重新设计独立角色，包含机器人、猫、兔子、狐狸、水母、飞鸟、海洋精灵等多种原创造型。
+- 为每套扩展主题新增 720 x 720 透明 WebP 角色资源，并重新生成含角色场景的画廊预览图。
+- 在 Codex 主页中增加角色悬浮、呼吸光环和闪光动效，并根据主题布局调整角色位置。
+- 增加窄屏隐藏、减少动画降级和轻量化滤镜，避免主题动效影响输入与滚动性能。
+- 新增扩展主题资源、版本、透明度和无障碍动效回归测试。
+
+### English
+
+- Redesigned all 35 expanded UI themes with original mascot families, including robots, cats, rabbits, foxes, jellyfish, birds, sea spirits, and more.
+- Added a transparent 720 x 720 WebP mascot asset to every expanded theme and regenerated gallery previews with character-driven scenes.
+- Added floating mascot motion, breathing auras, and sparkle accents to the Codex home surface with layout-aware placement.
+- Added narrow-screen hiding, reduced-motion fallbacks, and lightweight filters to protect typing and scrolling performance.
+- Added regression coverage for expanded-theme assets, versions, transparency, and accessible motion behavior.
+
 ## 0.3.3 - 2026-07-29
 
 ### 中文

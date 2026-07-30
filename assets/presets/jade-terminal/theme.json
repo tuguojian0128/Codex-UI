@@ -2,7 +2,7 @@
   "schemaVersion": 2,
   "uuid": "collection-jade-terminal",
   "id": "jade-terminal",
-  "version": "1.0.0",
+  "version": "1.2.0",
   "minEngineVersion": "2.0.0",
   "galleryVisible": true,
   "name": "翡翠终端 Jade Terminal",
@@ -12,11 +12,15 @@
     "翡翠",
     "终端",
     "命令行",
-    "现代"
+    "现代",
+    "角色",
+    "动态",
+    "特色"
   ],
   "hero": "hero.webp",
   "wallpaper": "hero.webp",
   "preview": "preview.webp",
+  "stamp": "stamp.webp",
   "light": {
     "background": "#eafcf4",
     "panel": "#ffffff",

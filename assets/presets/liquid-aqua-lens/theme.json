@@ -2,7 +2,7 @@
   "schemaVersion": 2,
   "uuid": "collection-liquid-aqua-lens",
   "id": "liquid-aqua-lens",
-  "version": "1.1.0",
+  "version": "1.2.0",
   "minEngineVersion": "2.0.0",
   "galleryVisible": true,
   "name": "流光水镜 Aqua Lens",
@@ -12,11 +12,15 @@
     "液态玻璃",
     "清透",
     "蓝色",
-    "现代"
+    "现代",
+    "角色",
+    "动态",
+    "特色"
   ],
   "hero": "hero.webp",
   "wallpaper": "hero.webp",
   "preview": "preview.webp",
+  "stamp": "stamp.webp",
   "light": {
     "background": "#ecf8ff",
     "panel": "#ffffff",

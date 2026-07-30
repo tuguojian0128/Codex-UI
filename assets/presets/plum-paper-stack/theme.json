@@ -2,7 +2,7 @@
   "schemaVersion": 2,
   "uuid": "collection-plum-paper-stack",
   "id": "plum-paper-stack",
-  "version": "1.0.0",
+  "version": "1.2.0",
   "minEngineVersion": "2.0.0",
   "galleryVisible": true,
   "name": "梅紫纸堆 Plum Paper Stack",
@@ -12,11 +12,15 @@
     "梅紫",
     "纸张",
     "编辑",
-    "秩序"
+    "秩序",
+    "角色",
+    "动态",
+    "特色"
   ],
   "hero": "hero.webp",
   "wallpaper": "hero.webp",
   "preview": "preview.webp",
+  "stamp": "stamp.webp",
   "light": {
     "background": "#f9f2f7",
     "panel": "#ffffff",

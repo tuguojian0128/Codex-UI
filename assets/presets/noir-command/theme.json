@@ -2,7 +2,7 @@
   "schemaVersion": 2,
   "uuid": "collection-noir-command",
   "id": "noir-command",
-  "version": "1.0.0",
+  "version": "1.2.0",
   "minEngineVersion": "2.0.0",
   "galleryVisible": true,
   "name": "黑曜指令 Noir Command",
@@ -12,11 +12,15 @@
     "终端",
     "黑色",
     "极简",
-    "命令行"
+    "命令行",
+    "角色",
+    "动态",
+    "特色"
   ],
   "hero": "hero.webp",
   "wallpaper": "hero.webp",
   "preview": "preview.webp",
+  "stamp": "stamp.webp",
   "light": {
     "background": "#fcfdfe",
     "panel": "#ffffff",
