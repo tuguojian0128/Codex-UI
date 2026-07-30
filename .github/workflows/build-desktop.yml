@@ -1,4 +1,4 @@
-﻿name: Build desktop releases
+name: Build desktop releases
 
 on:
   workflow_dispatch:
@@ -618,4 +618,3 @@ jobs:
           fi
 
           gh release edit "$RELEASE_TAG" --draft=false --latest
-
