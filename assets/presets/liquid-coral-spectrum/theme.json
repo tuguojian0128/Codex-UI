@@ -2,7 +2,7 @@
   "schemaVersion": 2,
   "uuid": "collection-liquid-coral-spectrum",
   "id": "liquid-coral-spectrum",
-  "version": "1.2.0",
+  "version": "1.2.1",
   "minEngineVersion": "2.0.0",
   "galleryVisible": true,
   "name": "珊瑚光谱 Coral Spectrum",
@@ -12,15 +12,11 @@
     "液态玻璃",
     "珊瑚",
     "高能",
-    "光谱",
-    "角色",
-    "动态",
-    "特色"
+    "光谱"
   ],
   "hero": "hero.webp",
   "wallpaper": "hero.webp",
   "preview": "preview.webp",
-  "stamp": "stamp.webp",
   "light": {
     "background": "#ffeff3",
     "panel": "#ffffff",

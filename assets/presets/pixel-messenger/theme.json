@@ -2,7 +2,7 @@
   "schemaVersion": 2,
   "uuid": "collection-pixel-messenger",
   "id": "pixel-messenger",
-  "version": "1.2.0",
+  "version": "1.2.1",
   "minEngineVersion": "2.0.0",
   "galleryVisible": true,
   "name": "像素信使 Pixel Messenger",
@@ -12,15 +12,11 @@
     "像素",
     "复古",
     "消息",
-    "窗口",
-    "角色",
-    "动态",
-    "特色"
+    "窗口"
   ],
   "hero": "hero.webp",
   "wallpaper": "hero.webp",
   "preview": "preview.webp",
-  "stamp": "stamp.webp",
   "light": {
     "background": "#edf6ff",
     "panel": "#ffffff",

@@ -2,7 +2,7 @@
   "schemaVersion": 2,
   "uuid": "collection-candy-pop-lab",
   "id": "candy-pop-lab",
-  "version": "1.2.0",
+  "version": "1.2.1",
   "minEngineVersion": "2.0.0",
   "galleryVisible": true,
   "name": "糖果实验室 Candy Pop Lab",
@@ -12,15 +12,11 @@
     "糖果",
     "活泼",
     "实验室",
-    "彩色",
-    "角色",
-    "动态",
-    "特色"
+    "彩色"
   ],
   "hero": "hero.webp",
   "wallpaper": "hero.webp",
   "preview": "preview.webp",
-  "stamp": "stamp.webp",
   "light": {
     "background": "#fff9fb",
     "panel": "#ffffff",

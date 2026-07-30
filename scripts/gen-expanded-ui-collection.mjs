@@ -2,7 +2,6 @@ import fs from "node:fs/promises";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 import sharp from "sharp";
-import { mascotSvg, previewMascotMarkup } from "./theme-character-art.mjs";
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 const presetsRoot = path.join(root, "assets", "presets");
@@ -170,7 +169,6 @@ function sceneSvg(theme, width, height, preview = false) {
   ${motif}
   <rect width="100%" height="100%" fill="none" stroke="${rgba("#ffffff",dark?.08:.3)}" stroke-width="2"/>
   ${chrome}
-  ${preview ? previewMascotMarkup(theme,width,height) : ""}
   </svg>`;
 }
 
@@ -192,17 +190,16 @@ function manifest(theme) {
     schemaVersion: 2,
     uuid: `collection-${theme.id}`,
     id: theme.id,
-    version: "1.2.0",
+    version: "1.2.1",
     minEngineVersion: "2.0.0",
     galleryVisible: true,
     name: `${theme.zh} ${theme.en}`,
     description: theme.description,
     tagline: theme.tagline,
-    tags: [...theme.tags, "\u89d2\u8272", "\u52a8\u6001", "\u7279\u8272"],
+    tags: theme.tags,
     hero: "hero.webp",
     wallpaper: "hero.webp",
     preview: "preview.webp",
-    stamp: "stamp.webp",
     light: makePalette(theme,false),
     dark: makePalette(theme,true),
     layout: theme.layout,
@@ -246,7 +243,6 @@ for (const theme of THEMES) {
   await fs.mkdir(dir,{recursive:true});
   await sharp(Buffer.from(sceneSvg(theme,1600,1000,false))).webp({quality:86,effort:5}).toFile(path.join(dir,"hero.webp"));
   await sharp(Buffer.from(sceneSvg(theme,720,450,true))).webp({quality:86,effort:5}).toFile(path.join(dir,"preview.webp"));
-  await sharp(Buffer.from(mascotSvg(theme))).webp({quality:88,alphaQuality:92,effort:5}).toFile(path.join(dir,"stamp.webp"));
   await fs.writeFile(path.join(dir,"theme.json"),`${JSON.stringify(manifest(theme),null,2)}\n`,"utf8");
 }
 

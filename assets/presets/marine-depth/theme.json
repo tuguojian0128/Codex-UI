@@ -2,7 +2,7 @@
   "schemaVersion": 2,
   "uuid": "collection-marine-depth",
   "id": "marine-depth",
-  "version": "1.2.0",
+  "version": "1.2.1",
   "minEngineVersion": "2.0.0",
   "galleryVisible": true,
   "name": "深海层流 Marine Depth",
@@ -12,15 +12,11 @@
     "深海",
     "海流",
     "青色",
-    "沉浸",
-    "角色",
-    "动态",
-    "特色"
+    "沉浸"
   ],
   "hero": "hero.webp",
   "wallpaper": "hero.webp",
   "preview": "preview.webp",
-  "stamp": "stamp.webp",
   "light": {
     "background": "#e6f5f9",
     "panel": "#ffffff",

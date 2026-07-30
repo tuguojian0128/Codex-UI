@@ -2,7 +2,7 @@
   "schemaVersion": 2,
   "uuid": "collection-sakura-workbench",
   "id": "sakura-workbench",
-  "version": "1.2.0",
+  "version": "1.2.1",
   "minEngineVersion": "2.0.0",
   "galleryVisible": true,
   "name": "樱粉工坊 Sakura Workbench",
@@ -12,15 +12,11 @@
     "樱花",
     "粉色",
     "创作",
-    "清新",
-    "角色",
-    "动态",
-    "特色"
+    "清新"
   ],
   "hero": "hero.webp",
   "wallpaper": "hero.webp",
   "preview": "preview.webp",
-  "stamp": "stamp.webp",
   "light": {
     "background": "#fff4f7",
     "panel": "#ffffff",

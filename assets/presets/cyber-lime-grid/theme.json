@@ -2,7 +2,7 @@
   "schemaVersion": 2,
   "uuid": "collection-cyber-lime-grid",
   "id": "cyber-lime-grid",
-  "version": "1.2.0",
+  "version": "1.2.1",
   "minEngineVersion": "2.0.0",
   "galleryVisible": true,
   "name": "赛博青柠 Cyber Lime Grid",
@@ -12,15 +12,11 @@
     "赛博",
     "青柠",
     "网格",
-    "高对比",
-    "角色",
-    "动态",
-    "特色"
+    "高对比"
   ],
   "hero": "hero.webp",
   "wallpaper": "hero.webp",
   "preview": "preview.webp",
-  "stamp": "stamp.webp",
   "light": {
     "background": "#f6ffec",
     "panel": "#ffffff",

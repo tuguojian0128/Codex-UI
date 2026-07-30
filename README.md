@@ -17,7 +17,6 @@ Codex-UI 是一个面向 OpenAI Codex 桌面端的开源 UI 主题管理器。�
 - 导入 `.codextheme` 主题包
 - 61 套内置主题和多种布局结构
 - 35 套扩展 UI，其中包含 8 套液态玻璃主题
-- 扩展主题内置原创动画角色、主题徽章和布局化场景
 - 官方主题搜索和风格分类筛选
 - 可选的自部署 Supabase 登录
 - 可选的自部署付费主题与支付宝后端
@@ -162,7 +161,6 @@ Codex-UI is an open-source desktop UI theme manager for the OpenAI Codex desktop
 - `.codextheme` package import
 - 61 bundled themes and multiple layout systems
 - 35 expanded UI themes, including eight liquid-glass designs
-- Original animated mascots, theme badges, and layout-aware scenes for the expanded collection
 - Search and collection filters for bundled themes
 - Optional self-hosted Supabase login
 - Optional self-hosted paid-theme and Alipay backend

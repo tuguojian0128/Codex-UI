@@ -1,5 +1,21 @@
 # Changelog
 
+## 0.3.5 - 2026-07-30
+
+### 中文
+
+- 根据视觉审核反馈，删除 35 套扩展 UI 中的小图标式吉祥物，不再将简单图形冒充为人物角色。
+- 删除对应的 35 个 WebP 角色资源、主页悬浮动画、光环与闪光样式。
+- 重新生成扩展主题预览图，保留干净布局、色彩和背景纹理，为后续的原创动漫与游戏人物立绘预留空间。
+- 扩展主题资源版本升级至 1.2.1，并增加无废弃角色资源的回归检查。
+
+### English
+
+- Removed the icon-like mascots from all 35 expanded UI themes after visual review; simple symbols are no longer presented as character artwork.
+- Removed the 35 associated WebP mascot assets, floating home animations, aura effects, and sparkle styling.
+- Regenerated clean expanded-theme previews while preserving layouts, color systems, and background motifs for a future original anime and game-character art pass.
+- Upgraded expanded-theme resources to version 1.2.1 and added regression coverage against stale mascot resources.
+
 ## 0.3.4 - 2026-07-30
 
 ### 中文

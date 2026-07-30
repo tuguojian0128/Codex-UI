@@ -232,19 +232,6 @@ describe("compileTheme", () => {
     assert.equal(dark.variables["--ds-bg"], theme.dark.background);
     assert.ok(light.classes.includes("codex-dream-skin--split-studio"));
     assert.equal(light.attrs["data-dream-theme"], theme.id);
-    assert.equal(light.attrs["data-dream-collection"], "standard");
-  });
-
-  it("marks generated collection themes for mascot styling", () => {
-    const { theme } = normalizeTheme({
-      ...minimalV2,
-      uuid: "collection-liquid-aqua-lens",
-      id: "liquid-aqua-lens",
-      stamp: "stamp.webp",
-    });
-    const compiled = compileTheme(theme);
-    assert.equal(compiled.attrs["data-dream-collection"], "expanded");
-    assert.equal(theme.resources.stamp, "stamp.webp");
   });
 
   it("includes compact mode class", () => {
@@ -449,8 +436,8 @@ describe("loadTheme", () => {
       assert.equal(loaded.theme.id, id);
       assert.equal(loaded.theme.resources.hero, "hero.webp");
       assert.equal(loaded.theme.resources.preview, "preview.webp");
-      assert.equal(loaded.theme.resources.stamp, "stamp.webp");
-      assert.equal(raw.version, "1.2.0");
+      assert.equal(loaded.theme.resources.stamp, undefined);
+      assert.equal(raw.version, "1.2.1");
       expanded.push(id);
       if (id.startsWith("liquid-")) {
         assert.ok((raw.wallpaperBlur ?? 99) <= 1);

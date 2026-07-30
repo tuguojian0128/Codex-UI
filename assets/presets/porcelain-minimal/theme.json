@@ -2,7 +2,7 @@
   "schemaVersion": 2,
   "uuid": "collection-porcelain-minimal",
   "id": "porcelain-minimal",
-  "version": "1.2.0",
+  "version": "1.2.1",
   "minEngineVersion": "2.0.0",
   "galleryVisible": true,
   "name": "瓷白极简 Porcelain Minimal",
@@ -12,15 +12,11 @@
     "瓷白",
     "极简",
     "克制",
-    "可靠",
-    "角色",
-    "动态",
-    "特色"
+    "可靠"
   ],
   "hero": "hero.webp",
   "wallpaper": "hero.webp",
   "preview": "preview.webp",
-  "stamp": "stamp.webp",
   "light": {
     "background": "#fafbf9",
     "panel": "#ffffff",

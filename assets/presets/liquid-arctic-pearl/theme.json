@@ -2,7 +2,7 @@
   "schemaVersion": 2,
   "uuid": "collection-liquid-arctic-pearl",
   "id": "liquid-arctic-pearl",
-  "version": "1.2.0",
+  "version": "1.2.1",
   "minEngineVersion": "2.0.0",
   "galleryVisible": true,
   "name": "极地珍珠 Arctic Pearl",
@@ -12,15 +12,11 @@
     "液态玻璃",
     "珍珠",
     "冰白",
-    "精致",
-    "角色",
-    "动态",
-    "特色"
+    "精致"
   ],
   "hero": "hero.webp",
   "wallpaper": "hero.webp",
   "preview": "preview.webp",
-  "stamp": "stamp.webp",
   "light": {
     "background": "#f9fbff",
     "panel": "#ffffff",

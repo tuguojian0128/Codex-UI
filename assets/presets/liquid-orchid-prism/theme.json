@@ -2,7 +2,7 @@
   "schemaVersion": 2,
   "uuid": "collection-liquid-orchid-prism",
   "id": "liquid-orchid-prism",
-  "version": "1.2.0",
+  "version": "1.2.1",
   "minEngineVersion": "2.0.0",
   "galleryVisible": true,
   "name": "兰紫棱镜 Orchid Prism",
@@ -12,15 +12,11 @@
     "液态玻璃",
     "紫色",
     "棱镜",
-    "沉浸",
-    "角色",
-    "动态",
-    "特色"
+    "沉浸"
   ],
   "hero": "hero.webp",
   "wallpaper": "hero.webp",
   "preview": "preview.webp",
-  "stamp": "stamp.webp",
   "light": {
     "background": "#f6efff",
     "panel": "#ffffff",

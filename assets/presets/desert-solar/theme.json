@@ -2,7 +2,7 @@
   "schemaVersion": 2,
   "uuid": "collection-desert-solar",
   "id": "desert-solar",
-  "version": "1.2.0",
+  "version": "1.2.1",
   "minEngineVersion": "2.0.0",
   "galleryVisible": true,
   "name": "沙丘日轮 Desert Solar",
@@ -12,15 +12,11 @@
     "沙漠",
     "日落",
     "暖色",
-    "全景",
-    "角色",
-    "动态",
-    "特色"
+    "全景"
   ],
   "hero": "hero.webp",
   "wallpaper": "hero.webp",
   "preview": "preview.webp",
-  "stamp": "stamp.webp",
   "light": {
     "background": "#fff3dd",
     "panel": "#ffffff",
